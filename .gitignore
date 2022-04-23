@@ -48,3 +48,4 @@ cs_workspaces
 runtime/lsp_servers
 runtime/pack
 runtime/site
+runtime/tree-sitter*

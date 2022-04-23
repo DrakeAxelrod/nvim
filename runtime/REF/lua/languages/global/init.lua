@@ -1,5 +1,6 @@
 local global = require("core.global")
-local funcs = require("core.fn")
+local fn = require("core.fn")
+local fs = require("core.fs")
 
 local M = {}
 
@@ -50,10 +51,10 @@ M.setup = function()
 	for language, v in pairs(M.filetypes) do
 		for _, v2 in pairs(v) do
 			if v2 == filetype then
-				if language == "jsts" and funcs.file_exists(project_root_path .. "/angular.json") then
+				if language == "jsts" and fn.file_exists(fs.join(project_root_path, "angular.json")) then
 					M.start_language("angular", project_root_path)
 					M.start_language("jsts", project_root_path)
-				elseif language == "jsts" and funcs.file_exists(project_root_path .. "/ember-cli-build.js") then
+				elseif language == "jsts" and fn.file_exists(fs.join(project_root_path, "ember-cli-build.js")) then
 					M.start_language("ember", project_root_path)
 					M.start_language("jsts", project_root_path)
 				else
@@ -70,7 +71,7 @@ M.start_language = function(language, project_root_path)
 			-- nothing
 			return
 		else
-			if funcs.file_exists(project_root_path .. "/.xyz/" .. language .. ".lua") then
+			if funcs.file_exists(fs.join(project_root_path, ".xyz", language .. ".lua")) then
 				M.kill_server(language)
 				M.pre_init_language(language, project_root_path, "custom")
 				M.init_language(language, project_root_path)
@@ -106,11 +107,11 @@ M.kill_server = function(language)
 end
 
 M.init_language = function(language, project_root_path)
-	local language_configs_global = dofile(global.languages_path .. language .. ".lua")
+	local language_configs_global = dofile(fs.join(global.path.langs, language .. ".lua"))
 	local language_configs
-	if funcs.file_exists(project_root_path .. "/.xyz/" .. language .. ".lua") then
-		local language_configs_custom = dofile(project_root_path .. "/.xyz/" .. language .. ".lua")
-		language_configs = funcs.merge(language_configs_global, language_configs_custom)
+	if fn.file_exists(fs.join(project_root_path, ".xyz", language .. ".lua")) then
+		local language_configs_custom = dofile(fs.join(project_root_path, ".xyz", language .. ".lua"))
+		language_configs = fn.merge(language_configs_global, language_configs_custom)
 	else
 		language_configs = language_configs_global
 	end

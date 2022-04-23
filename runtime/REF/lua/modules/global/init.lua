@@ -88,10 +88,10 @@ modules["lvim-tech/lvim-focus"] = {
 	-- config = ui_config.lvim_focus,
 }
 
-modules["lvim-tech/lvim-helper"] = {
-	cmd = "LvimHelper",
-	config = ui_config.lvim_helper,
-}
+-- modules["lvim-tech/lvim-helper"] = {
+-- 	cmd = "LvimHelper",
+-- 	config = ui_config.lvim_helper,
+-- }
 
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 -- Editor -------------------------------------------------------

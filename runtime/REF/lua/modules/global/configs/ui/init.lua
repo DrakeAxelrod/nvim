@@ -1,7 +1,7 @@
 local config = {}
 
 function config.lvim_colorscheme()
-	vim.cmd("colorscheme lvim")
+	vim.cmd("colorscheme onedark")
 end
 
 function config.dashboard_nvim()
@@ -44,10 +44,10 @@ function config.dashboard_nvim()
 			description = { "     Settings                 " },
 			command = ":e ~/.config/xyz/lua/configs/global/xyz.lua",
 		},
-		h = {
-			description = { "     Readme                   " },
-			command = ":e ~/.config/xyz/README.md",
-		},
+		-- h = {
+		-- 	description = { "     Readme                   " },
+		-- 	command = ":e ~/.config/xyz/README.md",
+		-- },
 	}
 end
 
@@ -801,12 +801,11 @@ function config.lvim_focus()
 end
 
 function config.lvim_helper()
-	local global = require("core.global")
 	require("lvim-helper").setup({
 		files = {
-			vim.fn.stdpath("config") .. "/help/lvim_bindings_normal_mode.md",
-			vim.fn.stdpath("config") .. "/help/lvim_bindings_visual_mode.md",
-			vim.fn.stdpath("config") .. "/help/lvim_bindings_debug_dap.md",
+			vim.fn.stdpath("config") .. "/help/xyz_bindings_normal_mode.md",
+			vim.fn.stdpath("config") .. "/help/xyz_bindings_visual_mode.md",
+			vim.fn.stdpath("config") .. "/help/xyz_bindings_debug_dap.md",
 			vim.fn.stdpath("config") .. "/help/vim_cheat_sheet_global.md",
 			vim.fn.stdpath("config") .. "/help/vim_cheat_sheet_cursor_movement.md",
 			vim.fn.stdpath("config") .. "/help/vim_cheat_sheet_visual_mode.md",
