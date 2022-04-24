@@ -1,18 +1,17 @@
 local M = {}
+M.tbl = {}
 
-
-function M.change_path()
-	return vim.fn.input("Path: ", vim.fn.getcwd() .. "/", "file")
-end
-
-function M.set_global_path()
-	local path = M.change_path()
-	vim.api.nvim_command("silent :cd " .. path)
-end
-
-function M.set_window_path()
-	local path = M.change_path()
-	vim.api.nvim_command("silent :lcd " .. path)
+function M.tbl.merge(a, b)
+	if type(a) == "table" and type(b) == "table" then
+		for k, v in pairs(b) do
+			if type(v) == "table" and type(a[k] or false) == "table" then
+				M.merge(a[k], v)
+			else
+				a[k] = v
+			end
+		end
+	end
+	return a
 end
 
 ---@param group string
@@ -33,6 +32,18 @@ function M.augroup(group)
       vim.api.nvim_create_autocmd(event, opts)
     end)
   end
+end
+
+function M.configs()
+	local configs = M.tbl.merge(
+		require("configs.global"),
+		require("configs.custom")
+	)
+	for _, func in pairs(configs) do
+		if type(func) == "function" then
+			func()
+		end
+	end
 end
 
 return M

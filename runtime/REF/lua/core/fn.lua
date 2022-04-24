@@ -36,9 +36,10 @@ function M.keymaps(mode, opts, keymaps)
 end
 
 function M.configs()
-	local global_configs = require("configs.global")
-	local custom_configs = require("configs.custom")
-	local configs = M.merge(global_configs, custom_configs)
+	local configs = M.merge(
+		require("configs.global"),
+		require("configs.custom")
+	)
 	for _, func in pairs(configs) do
 		if type(func) == "function" then
 			func()
