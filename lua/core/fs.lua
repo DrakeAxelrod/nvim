@@ -37,17 +37,6 @@ function M.get_cache()
     return cache
 end
 
----@meta overridden to use xyz_x_dir instead
-vim.fn.stdpath = function(what)
-    if what == "cache" then
-        return M.get_cache()
-    elseif what == "data" then
-        return M.get_runtime()
-    elseif what == "config" then
-        return M.get_config()
-    end
-    return vim.call("stdpath", what)
-end
 
 ---@meta overridden to use xyz_x_dir instead
 ---vim.call("stdpath", x) will still get originals
@@ -62,12 +51,16 @@ vim.fn.stdpath = function(what)
     return vim.call("stdpath", what)
 end
 
+	-- self.path.cache = fs.get_cache()
+	-- self.path.mods = fs.join(vim.fn.stdpath("config"), "lua", "modules")
+	-- self.path.gconf = fs.join(vim.fn.stdpath("config"), "lua", "config", "global")
+	-- self.path.conf = fs.join(vim.fn.stdpath("config"), "lua", "config", "custom")
+	-- self.path.langs = fs.join(vim.fn.stdpath("config"), "lua", "languages", "global", "languages")
+	-- self.path.lsp_langs = fs.join(vim.fn.stdpath("config"), "lua", "lsp", "languages")
+	-- self.path.data = vim.fn.stdpath("data")
+	-- self.path.lsp = fs.join(vim.fn.stdpath("data"), "lsp_servers")
 
----Get the os appropriate path
----@return string
-function M.join(...)
-  return table.concat({ ... }, package.config:sub(1, 1))
-end
+
 
 function M.is_file(path)
     return vim.fn.filereadable(path) == 1
@@ -76,6 +69,15 @@ end
 function M.is_directory(path)
     return vim.fn.isdirectory(path) == 1
 end
+
+-- function M.file_exists(name)
+-- 	local f = io.open(name, "r")
+-- 	return f ~= nil and io.close(f)
+-- end
+
+-- function M.dir_exists(path)
+-- 	return M.file_exists(path)
+-- end
 
 function M.change_path()
 	return vim.fn.input("Path: ", M.join(vim.fn.getcwd() , "file"))

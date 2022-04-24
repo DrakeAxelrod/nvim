@@ -49,3 +49,4 @@ runtime/lsp_servers
 runtime/pack
 runtime/site
 runtime/tree-sitter*
+.vscode

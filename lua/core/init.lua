@@ -32,21 +32,12 @@ global["diagnostics"]["method"] = "global"
 
 local packer = require("core.pack")
 
-local xyz = function()
+-- pcall(function()
   -- fix cursorhold (plugins/fix_cursorhold_nvim.vim)
   vim.api.nvim_set_var("cursorhold_updatetime", 100)
   createdir()
   mapleaders()
   packer.load_pack()
-	local configs = global.fn.tbl.merge(
-		require("conf.global"),
-		require("conf.custom")
-	)
-	for _, func in pairs(configs) do
-		if type(func) == "function" then
-			func()
-		end
-	end
-end
-
-xyz()
+  local init = require("conf")
+  init()
+-- end)

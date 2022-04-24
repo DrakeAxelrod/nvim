@@ -10,10 +10,7 @@ Packer.__index = Packer
 
 function Packer:load_plugins()
 	self.repos = {}
-	local global_modules = require("modules.global")
-	local custom_modules = require("modules.custom")
-	local modules = global.fn.tbl.merge(global_modules, custom_modules)
-	for repo, conf in pairs(modules) do
+	for repo, conf in pairs(require("modules")) do
 		if conf ~= false then
 			self.repos[#self.repos + 1] = vim.tbl_extend("force", { repo }, conf)
 		end
@@ -102,6 +99,7 @@ function plugins.load_pack()
 	if vim.fn.filereadable(compile_to_lua) == 1 then
 		require("packer_compiled")
 	end
+
 	vim.cmd([[command! PackerSync lua require("core.pack").sync()]])
 	vim.cmd([[command! PackerStatus  lua require("core.pack").status()]])
 end
