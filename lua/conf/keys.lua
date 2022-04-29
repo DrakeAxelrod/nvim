@@ -10,6 +10,7 @@ local function map(binds, opts)
     noremap = true, -- use `noremap` when creating keymaps
   }))
 end
+
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
@@ -53,13 +54,13 @@ function M.common()
     ["<A-k>"] = { ":move '<-2<CR>gv-gv", "Indent right" }
   }, { prefix = "", mode = "x" })
   map({ -- normal mode
-    ["k"]     = { [[v:count == 0 ? "gk" : "k"]], "remap for dealing with wordwrap"},
-    ["j"]     = { [[v:count == 0 ? "gj" : "j"]], "remap for dealing with wordwrap"},
+    ["k"] = { [[v:count == 0 ? "gk" : "k"]], "remap for dealing with wordwrap" },
+    ["j"] = { [[v:count == 0 ? "gj" : "j"]], "remap for dealing with wordwrap" },
   }, { prefix = "", expr = true, mode = "n" })
 
   map({ -- normal mode
     ["<C-s>"] = { ":Telescope command_palette<CR>", "Command Palette" },
-    ["<ESC>"] = {"<ESC><Cmd>noh<CR>", "No Highlight" },
+    ["<ESC>"] = { "<ESC><Cmd>noh<CR>", "No Highlight" },
     ["<C-/>"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
     -- move text up and down
     ["<A-j>"] = { ":m+<CR>==", "Shifts text up" },
@@ -69,7 +70,7 @@ function M.common()
     ["<C-j>"] = { "<C-w>j", "Move cursor below buffer" },
     ["<C-k>"] = { "<C-w>k", "Move cursor above buffer" },
     ["<C-l>"] = { "<C-w>l", "Move cursor right buffer" },
-     -- resize panes
+    -- resize panes
     ["<S-h>"] = { ":CmdResizeLeft<CR>", "Resize buffer toward left" },
     ["<S-j>"] = { ":CmdResizeDown<CR>", "Resize buffer toward below" },
     ["<S-k>"] = { ":CmdResizeUp<CR>", "Resize buffer towards above" },
@@ -86,14 +87,14 @@ function M.common()
     [";"] = { ":lua require('mini.starter').open()<CR>", "MiniStartup" },
     ["j"] = { ":HopWord<CR>", "Jump!" },
     ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
-    ["\\"] = {":vnew<CR>", "Split Vertical" },
+    ["\\"] = { ":vnew<CR>", "Split Vertical" },
     ["-"] = { ":new<CR>", "Split Horizontal" },
     ["c"] = { ":lua MiniBufremove.delete(0, false)<CR>", "Close" },
     ["e"] = { ":Telescope file_browser<CR>", "File Explorer" },
     ["h"] = { ":Telescope command_palette<CR>", "Command Palette" },
     ["l"] = {
       name = "Language Server Protocol",
-      ["i"] = { ":LspInfo", "Language installer info"},
+      ["i"] = { ":LspInfo", "Language installer info" },
       ["a"] = { ":lua vim.lsp.buf.code_action()<CR>", "Code Action" },
       ["d"] = { ":lua vim.diagnostic.open_float()<CR>", "Hover Diagnostic" },
       ["f"] = { ":lua vim.lsp.buf.formatting_sync()<CR>", "Format" },
@@ -181,7 +182,7 @@ function M.common()
       -- ["b"] = { ":GitBlameToggle<CR>", "Git Blame Toggle" },
       ["f"] = {
         name = "Fugitive",
-        ["s"] = { ":Git status", "Git Status" },
+        ["s"] = { ":Git status<CR>", "Git Status" },
         ["l"] = { [[:Git log --graph --abbrev-commit --decorate --format=format:"%h - (%ar) %s - %an%d" --all<CR>]], "Git Log" },
         ["d"] = { ":Git diff<CR>", "Git Diff" },
         ["u"] = { ":Git diff --staged<CR>", "Git Diff Staged" },
@@ -216,7 +217,7 @@ function M.common()
         if input:lower() == "y" then
           MiniSessions.write(name)
         elseif input ~= nil then
-           MiniSessions.write(name)
+          MiniSessions.write(name)
         else
           vim.notify(("Session %s not saved"):format(name))
         end
@@ -240,13 +241,13 @@ function M.lsp(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   map({
-    ["]d"] = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Goto next"},
-    ["[d"] = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Goto prev"},
+    ["]d"] = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Goto next" },
+    ["[d"] = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Goto prev" },
     ["<leader>"] = {
       name = "Diagnostics & Formatting",
       ["e"] = { ":lua vim.diagnostic.open_float()<CR>", "Open diagnostic float" },
       ["q"] = { ":lua vim.diagnostic.setloclist()<CR>", "Set loclist" },
-      ["f"] = { ":lua vim.lsp.buf.formatting()<CR>", "Format"},
+      ["f"] = { ":lua vim.lsp.buf.formatting()<CR>", "Format" },
       ["c"] = { ":lua vim.lsp.buf.code_actions()<CR>", "Code Actions" },
       ["r"] = { ":lua vim.lsp.buf.rename()<CR>", "Rename" },
       ["w"] = {

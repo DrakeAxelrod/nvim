@@ -279,7 +279,6 @@ return function()
         cmp.config.compare.kind,
         cmp.config.compare.sort_text,
         cmp.config.compare.order
-        -- kind_compare
       }
     },
     sources = cmp.config.sources({
