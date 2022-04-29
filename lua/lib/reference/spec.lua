@@ -1,4 +1,5 @@
----@module Module
+---@diagnostic disable: doc-field-no-class, undefined-doc-name
+---@class Module
 ---@field repo string username/example
 ---@field disable? true|false Mark a plugin as inactive
 ---@field as? string Specifies an alias under which to install the plugin
@@ -75,11 +76,11 @@
 --   fn?: string|list
 --   // Specifies a conditional test to load this plugin
 --   cond?: string|function|[strings|functions]
---   // Specifies Lua module names for require. 
+--   // Specifies Lua module names for require.
 --   // When requiring a string which starts with one of these module names,
 --   // the plugin will be loaded.
 --   module?: string|list
---   // Specifies Lua pattern of Lua module names for require. 
+--   // Specifies Lua pattern of Lua module names for require.
 --   // When requiring a string which matches one of these patterns,
 --   // the plugin will be loaded.
 --   module_pattern?: string|list

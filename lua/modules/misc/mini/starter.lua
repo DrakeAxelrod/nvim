@@ -1,10 +1,9 @@
-
 local header = string.format([[
      .-.      _______                             .  '  *   .  . '
     {}``; |==|_______D                                  . *  -+-  .
     / ('        /|\                                 . '   * .    '  *
 (  /  |        / | \                                    * .  ' .  .-+-
- \(_)_%s      /  |  \                                *   *  .   .      ]],"]]")
+ \(_)_%s      /  |  \                                *   *  .   .      ]], "]]")
 local footer =
 "<?> to toggle help                                           draxel.io"
 local default_footer =
@@ -20,9 +19,9 @@ local default_footer =
 local function footer_help(content)
   vim.keymap.set('n', "?", function()
     if MiniStarter.config.footer == default_footer then
-        MiniStarter.config.footer = footer
+      MiniStarter.config.footer = footer
     else
-        MiniStarter.config.footer = default_footer
+      MiniStarter.config.footer = default_footer
     end
     MiniStarter.refresh()
   end)
@@ -34,6 +33,7 @@ return function()
   if not ok then
     return
   end
+  -- starter.on_vimenter()
   starter.setup({
     -- Whether to open starter buffer on VimEnter. Not opened if Neovim was
     -- started with intent to show something else.
@@ -50,7 +50,7 @@ return function()
     items = {
       { name = "Edit new buffer", action = "enew", section = "Actions" },
       { name = "Update Plugins", action = "PackerSync", section = "Actions" },
-      { name = "Config", action = "e ".. api.fs.join(vim.fn.stdpath('config').."/init.lua"), section = "Actions" },
+      { name = "Config", action = "e " .. api.fs.join(vim.fn.stdpath('config') .. "/init.lua"), section = "Actions" },
       { name = "StartupTime", action = "StartupTime", section = "Actions" },
       { name = "Quit Neovim", action = "qall", section = "Actions" },
       starter.sections.recent_files(3, true),

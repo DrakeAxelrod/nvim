@@ -10,10 +10,10 @@ return function()
     terminal_colors = true,
     italic_comments = true,
     enable_treesitter = true,
-    transparent_background = false,
+    transparent_background = true,
     pumblend = {
-      enable = false,
-      transparency_amount = 0,
+      enable = true,
+      transparency_amount = 20,
     },
     plugins_integrations = {
       neorg = false,
@@ -23,7 +23,7 @@ return function()
       gitsigns = true,
       telescope = true,
       neogit = false,
-      nvim_tree = true,
+      nvim_tree = false,
       dashboard = false,
       startify = false,
       whichkey = true,
@@ -44,6 +44,4 @@ return function()
   --   -- vim.cmd "let &fcs='eob: '"
   -- end
   -- enable_transparent_mode()
-  -- LineNr         xxx ctermfg=11 guifg=#46D9FF guibg=#282c34
-  -- CursorLineNr   xxx cterm=underline ctermfg=11 guifg=#bbc2cf guibg=#21252a
 end
