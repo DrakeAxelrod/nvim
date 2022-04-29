@@ -11,19 +11,12 @@ if not vim.tbl_contains(vim.opt.rtp:get(), base) then
   vim.opt.rtp:append(base)
 end
 
----Get the os appropriate path
----@return string
 local function join(...)
   return table.concat({ ... }, package.config:sub(1, 1))
 end
 
----@meta if file doesnt exist we create it
-local bin_path = join(os.getenv "HOME", ".local", "bin", "xyz")
-if vim.fn.filereadable(bin_path) ~= 1 then
-  local file = io.open(bin_path, "w")
-  file:write '#!/bin/sh\nexec nvim -u "$HOME/.config/xyz/runtime/init.lua" "$@"'
-  file:close()
-  vim.loop.fs_chmod(bin_path, 510)
+local function is_file(path)
+    return vim.fn.filereadable(path) == 1
 end
 
 ---Get the full path to runtime
@@ -69,6 +62,20 @@ vim.fn.stdpath = function(what)
   return vim.call("stdpath", what)
 end
 
+
+---@meta if file doesnt exist we create it
+local bin_path = join(os.getenv "HOME", ".local", "bin", "xyz")
+if not is_file(bin_path) then
+  local file = io.open(bin_path, "w")
+  local bin_content = ('#!/bin/sh\nexec nvim -u "%s" "$@"'):format(join(get_runtime(), "init.lua"))
+  if file ~= nil then
+    file:write(bin_content)
+    file:close()
+  end
+  vim.loop.fs_chmod(bin_path, 510)
+end
+
+
 vim.opt.rtp:remove(join(vim.call("stdpath", "data"), "site"))
 vim.opt.rtp:remove(join(vim.call("stdpath", "data"), "site", "after"))
 vim.opt.rtp:prepend(join(get_runtime(), "site"))
@@ -81,7 +88,7 @@ vim.cmd [[let &packpath = &runtimepath]]
 
 local ok, err = pcall(dofile, join(get_config(), "init.lua"))
 if not ok then
-  if vim.fn.filereadable(join(get_config(), "init.lua")) == 1 then
+  if is_file(join(get_config(), "init.lua")) then
     vim.notify("Invalid configuration: " .. err)
   else
     vim.notify(("Unable to find configuration file [%s]"):format(join(get_config(), "init.lua")))

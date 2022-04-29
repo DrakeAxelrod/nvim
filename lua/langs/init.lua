@@ -1,123 +1,69 @@
-local global = require("core.global")
-local M = {}
+-- https://github.com/williamboman/nvim-lsp-installer
+-- vim.lsp.set_log_level("debug")
+local ok, lsp_installer = pcall(require,"nvim-lsp-installer")
+if not ok then
+  return
+end
+-- Include the servers you want to have installed by default below
+-- local servers = {
+--   "bashls",
+--   "pyright",
+--   "vuels",
+--   "yamlls",
+-- }
+-- for _, name in pairs(servers) do
+--   local server_is_found, server = lsp_installer.get_server(name)
+--   if server_is_found and not server:is_installed() then
+--     print("Installing " .. name)
+--     server:install()
+--   end
+-- end
 
-M.filetypes = {
-	["clojure"] = { "clojure", "edn" },
-	["cmake"] = { "cmake" },
-	["cpp"] = { "c", "cpp", "objc", "objcpp" },
-	["cs"] = { "cs", "vb" },
-	["css"] = { "css", "scss", "less" },
-	["d"] = { "d" },
-	["dart"] = { "dart" },
-	["elixir"] = { "elixir", "eelixir" },
-	["erlang"] = { "erlang" },
-	["fortran"] = { "fortran" },
-	["go"] = { "go", "gomod" },
-	["graphql"] = { "graphql" },
-	["groovy"] = { "groovy" },
-	["html"] = { "html" },
-	["java"] = { "java" },
-	["json"] = { "json" },
-	["jsts"] = {
-		"javascript",
-		"typescript",
-		"javascriptreact",
-		"typescriptreact",
-	},
-	["kotlin"] = { "kotlin" },
-	["latex"] = { "bib", "tex" },
-	["lua"] = { "lua" },
-	["markdown"] = { "markdown" },
-	["php"] = { "php" },
-	["python"] = { "python" },
-	["ruby"] = { "ruby" },
-	["r"] = { "r", "rmd" },
-	["rust"] = { "rust" },
-	["shell"] = { "sh" },
-	["sql"] = { "sql", "mysql" },
-	["vim"] = { "vim" },
-	["toml"] = { "toml" },
-	["vue"] = { "vue" },
-	["xml"] = { "xml", "xsd", "xsl", "xslt", "svg" },
-	["yaml"] = { "yaml" },
-}
+local function common_capabilities()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
+    },
+  }
 
-M.setup = function()
-	local filetype = vim.bo.filetype
-	local proj_root_path = vim.fn.getcwd()
-	for lang, v in pairs(M.filetypes) do
-		for _, v2 in pairs(v) do
-			if v2 == filetype then
-				if lang == "jsts" and global.fs.is_file(global.fs.join(proj_root_path, "angular.json")) then
-					M.start_language("angular", proj_root_path)
-					M.start_language("jsts", proj_root_path)
-				elseif lang == "jsts" and global.fs.is_file(global.fs.join(proj_root_path, "ember-cli-build.js")) then
-					M.start_language("ember", proj_root_path)
-					M.start_language("jsts", proj_root_path)
-				else
-					M.start_language(lang, proj_root_path)
-				end
-			end
-		end
-	end
+  local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+  if status_ok then
+    capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+  end
+
+  return capabilities
 end
 
-function M.start_language(lang, proj_root_path)
-	if global["langs"][lang] ~= nil then
-		if global["langs"][lang]["proj_root_path"] == proj_root_path then
-			-- nothing
-			return
-		else
-			if global.fn.is_file(global.fs.join(proj_root_path, ".xyz", ("%s.lua"):format(lang))) then
-				M.kill_server(lang)
-				M.pre_init_language(lang, proj_root_path, "custom")
-				M.init_language(lang, proj_root_path)
-			elseif global["langs"][lang]["lsp_type"] == "global" then
-				-- nothing
-				return
-			else
-				M.kill_server(lang)
-				M.pre_init_language(lang, proj_root_path, "global")
-				M.init_language(lang, proj_root_path)
-			end
-		end
-	else
-		M.pre_init_language(lang, proj_root_path, "global")
-		M.init_language(lang, proj_root_path)
-	end
+local function common_on_attach(client, bufnr)
+  local aerial_ok, aerial = pcall(require, "aerial")
+  if aerial_ok then
+    aerial.on_attach(client, bufnr)
+  end
+
+  local keys = require("conf.keys")
+  keys.lsp(client, bufnr)
+  require("langs.handlers").setup()
 end
 
-M.pre_init_language = function(lang, proj_root_path, lsp_type)
-	global.current_pwd = proj_root_path
-	global["langs"][lang] = {}
-	global["langs"][lang]["proj_root_path"] = proj_root_path
-	global["langs"][lang]["pid"] = {}
-	global["langs"][lang]["lsp_type"] = lsp_type
-end
+lsp_installer.on_server_ready(function(server)
+  -- Specify the default options which we'll use to setup all servers
+  local opts = {
+    on_attach = common_on_attach,
+    capabilities = common_capabilities(),
+  }
 
-function M.kill_server(lang)
-	if next(global["langs"][lang]["pid"]) ~= nil then
-		for _, pid in pairs(global["langs"][lang]["pid"]) do
-			os.execute(("kill -9 %s > /dev/null 2>&1"):format(pid))
-		end
-	end
-end
-
-function M.init_language(lang, proj_root_path)
-	-- gconf = global, cconf = custom, cont = merged
-	local lang_conf, lang_gconf, lang_cconf, providers
-	providers = global.fs.join(vim.fn.stdpath("config"), "lua", "langs", "providers")
-	lang_gconf = dofile(global.fs.join(providers, ("%s.lua"):format(lang)))
-	if global.fs.is_file(global.fs.join(proj_root_path, ".xyz", ("%s.lua"):format(lang))) then
-		lang_cconf = dofile(global.fs.join(proj_root_path, ".xyz", ("%s.lua"):format(lang)))
-		lang_conf = vim.tbl_deep_extend("force", lang_gconf, lang_cconf)
-	else
-		lang_conf = lang_gconf
-	end
-	for _, func in pairs(lang_conf) do
-		func()
-	end
-	vim.cmd("e")
-end
-
-return M
+  if server.name == "sumneko_lua" then
+    local sumneko_opts = require "langs.providers.sumneko_lua"
+    opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
+  end
+  -- might cause installation of all severs?
+  -- if not server:is_installed() then
+  --   vim.notify("Installing " .. server.name)
+  --   server:install()
+  -- end
+  server:setup(opts)
+end)

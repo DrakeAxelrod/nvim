@@ -49,4 +49,6 @@ runtime/lsp_servers
 runtime/pack
 runtime/site
 runtime/tree-sitter*
+runtime/session
+runtime/session/telescope_history
 .vscode
