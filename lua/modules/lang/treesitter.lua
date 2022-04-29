@@ -62,29 +62,14 @@ return function()
       enable = true,
       extended_mode = false, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
       colors = {
-        -- "#efefef",
-        "#f4468f",
+        "#efefef",
         "#ECBE7B",
         "#de73ff",
         "#46D9FF",
         "#ff6c6b",
         "#51afef",
         "#a5e075",
-        "#efefef",
       },
--- local grey = base4
--- local red = '#ff6c6b'
--- local orange = '#da8548'
--- local green = '#98be65'
--- local yellow = '#ECBE7B'
--- local blue = '#51afef'
--- local dark_blue = '#2257A0'
--- local magenta = '#c678dd'
--- local light_magenta = utils.Lighten(magenta, 0.4)
--- local violet = '#a9a1e1'
--- local dark_violet = '#4e4f67'
--- local cyan = '#46D9FF'
--- local white = '#efefef'
       disable = { "html" },
     },
     context_commentstring = {
@@ -121,8 +106,8 @@ return function()
         [";"] = "textsubjects-big" },
     },
   })
-  local ok, context = pcall(require, "treesitter-context")
-  if not ok then
+  local ok_context, context = pcall(require, "treesitter-context")
+  if not ok_context then
     return
   end
   context.setup({

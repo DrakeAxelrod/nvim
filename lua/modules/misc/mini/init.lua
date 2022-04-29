@@ -12,19 +12,16 @@ local tabline = require("modules.misc.mini.tabline")
 local surround = require("modules.misc.mini.surround")
 local bufremove = require("modules.misc.mini.bufremove")
 local cursorword = require("modules.misc.mini.cursorword")
-local function init()
-  starter()
-  sessions()
-  indentscope()
-  tabline()
-  surround()
-  bufremove()
-  cursorword()
-  require("mini.statusline").setup({})
-  require("mini.misc").setup({
-    -- Array of fields to make global (to be used as independent variables)
-    make_global = { "put", "put_text", "zoom" },
-  })
-end
 
-init()
+starter()
+sessions()
+indentscope()
+tabline()
+surround()
+bufremove()
+cursorword()
+-- require("mini.statusline").setup({})
+require("mini.misc").setup({
+  -- Array of fields to make global (to be used as independent variables)
+  make_global = { "put", "put_text", "zoom" },
+})

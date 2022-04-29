@@ -4,7 +4,7 @@ local function config(file)
   return require(("modules.lang.%s"):format(file))
 end
 
-M.nvim_lsp_installer = config("lsp_installer")
+M.lsp_installer = config("lsp_installer")
 M.treesitter = config("treesitter")
 M.fidget = config("fidget")
 M.indent_blankline = config("indent-blankline")

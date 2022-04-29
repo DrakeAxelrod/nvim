@@ -15,9 +15,20 @@ local function join(...)
   return table.concat({ ... }, package.config:sub(1, 1))
 end
 
-local function is_file(path)
-    return vim.fn.filereadable(path) == 1
+--- Check if a file or directory exists in this path
+local function is_file(file)
+  local ok, err, code = os.rename(file, file)
+  if not ok then
+    if code == 13 then
+      -- Permission denied, but it exists
+      return true
+    end
+  end
+  return ok, err
 end
+-- local function is_file(path)
+--     return vim.fn.filereadable(path) == 1
+-- end
 
 ---Get the full path to runtime
 ---@return string

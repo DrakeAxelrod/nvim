@@ -4,7 +4,7 @@ return function()
     local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
 
     -- Add any disabling global or filetype-specific logic here
-    local blocklist = {}
+    local blocklist = { "Starter" }
     if filetype == 'lua' then
       blocklist = { 'local', 'require' }
     elseif filetype == 'javascript' then

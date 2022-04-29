@@ -108,6 +108,7 @@ function Impatient()
 		vim.notify("impatient not found")
 		return false
 	end
+	vim.notify("impatient loaded")
 	impatient.enable_profile()
 	return true
 end
@@ -177,4 +178,53 @@ local augroup = function(group)
 	end
 end
 
-return augroup
+function pacstrap()
+	pcall(vim.cmd, "packadd packer.nvim")
+	local packer = prequire("packer")
+	local install_path = api.fs.join(vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim")
+	if not packer then
+		vim.notify("Please wait ... \nDownloading packer ...", "info", { title = "Packer" })
+		-- remove the dir if present before cloning
+		vim.fn.delete(install_path, "rf")
+		local bootstrap
+		if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+			local url = "https://github.com/wbthomason/packer.nvim"
+			bootstrap = vim.fn.system({ "git", "clone", "--depth", "1", url, install_path })
+		end
+		vim.cmd("packadd packer.nvim")
+		packer = prequire("packer")
+		if packer then
+			vim.notify("Packer cloned successfully.")
+		else
+			vim.notify("Couldn't clone packer !\nPacker install path: " .. install_path, "error")
+		end
+		packer.bootstrapped = bootstrap
+	end
+	if packer then
+	packer.reset()
+		packer.init({
+			compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
+			auto_clean = true,
+			auto_reload_compiled = true,
+			git = { clone_timeout = 600 },
+			display = {
+				open_fn = function()
+					return require("packer.util").float({ border = "single" })
+				end,
+			}
+		})
+	end
+	return packer
+end
+
+---packer lazyloader
+---@param plugin string
+---@param timer number
+lazyload = function(plugin, timer)
+	if plugin then
+		timer = timer or 0
+		vim.defer_fn(function()
+			require("packer").loader(plugin)
+		end, timer)
+	end
+end
