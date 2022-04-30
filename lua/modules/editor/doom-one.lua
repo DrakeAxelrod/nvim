@@ -10,9 +10,9 @@ return function()
     terminal_colors = true,
     italic_comments = true,
     enable_treesitter = true,
-    transparent_background = true,
+    transparent_background = false,
     pumblend = {
-      enable = true,
+      enable = false,
       transparency_amount = 20,
     },
     plugins_integrations = {

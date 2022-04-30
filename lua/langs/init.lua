@@ -177,6 +177,10 @@ lsp_installer.on_server_ready(function(server)
     capabilities = common_capabilities(),
   }
 
+  if server.name == "diagnosticls" then
+    local diagnosticls_opts = require "langs.providers.diagnosticls"
+    opts = vim.tbl_deep_extend("force", diagnosticls_opts, opts)
+  end
   if server.name == "sumneko_lua" then
     local sumneko_opts = require "langs.providers.sumneko_lua"
     opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
