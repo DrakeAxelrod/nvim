@@ -1,10 +1,6 @@
 -- https://github.com/NTBBloodbath/doom-one.nvim
-vim.cmd("au ColorScheme * hi CursorLineNr guifg=#46D9FF guibg=#282c34")
-return function()
-  local ok, doom_one = pcall(require, "doom-one")
-  if not ok then
-    return false
-  end
+return function(doom_one)
+-- vim.cmd("au ColorScheme * hi CursorLineNr guifg=#46D9FF guibg=#282c34")
   doom_one.setup({
     cursor_coloring = true,
     terminal_colors = true,
@@ -32,16 +28,4 @@ return function()
       lspsaga = false,
     },
   })
-  -- local function enable_transparent_mode()
-  --   vim.cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
-  --   vim.cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
-  --   vim.cmd "au ColorScheme * hi NormalNC ctermbg=none guibg=none"
-  --   vim.cmd "au ColorScheme * hi MsgArea ctermbg=none guibg=none"
-  --   vim.cmd "au ColorScheme * hi TelescopeBorder ctermbg=none guibg=none"
-  --   vim.cmd "au ColorScheme * hi NvimTreeNormal ctermbg=none guibg=none"
-  --   vim.cmd "au ColorScheme * hi EndOfBuffer ctermbg=none guibg=none"
-  --   vim.cmd "au ColorScheme * hi Pmenu ctermbg=none guibg=none"
-  --   -- vim.cmd "let &fcs='eob: '"
-  -- end
-  -- enable_transparent_mode()
 end

@@ -2,15 +2,10 @@
 -- https://github.com/hrsh7th/cmp-nvim-lsp
 -- https://github.com/hrsh7th/cmp-path
 -- https://github.com/hrsh7th/cmp-buffer
-return function()
+return function(cmp)
   local M = {}
   M.methods = {}
   local icons = require("lib.icons")
-  local cmp_status_ok, cmp = pcall(require, "cmp")
-  if not cmp_status_ok then
-    return
-  end
-
   local under_compare = function(entry1, entry2)
     local _, entry1_under = entry1.completion_item.label:find "^_+"
     local _, entry2_under = entry2.completion_item.label:find "^_+"
@@ -39,16 +34,12 @@ return function()
   end
   M.methods.check_backspace = check_backspace
 
-  local function T(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
-  end
-
   ---wraps vim.fn.feedkeys while replacing key codes with escape codes
   ---Ex: feedkeys("<CR>", "n") becomes feedkeys("^M", "n")
   ---@param key string
   ---@param mode string
   local function feedkeys(key, mode)
-    vim.fn.feedkeys(T(key), mode)
+    vim.fn.feedkeys(t(key), mode)
   end
 
   M.methods.feedkeys = feedkeys

@@ -2,11 +2,8 @@
 -- https://github.com/p00f/nvim-ts-rainbow
 -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
 return function()
-  local ok, ts = pcall(require, "nvim-treesitter.configs")
-  if not ok then
-    return
-  end
-  ts.setup({
+  local tscfg = require("nvim-treesitter.configs")
+  tscfg.setup({
     ensure_installed = { "lua" }, --"all", -- one of "all" or a list of languages
     sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
     ignore_install = { "" }, -- List of parsers to ignore installing

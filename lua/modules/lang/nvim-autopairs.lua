@@ -1,10 +1,5 @@
 -- https://github.com/windwp/nvim-autopairs
-return function()
-  local status_ok, npairs = pcall(require, "nvim-autopairs")
-  if not status_ok then
-    return
-  end
-
+return function(npairs)
   npairs.setup {
     enable_check_bracket_line = false,
     check_ts = true,

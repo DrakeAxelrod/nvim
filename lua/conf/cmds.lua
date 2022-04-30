@@ -1,149 +1,137 @@
-local legendary = prequire("legendary")
-if not legendary then
-  return
-end
-
-local function enable_format_on_save(opts)
-  local fmd_cmd = string.format(":silent lua vim.lsp.buf.formatting_sync({}, %s)", opts.timeout)
-  define_augroups({
-    format_on_save = { { "BufWritePre", opts.pattern, fmd_cmd } },
-  }, true)
-  vim.notify("enabled format-on-save")
-end
-
-local function disable_format_on_save()
-  disable_augroup("format_on_save")
-  vim.notify("disabled format-on-save")
-end
-
-local function toggle_format_on_save()
-  if vim.fn.exists("#format_on_save#BufWritePre") == 0 then
-    local opts = {
-      pattern = "<buffer>",
-      timeout = "1000",
-    }
-    enable_format_on_save(opts)
-  else
-    disable_format_on_save()
-  end
-end
-
-legendary.bind_commands({
-  { ":EnableFormatOnSave", enable_format_on_save, description = "Enable format on save" },
-  { ":DisableFormatOnSave", disable_format_on_save, description = "Disable format on save" },
-  { ":ToggleFormatOnSave", toggle_format_on_save, description = "Toggle format on save" },
-  { ":LspAddToWorkspaceFolder", vim.lsp.buf.add_workspace_folder, description = "Add to workspace folder" },
-  { ":LspListWorkspaceFolders", vim.lsp.buf.list_workspace_folders, description = "List workspace folders" },
-  { ":LspRemoveWorkspaceFolder", vim.lsp.buf.remove_workspace_folder, description = "Remove workspace folder" },
-  { ":LspWorkspaceSymbol", vim.lsp.buf.workspace_symbol, description = "Workspace symbol" },
-  { ":LspDocumentSymbol", vim.lsp.buf.document_symbol, description = "Document symbol" },
-  { ":LspReferences", vim.lsp.buf.references, description = "References" },
-  { ":LspClearReferences", vim.lsp.buf.clear_references, description = "Clear references" },
-  { ":LspCodeAction", vim.lsp.buf.code_action, description = "Code action" },
-  { ":LspRangeCodeAction", vim.lsp.buf.range_code_action, description = "Range code action" },
-  { ":LspCodeLensRefresh", vim.lsp.codelens.refresh, description = "Code lens refresh" },
-  { ":LspCodeLensRun", vim.lsp.codelens.run, description = "Code lens run" },
-  { ":LspDeclaration", vim.lsp.buf.declaration, description = "Declaration" },
-  { ":LspDefinition", vim.lsp.buf.definition, description = "Definition" },
-  { ":LspTypeDefinition", vim.lsp.buf.type_definition, description = "Type definition" },
-  { ":LspDocumentHighlight", vim.lsp.buf.document_highlight, description = "Document highlight" },
-  { ":LspImplementation", vim.lsp.buf.implementation, description = "Implementation" },
-  { ":LspIncomingCalls", vim.lsp.buf.incoming_calls, description = "Incoming" },
-  { ":LspOutgoingCalls", vim.lsp.buf.outgoing_calls, description = "Outgoing" },
-  { ":LspFormatting", vim.lsp.buf.formatting, description = "Formatting" },
-  { ":LspRangeFormatting", vim.lsp.buf.range_formatting, description = "Range formatting" },
-  { ":LspFormattingSync", vim.lsp.buf.formatting_sync, description = "Formatting sync" },
-  { ":LspHover", vim.lsp.buf.hover, description = "Hover" },
-  { ":LspRename", vim.lsp.buf.rename, description = "Rename" },
-  { ":LspSignatureHelp", vim.lsp.buf.signature_help, description = "Signature help" },
-})
-
-legendary.bind_autocmds({
-  {
-    { "BufWinEnter" },
-    ":checktime",
-    opts = { pattern = "*" }
-  },
-  {
-    { "FileType" },
-    [[:nnoremap <silent> <buffer> q :close<CR>]],
-    opts = {
-      pattern = { "qf", "help", "man", "null-ls-info", "lspinfo", "lsp-installer" },
-    },
-  },
-  {
-    { "FileType" },
-    [[:set nobuflisted]],
-    opts = {
-      pattern = { "qf" },
-    },
-  },
-  {
-    { "FileType" },
-    function()
-       vim.b.miniindentscope_disable = true
-       vim.b.minicursorword_disable = true
-    end,
-    opts = {
-      pattern = { "starter", "Telescope", "aerial", "NvimTree", "man", "help", "qf" },
-    },
-  },
-  -- {
-  --   { "BufEnter" },
-  --   function()
-  --     local bufname = vim.api.nvim_buf_get_name(0)
-  --     if bufname == "" then
-  --       vim.opt.laststatus = 0
-  --       vim.opt.laststatus = 0
-  --     else
-  --       vim.opt.laststatus = 3
-  --       vim.opt.showtabline = 1
-  --     end
-  --   end,
-  --   opts = { pattern = "*" }
-  -- },
-  {
-    { "TermOpen" },
-    function()
-      vim.cmd([[:setlocal listchars= nonumber norelativenumber]])
-      vim.cmd([[:startinsert]])
-      vim.b.miniindentscope_disable = true
-    end,
-    opts = { pattern = "*" }
-  },
-  {
-    { "TermClose" },
-    [[:call feedkeys("\<cr>")]],
-    opts = {
-      pattern = "term://*",
-    }
-  },
-  {
-    { "VimResized" },
-    [[:tabdo wincmd =]],
-    opts = {
-      pattern = "*",
-    }
-  },
-  {
-    { "TextYankPost" },
-    [[:lua vim.highlight.on_yank({higroup = "Search", timeout = 300})]],
-    opts = {
-      pattern = "*",
-    }
-  }
-})
-
--- nvim_set_option_value({name}, {value}, {*opts})
---                 Sets the value of an option. The behavior of this function
---                 matches that of :set: for global-local options, both the
---                 global and local value are set unless otherwise specified with
---                 {scope}.
---                 Parameters:
---                     {name}   Option name
---                     {value}  New option value
---                     {opts}   Optional parameters
---                              • scope: One of 'global' or 'local'. Analogous to
---                              ╎ :setglobal and :setlocal, respectively.
+if not conf.ok.legendary then return end
+conf.cmds = {}
+local legendary = require("legendary")
 
 -- vim.api.nvim_add_user_command("command! MiniStarter :lua require("mini.starter").open()")
+
+conf.cmds.autocmds = function()
+  legendary.bind_autocmds({
+    {{ "BufWinEnter" }, ":checktime", opts = { pattern = "*" }},
+    {{ "FileType" },
+      [[:nnoremap <silent> <buffer> q :close<CR>]],
+      opts = { pattern = { "qf", "help", "man", "null-ls-info", "lspinfo", "lsp-installer" }
+    }},
+    {{ "FileType" }, [[:set nobuflisted]], opts = { pattern = { "qf" } }},
+    {{ "FileType" },
+      function()
+        vim.b.miniindentscope_disable = true
+        vim.b.minicursorword_disable = true
+      end,
+      opts = { pattern = { "starter", "Telescope", "aerial", "NvimTree", "man", "help", "qf" }}
+    },
+    {{ "TermOpen" },
+      function()
+        vim.cmd([[:setlocal listchars= nonumber norelativenumber]])
+        vim.cmd([[:startinsert]])
+        vim.b.miniindentscope_disable = true
+      end,
+      opts = { pattern = "*" }
+    },
+    {{ "TermClose" }, [[:call feedkeys("\<cr>")]], opts = { pattern = "term://*" }},
+    {{ "VimResized" }, [[:tabdo wincmd =]], opts = { pattern = "*" }},
+    {{"ColorScheme"}, [[:hi CursorLineNr guifg=#46D9FF guibg=#282c34]], opts = { pattern = "*" }},
+    {{ "TextYankPost" },
+      [[:lua vim.highlight.on_yank({higroup = "Search", timeout = 300})]],
+      opts = { pattern = "*" }
+    }
+  })
+end
+
+
+conf.cmds.command_palette = function()
+  return {
+    { "all keymaps", [[Legendary keymaps]] },
+    { "normal mode keymaps", [[lua require('legendary').find('keymaps', require('legendary.filters').mode('n'))]]},
+    { "visual mode keymaps", [[lua require('legendary').find('keymaps', require('legendary.filters').mode('v'))]] },
+    { "insert mode keymaps", [[lua require('legendary').find('keymaps', require('legendary.filters').mode('i'))]] },
+    { "commands", [[Legendary commands]] },
+    { "autocmds", [[Legendary autocmds]] },
+    { "entire selection", ':call feedkeys("GVgg")' },
+    { "save current file", ':w' },
+    { "save all files", ':wa' },
+    { "quit", ':qa' },
+    { "file browser", ":lua require'telescope'.extensions.file_browser.file_browser()", 1 },
+    { "search word", ":lua require('telescope.builtin').live_grep()", 1 },
+    { "git files", ":lua require('telescope.builtin').git_files()", 1 },
+    { "files", ":lua require('telescope.builtin').find_files()", 1 },
+    { "keymaps", ":Legendary" },
+    { "tips", ":help tips" },
+    { "cheatsheet", ":help index" },
+    { "tutorial", ":help tutor" },
+    { "summary", ":help summary" },
+    { "quick reference", ":help quickref" },
+    { "search", ":lua require('telescope.builtin').help_tags()", 1 },
+    { "reload vimrc", ":source $MYVIMRC" },
+    { 'check health', ":checkhealth" },
+    { "jumps", ":lua require('telescope.builtin').jumplist()" },
+    { "commands", ":lua require('telescope.builtin').commands()" },
+    { "command history", ":lua require('telescope.builtin').command_history()" },
+    { "registers", ":lua require('telescope.builtin').registers()" },
+    { "colorshceme", ":lua require('telescope.builtin').colorscheme()", 1 },
+    { "vim options", ":lua require('telescope.builtin').vim_options()" },
+    { "keymaps", ":lua require('telescope.builtin').keymaps()" },
+    { "buffers", ":Telescope buffers" },
+    { "search history", ":lua require('telescope.builtin').search_history()" },
+    { "paste mode", ':set paste!' },
+    { 'cursor line', ':set cursorline!' },
+    { 'cursor column', ':set cursorcolumn!' },
+    { "spell checker", ':set spell!' },
+    { "relative number", ':set relativenumber!' },
+    { "search highlighting", ':set hlsearch!' },
+    { "Open Last", ":Telescope resume<CR>" },
+    { "Telescope Builtin's", ":Telescope builtin<CR>" },
+    { "Man Pages", ":Telescope man_pages<CR>" },
+    { "Grep String", ":Telescope grep_string<CR>" },
+    { "Live Grep", ":Telescope live_grep<CR>" },
+    { "FZF Native", ":Telescope fzf_native<CR>" },
+    { "Buffer FZF Find", ":Telescope current_buffer_fuzzy_find<CR>" },
+    { "Reloader", ":Telescope reloader<CR>" },
+    { "Locations List", ":Telescope loclist<CR>" },
+    { "Buffers", ":Telescope buffers<CR>" },
+    { "Jumplist", ":Telescope jumplist<CR>" },
+    { "Spelling Suggestions", ":Telescope spell_suggest<CR>" },
+    { "Help Tags", ":Telescope help_tags<CR>" },
+    { "Marks", ":Telescope marks<CR>" },
+    { "Tags", ":Telescope tags<CR>" },
+    { "Current Buffer Tags", ":Telescope current_buffer_tags<CR>" },
+    { "Tagstack", ":Telescope tagstack<CR>" },
+    { "Symbols", ":Telescope symbols<CR>" },
+    { "Quickfix", ":Telescope quickfix<CR>" },
+    { "Treesitter", ":Telescope treesitter<CR>" },
+    { "Files", ":Telescope find_files<CR>" },
+    { "Media Files", ":Telescope media_files<CR>" },
+    { "Old Files", ":Telescope oldfiles<CR>" },
+    { "History", ":Telescope search_history<CR>" },
+    { "Command History", ":Telescope command_history<CR>" },
+    { "Normal Mode Keymaps", ":Telescope keymaps<CR>" },
+    { "Registers", ":Telescope registers<CR>" },
+    { "Colorschemes", ":Telescope colorscheme<CR>" },
+    { "Vim Options", ":Telescope vim_options<CR>" },
+    { "Vim Commands", ":Telescope commands<CR>" },
+    { "Vim Autocommands", ":Telescope autocommands<CR>" },
+    { "Compile", ":PackerCompile<cr>" },
+    { "Install", ":PackerInstall<cr>" },
+    { "Sync", ":PackerSync<cr>" },
+    { "Status", ":PackerStatus<cr>" },
+    { "Update", ":PackerUpdate<cr>" },
+    { "Git Status", ":Git status" },
+    { "Git Log", [[:Git log --graph --abbrev-commit --decorate --format=format:"%h - (%ar) %s - %an%d" --all<CR>]] },
+    { "Git Diff", ":Git diff<CR>" },
+    { "Git Diff Staged", ":Git diff --staged<CR>" },
+    { "Git Diff", ":Gitsigns diffthis HEAD<CR>" },
+    { "Next Hunk", ":lua require 'gitsigns'.next_hunk()<CR>" },
+    { "Prev Hunk", ":lua require 'gitsigns'.prev_hunk()<CR>" },
+    { "Blame", ":lua require 'gitsigns'.blame_line()<CR>" },
+    { "Preview Hunk", ":lua require 'gitsigns'.preview_hunk()<CR>" },
+    { "Reset Hunk", ":lua require 'gitsigns'.reset_hunk()<CR>" },
+    { "Reset Buffer", ":lua require 'gitsigns'.reset_buffer()<CR>" },
+    { "Stage Hunk", ":lua require 'gitsigns'.stage_hunk()<CR>" },
+    { "Undo Stage Hunk", ":lua require('gitsigns').undo_stage_hunk()<CR>" },
+    { "Telescope Status", ":Telescope git_status<CR>" },
+    { "Telescope Stash", ":Telescope git_stash<CR>" },
+    { "Telescope Branch's", ":Telescope git_branches<CR>" },
+    { "Telescope Commis", ":Telescope git_commits<CR>" },
+    { "Telescope Branch Commits", ":Telescope git_bcommits<CR>" },
+    { "Telescope Files", ":Telescope git_files<CR>" },
+  }
+end

@@ -1,5 +1,4 @@
-return function()
-  local wilder = require("wilder")
+return function(wilder)
   local accent_color = "#4aa5f0"
   wilder.setup({ modes = { ":", "/", "?" } })
   wilder.set_option("use_python_remote_plugin", 0) -- Disable Python remote plugin

@@ -1,7 +1,6 @@
 -- https://github.com/mrjones2014/legendary.nvim
-
-return function()
-  require('legendary').setup({
+return function(legendary)
+  legendary.setup({
     -- Include builtins by default, set to false to disable
     include_builtin = true,
     -- Include the commands that legendary.nvim creates itself
@@ -27,17 +26,11 @@ return function()
     -- show it at the top next time you use legendary.nvim
     most_recent_item_at_top = true,
     -- Initial keymaps to bind
-    keymaps = {
-      -- your keymap tables here
-    },
+    keymaps = {}, -- your keymap tables here
     -- Initial commands to bind
-    commands = {
-      -- your command tables here
-    },
+    commands = {}, -- your command tables here
     -- Initial augroups and autocmds to bind
-    autocmds = {
-      -- your autocmd tables here
-    },
+    autocmds = {}, -- your autocmd tables here
     which_key = {
       -- you can put which-key.nvim tables here,
       -- or alternatively have them auto-register,
@@ -51,7 +44,7 @@ return function()
     },
     -- Automatically add which-key tables to legendary
     -- see "which-key.nvim Integration" below for more details
-    auto_register_which_key = true,
+    auto_register_which_key = false,
     -- settings for the :LegendaryScratch command
     scratchpad = {
       -- configure how to show results of evaluated Lua code,
