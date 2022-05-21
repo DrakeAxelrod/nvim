@@ -33,6 +33,7 @@ M.options = {
 		node_host_prog = "/bin/neovim-node-host",
 	},
 	opt = {
+	  autochdir = true, -- auto chdir
 		foldlevelstart = 99, -- Sets "foldlevel" when starting to edit another buffer in a window.
 		foldmethod = "expr", -- folding set to "expr" for treesitter based folding
 		foldexpr = "nvim_treesitter#foldexpr()", -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
@@ -78,6 +79,33 @@ M.options = {
 		grepformat = "%f:%l:%c:%m", -- Format to recognize for the ":grep" command output.
 		grepprg = "rg --hidden --vimgrep --smart-case --", -- Program to use for the |:grep| command.
 		backspace = { "indent", "eol", "start" }, -- backspace behavior
+    listchars = {
+      -- eol = "↲",
+      tab = "⎵/",
+      nbsp = "+",
+      trail = "·",
+      extends = "→",
+      precedes = "←",
+    },
+    fillchars = {
+      --    item            default         Used for ~
+      stl = " ", -- " " or "^" statusline of the current window
+      stlnc = " ", -- " " or "=" statusline of the non-current windows
+      horiz = "─", -- "─" or "-" horizontal separators |:split|
+      horizup = "┴", -- "┴" or "-" upwards facing horizontal separator
+      horizdown = "┬", -- "┬" or "-" downwards facing horizontal separator
+      vert = "│", -- "│" or "|" vertical separators |:vsplit|
+      vertleft = "┤", -- "┤" or "|" left facing vertical separator
+      vertright = "├", -- "├" or "|" right facing vertical separator
+      verthoriz = "┼", -- "┼" or "+" overlapping vertical and horizontal separator
+      fold = "-", -- "·" or "-" filling "foldtext"
+      foldopen = "-", -- "-" mark the beginning of a fold
+      foldclose = "+", -- "+" show a closed fold
+      foldsep = "│", -- "│" or "|" open fold middle marker
+      diff = "-", -- "-" deleted lines of the "diff" option
+      msgsep = " ", -- " " message separator "display"
+      eob = " ", -- "~" empty lines at the end of a buffer
+    },
 	},
 }
 

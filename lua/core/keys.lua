@@ -187,6 +187,7 @@ M.telescope_fb_browser = function()
 end
 
 
+
 M.bind = function(binds)
 	for _, m in ipairs(binds) do
 		local mode, keys, cmd, opts = unpack(m)

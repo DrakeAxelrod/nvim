@@ -4,6 +4,7 @@ return function(fn)
     plugins = require("core.plugins"),
     keys = require("core.keys"),
     theme = require("core.theme"),
+    cmds = require("core.cmds"),
   }
   return fn(conf)
 end

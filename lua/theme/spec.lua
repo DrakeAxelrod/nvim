@@ -73,7 +73,7 @@ M.theme = M.lush(function()
     LineNrAbove                            { LineNr }, -- LineNrAbove    xxx links to LineNr
     LineNrBelow                            { LineNr }, -- LineNrBelow    xxx links to LineNr
     TelescopeResultsLineNr                 { LineNr }, -- TelescopeResultsLineNr xxx links to LineNr
-    CursorLineNr                           { fg=M.colors.br_red, }, -- CursorLineNr   xxx cterm=underline ctermfg=11 guifg=#d57880
+    CursorLineNr                           { fg=M.colors.br_blue, }, -- CursorLineNr   xxx cterm=underline ctermfg=11 guifg=#d57880
     Question                               { fg=M.colors.green, }, -- Question       xxx ctermfg=121 guifg=#a3be8c
     StatusLine                             { fg=M.colors.foreground, bg=M.colors.background, }, -- StatusLine     xxx cterm=bold,reverse guifg=#c8d0e0 guibg=#353b49
     MsgSeparator                           { StatusLine }, -- MsgSeparator   xxx links to StatusLine
@@ -98,7 +98,7 @@ M.theme = M.lush(function()
     SignColumn                             { fg=M.colors.foreground, }, -- SignColumn     xxx ctermfg=14 ctermbg=242 guifg=#c8d0e0
     CursorLineSign                         { SignColumn }, -- CursorLineSign xxx links to SignColumn
     Conceal                                { bg="#2e3440", }, -- Conceal        xxx ctermfg=7 ctermbg=242 guibg=#2e3440
-    SpellBad                               { fg="#d57780", gui="underline,italic", sp="#d57780", }, -- SpellBad       xxx ctermbg=9 gui=underline,italic guifg=#d57780 guisp=#d57780
+    SpellBad                               { fg=M.colors.br_red, gui="underline,italic", sp=M.colors.br_red, }, -- SpellBad       xxx ctermbg=9 gui=underline,italic guifg=#d57780 guisp=#d57780
     SpellCap                               { fg=M.colors.yellow, gui="underline,italic", sp=M.colors.yellow, }, -- SpellCap       xxx ctermbg=12 gui=underline,italic guifg=#ebcb8b guisp=#ebcb8b
     SpellRare                              { fg=M.colors.magenta, gui="underline,italic", sp=M.colors.magenta, }, -- SpellRare      xxx ctermbg=13 gui=underline,italic guifg=#b988b0 guisp=#b988b0
     SpellLocal                             { fg=M.colors.cyan, gui="underline,italic", sp=M.colors.cyan, }, -- SpellLocal     xxx ctermbg=14 gui=underline,italic guifg=#88c0d0 guisp=#88c0d0
@@ -123,7 +123,7 @@ M.theme = M.lush(function()
     RedrawDebugRecompose                   { bg="red", }, -- RedrawDebugRecompose xxx ctermbg=9 guibg=red
     Cursor                                 { fg=M.colors.foreground, gui="reverse", }, -- Cursor         xxx gui=reverse guifg=#c8d0e0
     lCursor                                { fg="bg", bg="fg", }, -- lCursor        xxx guifg=bg guibg=fg
-    Normal                                 { fg=M.colors.foreground, bg="#2e3440", }, -- Normal         xxx guifg=#c8d0e0 guibg=#2e3440
+    Normal                                 { fg=M.colors.foreground, bg=M.colors.background, }, -- Normal         xxx guifg=#c8d0e0 guibg=#2e3440
     NvimSpacing                            { Normal }, -- NvimSpacing    xxx links to Normal
     NotifyERRORBody                        { Normal }, -- NotifyERRORBody xxx links to Normal
     NotifyWARNBody                         { Normal }, -- NotifyWARNBody xxx links to Normal
@@ -198,9 +198,9 @@ M.theme = M.lush(function()
     PreProc                                { fg=M.colors.magenta, }, -- PreProc        xxx ctermfg=81 guifg=#b988b0
     TSPreProc                              { PreProc }, -- TSPreProc      xxx links to PreProc
     TSAnnotation                           { PreProc }, -- TSAnnotation   xxx links to PreProc
-    Define                                 { fg="#d57780", }, -- Define         xxx guifg=#d57780
+    Define                                 { fg=M.colors.red, }, -- Define         xxx guifg=#d57780
     TSDefine                               { Define }, -- TSDefine       xxx links to Define
-    Macro                                  { fg="#d57780", }, -- Macro          xxx guifg=#d57780
+    Macro                                  { fg=M.colors.br_red, }, -- Macro          xxx guifg=#d57780
     PreCondit                              { fg=M.colors.magenta, }, -- PreCondit      xxx guifg=#b988b0
     StorageClass                           { fg=M.colors.magenta, }, -- StorageClass   xxx guifg=#b988b0
     TSStorageClass                         { StorageClass }, -- TSStorageClass xxx links to StorageClass
@@ -214,10 +214,10 @@ M.theme = M.lush(function()
     Typedef                                { fg=M.colors.magenta, }, -- Typedef        xxx guifg=#b988b0
     TSTypeDefinition                       { Typedef }, -- TSTypeDefinition xxx links to Typedef
     Tag                                    { fg=M.colors.green, }, -- Tag            xxx guifg=#a3be8c
-    Special                                { fg="#de878f", }, -- Special        xxx ctermfg=224 guifg=#de878f
+    Special                                { fg=M.colors.br_red, }, -- Special        xxx ctermfg=224 guifg=#de878f
     NotifyLogTitle                         { Special }, -- NotifyLogTitle xxx links to Special
     TelescopePreviewLink                   { Special }, -- TelescopePreviewLink xxx links to Special
-    SpecialChar                            { fg="#de878f", }, -- SpecialChar    xxx guifg=#de878f
+    SpecialChar                            { fg=M.colors.br_red, }, -- SpecialChar    xxx guifg=#de878f
     NvimRegister                           { SpecialChar }, -- NvimRegister   xxx links to SpecialChar
     NvimStringSpecial                      { SpecialChar }, -- NvimStringSpecial xxx links to SpecialChar
     TSCharacterSpecial                     { SpecialChar }, -- TSCharacterSpecial xxx links to SpecialChar
@@ -253,7 +253,7 @@ M.theme = M.lush(function()
     NvimFigureBrace                        { NvimInternalError }, -- NvimFigureBrace xxx links to NvimInternalError
     NvimSingleQuotedUnknownEscape          { NvimInternalError }, -- NvimSingleQuotedUnknownEscape xxx links to NvimInternalError
     NvimInvalidSingleQuotedUnknownEscape   { NvimInternalError }, -- NvimInvalidSingleQuotedUnknownEscape xxx links to NvimInternalError
-    GitSignsDelete                         { fg="#d57780", }, -- GitSignsDelete xxx guifg=#d57780
+    GitSignsDelete                         { fg=M.colors.br_red, }, -- GitSignsDelete xxx guifg=#d57780
     GitSignsChange                         { fg=M.colors.blue, }, -- GitSignsChange xxx guifg=#5e81ac
     GitSignsAdd                            { fg=M.colors.green, }, -- GitSignsAdd    xxx guifg=#a3be8c
     WilderAccent                           { fg=M.colors.br_blue, bg="#3b4252", }, -- WilderAccent   xxx ctermfg=0 ctermbg=13 guifg=#81a1c1 guibg=#3b4252
@@ -305,7 +305,7 @@ M.theme = M.lush(function()
     DiagnosticVirtualTextHint              { LspDiagnosticsVirtualTextHint }, -- DiagnosticVirtualTextHint xxx links to LspDiagnosticsVirtualTextHint
     LightspeedUnlabeledMatch               { fg="#e5e9f0", gui="bold", }, -- LightspeedUnlabeledMatch xxx gui=bold guifg=#e5e9f0
     LightspeedGreyWash                     { fg=M.colors.br_black, }, -- LightspeedGreyWash xxx guifg=#646a76
-    LightspeedMaskedChar                   { fg="#b48ead", }, -- LightspeedMaskedChar xxx guifg=#b48ead
+    LightspeedMaskedChar                   { fg=M.colors.magenta, }, -- LightspeedMaskedChar xxx guifg=#b48ead
     LightspeedShortcut                     { fg="#e5e9f0", bg="#e85b7a", gui="bold,underline", }, -- LightspeedShortcut xxx gui=bold,underline guifg=#e5e9f0 guibg=#e85b7a
     LightspeedLabelDistantOverlapped       { fg=M.colors.br_blue, gui="underline", }, -- LightspeedLabelDistantOverlapped xxx gui=underline guifg=#81a1c1
     LightspeedLabelDistant                 { fg=M.colors.cyan, gui="bold,underline", }, -- LightspeedLabelDistant xxx gui=bold,underline guifg=#88c0d0
@@ -319,22 +319,22 @@ M.theme = M.lush(function()
     illuminatedCurWord                     { bg="#3f4758", }, -- illuminatedCurWord xxx guibg=#3f4758
     illuminatedWord                        { bg="#3f4758", }, -- illuminatedWord xxx guibg=#3f4758
     DapStopped                             { fg=M.colors.green, }, -- DapStopped     xxx guifg=#a3be8c
-    DapBreakpoint                          { fg="#d57780", }, -- DapBreakpoint  xxx guifg=#d57780
+    DapBreakpoint                          { fg=M.colors.br_red, }, -- DapBreakpoint  xxx guifg=#d57780
     IndentBlanklineContextChar             { fg=M.colors.magenta, gui="nocombine", }, -- IndentBlanklineContextChar xxx gui=nocombine guifg=#b988b0
     IndentBlanklineChar                    { fg="#4c566a", gui="nocombine", }, -- IndentBlanklineChar xxx gui=nocombine guifg=#4c566a
     SneakScope                             { bg="#4c566a", }, -- SneakScope     xxx guibg=#4c566a
     Sneak                                  { fg="#2e3440", bg=M.colors.foreground, }, -- Sneak          xxx guifg=#2e3440 guibg=#c8d0e0
-    BufferInactiveTarget                   { fg="#d57780", bg=M.colors.background, gui="bold", }, -- BufferInactiveTarget xxx gui=bold guifg=#d57780 guibg=#353b49
+    BufferInactiveTarget                   { fg=M.colors.br_red, bg=M.colors.background, gui="bold", }, -- BufferInactiveTarget xxx gui=bold guifg=#d57780 guibg=#353b49
     BufferInactiveSign                     { fg=M.colors.gray, bg=M.colors.background, }, -- BufferInactiveSign xxx guifg=#6c7a96 guibg=#353b49
     BufferInactiveMod                      { fg=M.colors.yellow, bg=M.colors.background, }, -- BufferInactiveMod xxx guifg=#ebcb8b guibg=#353b49
     BufferInactiveIndex                    { fg=M.colors.gray, bg=M.colors.background, }, -- BufferInactiveIndex xxx guifg=#6c7a96 guibg=#353b49
     BufferInactive                         { fg=M.colors.gray, bg=M.colors.background, }, -- BufferInactive xxx guifg=#6c7a96 guibg=#353b49
-    BufferVisibleTarget                    { fg="#d57780", bg="#2e3440", gui="bold", }, -- BufferVisibleTarget xxx gui=bold guifg=#d57780 guibg=#2e3440
+    BufferVisibleTarget                    { fg=M.colors.br_red, bg="#2e3440", gui="bold", }, -- BufferVisibleTarget xxx gui=bold guifg=#d57780 guibg=#2e3440
     BufferVisibleSign                      { fg=M.colors.gray, bg="#2e3440", }, -- BufferVisibleSign xxx guifg=#6c7a96 guibg=#2e3440
     BufferVisibleMod                       { fg=M.colors.yellow, bg="#2e3440", gui="bold", }, -- BufferVisibleMod xxx gui=bold guifg=#ebcb8b guibg=#2e3440
     BufferVisibleIndex                     { fg=M.colors.foreground, bg="#2e3440", }, -- BufferVisibleIndex xxx guifg=#c8d0e0 guibg=#2e3440
     BufferVisible                          { fg=M.colors.foreground, bg="#2e3440", }, -- BufferVisible  xxx guifg=#c8d0e0 guibg=#2e3440
-    BufferCurrentTarget                    { fg="#d57780", bg="#2e3440", gui="bold", }, -- BufferCurrentTarget xxx gui=bold guifg=#d57780 guibg=#2e3440
+    BufferCurrentTarget                    { fg=M.colors.br_red, bg="#2e3440", gui="bold", }, -- BufferCurrentTarget xxx gui=bold guifg=#d57780 guibg=#2e3440
     BufferCurrentSign                      { fg=M.colors.cyan, bg="#2e3440", }, -- BufferCurrentSign xxx guifg=#88c0d0 guibg=#2e3440
     BufferCurrentMod                       { fg=M.colors.yellow, bg="#2e3440", gui="bold", }, -- BufferCurrentMod xxx gui=bold guifg=#ebcb8b guibg=#2e3440
     BufferCurrentIndex                     { fg=M.colors.foreground, bg="#2e3440", }, -- BufferCurrentIndex xxx guifg=#c8d0e0 guibg=#2e3440
@@ -358,13 +358,13 @@ M.theme = M.lush(function()
     markdownH1                             { fg=M.colors.blue, gui="bold", }, -- markdownH1     xxx gui=bold guifg=#5e81ac
     markdownH2                             { fg=M.colors.br_blue, gui="bold", }, -- markdownH2     xxx gui=bold guifg=#81a1c1
     markdownH3                             { fg=M.colors.cyan, gui="bold", }, -- markdownH3     xxx gui=bold guifg=#88c0d0
-    markdownH4                             { fg="#8fbcbb", }, -- markdownH4     xxx guifg=#8fbcbb
-    markdownH5                             { fg="#8fbcbb", }, -- markdownH5     xxx guifg=#8fbcbb
-    markdownH6                             { fg="#8fbcbb", }, -- markdownH6     xxx guifg=#8fbcbb
+    markdownH4                             { fg=M.colors.cyan, }, -- markdownH4     xxx guifg=#8fbcbb
+    markdownH5                             { fg=M.colors.cyan, }, -- markdownH5     xxx guifg=#8fbcbb
+    markdownH6                             { fg=M.colors.cyan, }, -- markdownH6     xxx guifg=#8fbcbb
     markdownH1Delimiter                    { fg=M.colors.blue, }, -- markdownH1Delimiter xxx guifg=#5e81ac
     markdownH2Delimiter                    { fg=M.colors.br_blue, }, -- markdownH2Delimiter xxx guifg=#81a1c1
     TSEnvironment                          { fg=M.colors.foreground, }, -- TSEnvironment  xxx guifg=#c8d0e0
-    TSParameter                            { fg="#d57780", }, -- TSParameter    xxx guifg=#d57780
+    TSParameter                            { fg=M.colors.br_red, }, -- TSParameter    xxx guifg=#d57780
     luaTSParameter                         { TSParameter }, -- luaTSParameter xxx links to TSParameter
     TSAttribute                            { fg=M.colors.magenta, }, -- TSAttribute    xxx guifg=#b988b0
     TSBoolean                              { fg=M.colors.orange, }, -- TSBoolean      xxx guifg=#d08f70
@@ -375,7 +375,7 @@ M.theme = M.lush(function()
     TSConditional                          { fg=M.colors.magenta, }, -- TSConditional  xxx guifg=#b988b0
     TSConstant                             { fg=M.colors.cyan, }, -- TSConstant     xxx guifg=#88c0d0
     TSConstBuiltin                         { fg=M.colors.orange, }, -- TSConstBuiltin xxx guifg=#d08f70
-    TSConstMacro                           { fg="#d57780", }, -- TSConstMacro   xxx guifg=#d57780
+    TSConstMacro                           { fg=M.colors.br_red, }, -- TSConstMacro   xxx guifg=#d57780
     CmpItemKindTypeParameter               { fg=M.colors.yellow, }, -- CmpItemKindTypeParameter xxx guifg=#ebcb8b
     TSConstructor                          { fg=M.colors.yellow, }, -- TSConstructor  xxx guifg=#ebcb8b
     luaTSConstructor                       { TSConstructor }, -- luaTSConstructor xxx links to TSConstructor
@@ -405,17 +405,17 @@ M.theme = M.lush(function()
     TelescopePromptBorder                  { fg=M.colors.br_blue, }, -- TelescopePromptBorder xxx guifg=#81a1c1
     markdownUrl                            { fg=M.colors.cyan, gui="underline", }, -- markdownUrl    xxx gui=underline guifg=#88c0d0
     markdownRule                           { fg=M.colors.magenta, }, -- markdownRule   xxx guifg=#b988b0
-    markdownOrderedListMarker              { fg="#d57780", }, -- markdownOrderedListMarker xxx guifg=#d57780
-    markdownListMarker                     { fg="#d57780", }, -- markdownListMarker xxx guifg=#d57780
+    markdownOrderedListMarker              { fg=M.colors.br_red, }, -- markdownOrderedListMarker xxx guifg=#d57780
+    markdownListMarker                     { fg=M.colors.br_red, }, -- markdownListMarker xxx guifg=#d57780
     markdownLinkText                       { fg=M.colors.magenta, }, -- markdownLinkText xxx guifg=#b988b0
     markdownItalic                         { fg=M.colors.yellow, gui="italic", }, -- markdownItalic xxx gui=italic guifg=#ebcb8b
     markdownLinkDelimiter                  { fg=M.colors.gray, }, -- markdownLinkDelimiter xxx guifg=#6c7a96
     markdownIdDelimiter                    { fg=M.colors.gray, }, -- markdownIdDelimiter xxx guifg=#6c7a96
     markdownIdDeclaration                  { fg=M.colors.magenta, }, -- markdownIdDeclaration xxx guifg=#b988b0
     markdownId                             { fg=M.colors.yellow, }, -- markdownId     xxx guifg=#ebcb8b
-    markdownH6Delimiter                    { fg="#8fbcbb", }, -- markdownH6Delimiter xxx guifg=#8fbcbb
-    markdownH5Delimiter                    { fg="#8fbcbb", }, -- markdownH5Delimiter xxx guifg=#8fbcbb
-    markdownH4Delimiter                    { fg="#8fbcbb", }, -- markdownH4Delimiter xxx guifg=#8fbcbb
+    markdownH6Delimiter                    { fg=M.colors.cyan, }, -- markdownH6Delimiter xxx guifg=#8fbcbb
+    markdownH5Delimiter                    { fg=M.colors.cyan, }, -- markdownH5Delimiter xxx guifg=#8fbcbb
+    markdownH4Delimiter                    { fg=M.colors.cyan, }, -- markdownH4Delimiter xxx guifg=#8fbcbb
     markdownH3Delimiter                    { fg=M.colors.cyan, }, -- markdownH3Delimiter xxx guifg=#88c0d0
     NvimTreeVertSplit                      { fg=M.colors.background, bg=M.colors.background, }, -- NvimTreeVertSplit xxx guifg=#353b49 guibg=#353b49
     NvimTreeCursorLine                     { bg="#3b4252", }, -- NvimTreeCursorLine xxx guibg=#3b4252
@@ -423,7 +423,7 @@ M.theme = M.lush(function()
     NvimTreeImageFile                      { fg=M.colors.magenta, gui="bold", }, -- NvimTreeImageFile xxx gui=bold guifg=#b988b0
     NvimTreeSpecialFile                    { fg=M.colors.orange, gui="underline", }, -- NvimTreeSpecialFile xxx gui=underline guifg=#d08f70
     NvimTreeExecFile                       { fg=M.colors.green, gui="bold", }, -- NvimTreeExecFile xxx gui=bold guifg=#a3be8c
-    NvimTreeGitDeleted                     { fg="#d57780", }, -- NvimTreeGitDeleted xxx guifg=#d57780
+    NvimTreeGitDeleted                     { fg=M.colors.br_red, }, -- NvimTreeGitDeleted xxx guifg=#d57780
     NvimTreeGitStaged                      { fg=M.colors.magenta, }, -- NvimTreeGitStaged xxx guifg=#b988b0
     NvimTreeGitNew                         { fg=M.colors.green, }, -- NvimTreeGitNew xxx guifg=#a3be8c
     NvimTreeGitDirty                       { fg=M.colors.yellow, }, -- NvimTreeGitDirty xxx guifg=#ebcb8b
@@ -432,7 +432,7 @@ M.theme = M.lush(function()
     NvimTreeEmptyFolderName                { fg=M.colors.gray, }, -- NvimTreeEmptyFolderName xxx guifg=#6c7a96
     htmlH4                                 { fg=M.colors.yellow, gui="bold", }, -- htmlH4         xxx gui=bold guifg=#ebcb8b
     htmlH3                                 { fg=M.colors.green, gui="bold", }, -- htmlH3         xxx gui=bold guifg=#a3be8c
-    htmlH2                                 { fg="#d57780", gui="bold", }, -- htmlH2         xxx gui=bold guifg=#d57780
+    htmlH2                                 { fg=M.colors.br_red, gui="bold", }, -- htmlH2         xxx gui=bold guifg=#d57780
     htmlH1                                 { fg=M.colors.cyan, gui="bold", }, -- htmlH1         xxx gui=bold guifg=#88c0d0
     htmlLink                               { fg=M.colors.green, gui="underline", }, -- htmlLink       xxx gui=underline guifg=#a3be8c
     TelescopePromptPrefix                  { fg=M.colors.magenta, }, -- TelescopePromptPrefix xxx guifg=#b988b0
@@ -448,7 +448,7 @@ M.theme = M.lush(function()
     Warnings                               { fg=M.colors.orange, }, -- Warnings       xxx guifg=#d08f70
     CommandMode                            { fg=M.colors.yellow, gui="reverse", }, -- CommandMode    xxx gui=reverse guifg=#ebcb8b
     VisualMode                             { fg=M.colors.magenta, gui="reverse", }, -- VisualMode     xxx gui=reverse guifg=#b988b0
-    ReplacelMode                           { fg="#d57780", gui="reverse", }, -- ReplacelMode   xxx gui=reverse guifg=#d57780
+    ReplacelMode                           { fg=M.colors.br_red, gui="reverse", }, -- ReplacelMode   xxx gui=reverse guifg=#d57780
     InsertMode                             { fg=M.colors.green, gui="reverse", }, -- InsertMode     xxx gui=reverse guifg=#a3be8c
     NormalMode                             { fg=M.colors.cyan, gui="reverse", }, -- NormalMode     xxx gui=reverse guifg=#88c0d0
     VisualNOS                              { bg="#3f4758", }, -- VisualNOS      xxx guibg=#3f4758
@@ -470,7 +470,7 @@ M.theme = M.lush(function()
     CmpItemAbbrDeprecated                  { fg=M.colors.foreground, }, -- CmpItemAbbrDeprecated xxx guifg=#c8d0e0
     CmpItemAbbr                            { fg=M.colors.foreground, }, -- CmpItemAbbr    xxx guifg=#c8d0e0
     CursorIM                               { fg=M.colors.foreground, gui="reverse", }, -- CursorIM       xxx gui=reverse guifg=#c8d0e0
-    TSVariableBuiltin                      { fg="#d57780", gui="bold", }, -- TSVariableBuiltin xxx gui=bold guifg=#d57780
+    TSVariableBuiltin                      { fg=M.colors.br_red, gui="bold", }, -- TSVariableBuiltin xxx gui=bold guifg=#d57780
     TSVariable                             { fg=M.colors.foreground, gui="bold", }, -- TSVariable     xxx gui=bold guifg=#c8d0e0
     luaTSVariable                          { TSVariable }, -- luaTSVariable  xxx links to TSVariable
     TSTypeBuiltin                          { fg=M.colors.orange, }, -- TSTypeBuiltin  xxx guifg=#d08f70
@@ -502,7 +502,7 @@ M.theme = M.lush(function()
     TSPunctDelimiter                       { fg=M.colors.blue, }, -- TSPunctDelimiter xxx guifg=#5e81ac
     luaTSPunctDelimiter                    { TSPunctDelimiter }, -- luaTSPunctDelimiter xxx links to TSPunctDelimiter
     TSProperty                             { fg=M.colors.br_blue, }, -- TSProperty     xxx guifg=#81a1c1
-    TSParameterReference                   { fg="#d57780", }, -- TSParameterReference xxx guifg=#d57780
+    TSParameterReference                   { fg=M.colors.br_red, }, -- TSParameterReference xxx guifg=#d57780
     TSOperator                             { fg=M.colors.magenta, }, -- TSOperator     xxx guifg=#b988b0
     luaTSOperator                          { TSOperator }, -- luaTSOperator  xxx links to TSOperator
     TSNumber                               { fg=M.colors.orange, }, -- TSNumber       xxx guifg=#d08f70
@@ -513,7 +513,7 @@ M.theme = M.lush(function()
     TSLabel                                { fg=M.colors.magenta, }, -- TSLabel        xxx guifg=#b988b0
     TSKeywordReturn                        { fg=M.colors.magenta, }, -- TSKeywordReturn xxx guifg=#b988b0
     TSKeywordOperator                      { fg=M.colors.magenta, }, -- TSKeywordOperator xxx guifg=#b988b0
-    GitGutterDelete                        { fg="#d57780", }, -- GitGutterDelete xxx guifg=#d57780
+    GitGutterDelete                        { fg=M.colors.br_red, }, -- GitGutterDelete xxx guifg=#d57780
     TroubleCount                           { fg=M.colors.magenta, }, -- TroubleCount   xxx guifg=#b988b0
     GitGutterChange                        { fg=M.colors.blue, }, -- GitGutterChange xxx guifg=#5e81ac
     GitGutterAdd                           { fg=M.colors.green, }, -- GitGutterAdd   xxx guifg=#a3be8c
@@ -521,7 +521,7 @@ M.theme = M.lush(function()
     NeogitNotificationWarning              { fg=M.colors.orange, }, -- NeogitNotificationWarning xxx guifg=#d08f70
     NeogitNotificationInfo                 { fg=M.colors.green, }, -- NeogitNotificationInfo xxx guifg=#a3be8c
     NeogitDiffAddHighlight                 { fg=M.colors.green, bg="#394e3d", }, -- NeogitDiffAddHighlight xxx guifg=#a3be8c guibg=#394e3d
-    NeogitDiffDeleteHighlight              { fg="#d57780", bg="#4d2b2e", }, -- NeogitDiffDeleteHighlight xxx guifg=#d57780 guibg=#4d2b2e
+    NeogitDiffDeleteHighlight              { fg=M.colors.br_red, bg="#4d2b2e", }, -- NeogitDiffDeleteHighlight xxx guifg=#d57780 guibg=#4d2b2e
     NeogitDiffContextHighlight             { bg=M.colors.background, }, -- NeogitDiffContextHighlight xxx guibg=#353b49
     NeogitHunkHeaderHighlight              { fg=M.colors.yellow, bg="#3f4758", }, -- NeogitHunkHeaderHighlight xxx guifg=#ebcb8b guibg=#3f4758
     NeogitHunkHeader                       { fg=M.colors.foreground, bg="#3f4758", }, -- NeogitHunkHeader xxx guifg=#c8d0e0 guibg=#3f4758
@@ -531,7 +531,7 @@ M.theme = M.lush(function()
     diffFile                               { fg=M.colors.br_blue, }, -- diffFile       xxx guifg=#81a1c1
     diffOldFile                            { fg=M.colors.yellow, }, -- diffOldFile    xxx guifg=#ebcb8b
     diffChanged                            { fg=M.colors.blue, }, -- diffChanged    xxx guifg=#5e81ac
-    diffRemoved                            { fg="#d57780", }, -- diffRemoved    xxx guifg=#d57780
+    diffRemoved                            { fg=M.colors.br_red, }, -- diffRemoved    xxx guifg=#d57780
     diffAdded                              { fg=M.colors.green, }, -- diffAdded      xxx guifg=#a3be8c
     TroubleText                            { fg=M.colors.foreground, }, -- TroubleText    xxx guifg=#c8d0e0
     TroubleNormal                          { fg=M.colors.foreground, }, -- TroubleNormal  xxx guifg=#c8d0e0
@@ -551,7 +551,7 @@ M.theme = M.lush(function()
     GitSignsChangeNr                       { fg=M.colors.blue, }, -- GitSignsChangeNr xxx guifg=#5e81ac
     GitSignsChangeLn                       { fg=M.colors.blue, }, -- GitSignsChangeLn xxx guifg=#5e81ac
     GitSignsChangeVirtLn                   { GitSignsChangeLn }, -- GitSignsChangeVirtLn xxx links to GitSignsChangeLn
-    GitSignsDeleteNr                       { fg="#d57780", }, -- GitSignsDeleteNr xxx guifg=#d57780
+    GitSignsDeleteNr                       { fg=M.colors.br_red, }, -- GitSignsDeleteNr xxx guifg=#d57780
     CmpItemKindSnippet                     { fg=M.colors.green, }, -- CmpItemKindSnippet xxx guifg=#a3be8c
     CmpItemKindFile                        { fg=M.colors.br_blue, }, -- CmpItemKindFile xxx guifg=#81a1c1
     CmpItemKindEnumMember                  { fg=M.colors.cyan, }, -- CmpItemKindEnumMember xxx guifg=#88c0d0
@@ -566,9 +566,9 @@ M.theme = M.lush(function()
     DefinitionPreviewTitle                 { fg=M.colors.green, }, -- DefinitionPreviewTitle xxx guifg=#a3be8c
     DefinitionCount                        { fg=M.colors.magenta, }, -- DefinitionCount xxx guifg=#b988b0
     ReferencesCount                        { fg=M.colors.magenta, }, -- ReferencesCount xxx guifg=#b988b0
-    LspSagaAutoPreview                     { fg="#d57780", }, -- LspSagaAutoPreview xxx guifg=#d57780
+    LspSagaAutoPreview                     { fg=M.colors.br_red, }, -- LspSagaAutoPreview xxx guifg=#d57780
     LspSagaFinderSelection                 { fg=M.colors.green, }, -- LspSagaFinderSelection xxx guifg=#a3be8c
-    LspSagaSignatureHelpBorder             { fg="#de878f", }, -- LspSagaSignatureHelpBorder xxx guifg=#de878f
+    LspSagaSignatureHelpBorder             { fg=M.colors.red, }, -- LspSagaSignatureHelpBorder xxx guifg=#de878f
     LspSagaCodeActionTruncateLine          { fg="#3f4758", }, -- LspSagaCodeActionTruncateLine xxx guifg=#3f4758
     LspSagaCodeActionBorder                { fg=M.colors.br_blue, }, -- LspSagaCodeActionBorder xxx guifg=#81a1c1
     LspSagaCodeActionContent               { fg=M.colors.magenta, }, -- LspSagaCodeActionContent xxx guifg=#b988b0
@@ -611,13 +611,13 @@ M.theme = M.lush(function()
     lualine_b_diff_modified_command        { fg=M.colors.blue, bg=M.colors.foreground, }, -- lualine_b_diff_modified_command xxx guifg=#5e81ac guibg=#c8d0e0
     lualine_b_diff_modified_terminal       { fg=M.colors.blue, bg=M.colors.foreground, }, -- lualine_b_diff_modified_terminal xxx guifg=#5e81ac guibg=#c8d0e0
     lualine_b_diff_modified_inactive       { fg=M.colors.blue, bg=M.colors.foreground, }, -- lualine_b_diff_modified_inactive xxx guifg=#5e81ac guibg=#c8d0e0
-    lualine_b_diff_removed_normal          { fg="#d57780", bg=M.colors.foreground, }, -- lualine_b_diff_removed_normal xxx guifg=#d57780 guibg=#c8d0e0
-    lualine_b_diff_removed_insert          { fg="#d57780", bg=M.colors.foreground, }, -- lualine_b_diff_removed_insert xxx guifg=#d57780 guibg=#c8d0e0
-    lualine_b_diff_removed_visual          { fg="#d57780", bg=M.colors.foreground, }, -- lualine_b_diff_removed_visual xxx guifg=#d57780 guibg=#c8d0e0
-    lualine_b_diff_removed_replace         { fg="#d57780", bg=M.colors.foreground, }, -- lualine_b_diff_removed_replace xxx guifg=#d57780 guibg=#c8d0e0
-    lualine_b_diff_removed_command         { fg="#d57780", bg=M.colors.foreground, }, -- lualine_b_diff_removed_command xxx guifg=#d57780 guibg=#c8d0e0
-    lualine_b_diff_removed_terminal        { fg="#d57780", bg=M.colors.foreground, }, -- lualine_b_diff_removed_terminal xxx guifg=#d57780 guibg=#c8d0e0
-    lualine_b_diff_removed_inactive        { fg="#d57780", bg=M.colors.foreground, }, -- lualine_b_diff_removed_inactive xxx guifg=#d57780 guibg=#c8d0e0
+    lualine_b_diff_removed_normal          { fg=M.colors.br_red, bg=M.colors.foreground, }, -- lualine_b_diff_removed_normal xxx guifg=#d57780 guibg=#c8d0e0
+    lualine_b_diff_removed_insert          { fg=M.colors.br_red, bg=M.colors.foreground, }, -- lualine_b_diff_removed_insert xxx guifg=#d57780 guibg=#c8d0e0
+    lualine_b_diff_removed_visual          { fg=M.colors.br_red, bg=M.colors.foreground, }, -- lualine_b_diff_removed_visual xxx guifg=#d57780 guibg=#c8d0e0
+    lualine_b_diff_removed_replace         { fg=M.colors.br_red, bg=M.colors.foreground, }, -- lualine_b_diff_removed_replace xxx guifg=#d57780 guibg=#c8d0e0
+    lualine_b_diff_removed_command         { fg=M.colors.br_red, bg=M.colors.foreground, }, -- lualine_b_diff_removed_command xxx guifg=#d57780 guibg=#c8d0e0
+    lualine_b_diff_removed_terminal        { fg=M.colors.br_red, bg=M.colors.foreground, }, -- lualine_b_diff_removed_terminal xxx guifg=#d57780 guibg=#c8d0e0
+    lualine_b_diff_removed_inactive        { fg=M.colors.br_red, bg=M.colors.foreground, }, -- lualine_b_diff_removed_inactive xxx guifg=#d57780 guibg=#c8d0e0
     lualine_b_diagnostics_error_normal     { fg=M.colors.red, bg=M.colors.foreground, }, -- lualine_b_diagnostics_error_normal xxx guifg=#bf616a guibg=#c8d0e0
     lualine_b_diagnostics_error_insert     { fg=M.colors.red, bg=M.colors.foreground, }, -- lualine_b_diagnostics_error_insert xxx guifg=#bf616a guibg=#c8d0e0
     lualine_b_diagnostics_error_visual     { fg=M.colors.red, bg=M.colors.foreground, }, -- lualine_b_diagnostics_error_visual xxx guifg=#bf616a guibg=#c8d0e0
@@ -645,24 +645,24 @@ M.theme = M.lush(function()
     CmpItemAbbrDeprecatedDefault           { fg=M.colors.gray, }, -- CmpItemAbbrDeprecatedDefault xxx guifg=#6c7a96
     CmpItemAbbrMatchDefault                { fg=M.colors.foreground, }, -- CmpItemAbbrMatchDefault xxx guifg=#c8d0e0
     CmpItemAbbrMatchFuzzyDefault           { fg=M.colors.foreground, }, -- CmpItemAbbrMatchFuzzyDefault xxx guifg=#c8d0e0
-    CmpItemKindDefault                     { fg="#de878f", }, -- CmpItemKindDefault xxx guifg=#de878f
+    CmpItemKindDefault                     { fg=M.colors.red, }, -- CmpItemKindDefault xxx guifg=#de878f
     CmpItemKind                            { CmpItemKindDefault }, -- CmpItemKind    xxx links to CmpItemKindDefault
     CmpItemMenuDefault                     { fg=M.colors.foreground, }, -- CmpItemMenuDefault xxx guifg=#c8d0e0
     TSNone                                 { }, -- TSNone         xxx cterm= gui=
     TSStrike                               { gui="strikethrough", }, -- TSStrike       xxx cterm=strikethrough gui=strikethrough
-    rainbowcol1                            { fg="#efefef", }, -- rainbowcol1    xxx guifg=#efefef
-    rainbowcol2                            { fg="#ecbe7b", }, -- rainbowcol2    xxx guifg=#ecbe7b
-    rainbowcol3                            { fg="#de73ff", }, -- rainbowcol3    xxx guifg=#de73ff
-    rainbowcol4                            { fg="#46d9ff", }, -- rainbowcol4    xxx guifg=#46d9ff
-    rainbowcol5                            { fg="#ff6c6b", }, -- rainbowcol5    xxx guifg=#ff6c6b
-    rainbowcol6                            { fg="#51afef", }, -- rainbowcol6    xxx guifg=#51afef
-    rainbowcol7                            { fg="#a5e075", }, -- rainbowcol7    xxx guifg=#a5e075
+    rainbowcol1                            { fg=M.colors.br_white, }, -- rainbowcol1    xxx guifg=#efefef
+    rainbowcol2                            { fg=M.colors.br_yellow, }, -- rainbowcol2    xxx guifg=#ecbe7b
+    rainbowcol3                            { fg=M.colors.br_magenta, }, -- rainbowcol3    xxx guifg=#de73ff
+    rainbowcol4                            { fg=M.colors.br_cyan, }, -- rainbowcol4    xxx guifg=#46d9ff
+    rainbowcol5                            { fg=M.colors.br_red, }, -- rainbowcol5    xxx guifg=#ff6c6b
+    rainbowcol6                            { fg=M.colors.br_blue, }, -- rainbowcol6    xxx guifg=#51afef
+    rainbowcol7                            { fg=M.colors.br_green, }, -- rainbowcol7    xxx guifg=#a5e075
     lualine_b_diagnostics_info_normal      { fg=M.colors.green, bg=M.colors.foreground, }, -- lualine_b_diagnostics_info_normal xxx guifg=#a3be8c guibg=#c8d0e0
     lualine_b_diagnostics_warn_terminal    { fg=M.colors.orange, bg=M.colors.foreground, }, -- lualine_b_diagnostics_warn_terminal xxx guifg=#d08f70 guibg=#c8d0e0
     lualine_b_diagnostics_warn_command     { fg=M.colors.orange, bg=M.colors.foreground, }, -- lualine_b_diagnostics_warn_command xxx guifg=#d08f70 guibg=#c8d0e0
     lualine_b_diagnostics_warn_replace     { fg=M.colors.orange, bg=M.colors.foreground, }, -- lualine_b_diagnostics_warn_replace xxx guifg=#d08f70 guibg=#c8d0e0
     lualine_b_diagnostics_warn_visual      { fg=M.colors.orange, bg=M.colors.foreground, }, -- lualine_b_diagnostics_warn_visual xxx guifg=#d08f70 guibg=#c8d0e0
-    GitSignsDeleteLn                       { fg="#d57780", }, -- GitSignsDeleteLn xxx guifg=#d57780
+    GitSignsDeleteLn                       { fg=M.colors.br_red, }, -- GitSignsDeleteLn xxx guifg=#d57780
     GitSignsDeleteVirtLn                   { GitSignsDeleteLn }, -- GitSignsDeleteVirtLn xxx links to GitSignsDeleteLn
     GitSignsAddLn                          { fg=M.colors.green, }, -- GitSignsAddLn  xxx guifg=#a3be8c
     GitSignsAddLnVirtLn                    { GitSignsAddLn }, -- GitSignsAddLnVirtLn xxx links to GitSignsAddLn

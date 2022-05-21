@@ -14,7 +14,7 @@ return function()
 		-- config = require("plugins.lsp_installer"),
 		config = function()
 			local fs = require("lib").fs
-			local theme = require("theme")
+			-- local theme = require("theme")
 
 			local installer_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
 			if not installer_ok then
@@ -51,47 +51,7 @@ return function()
 				log_level = vim.log.levels.INFO,
 			})
 
-			local signs = {
-				{ name = "DiagnosticSignError", text = theme.icons.diagnostics.error },
-				{ name = "DiagnosticSignWarn", text = theme.icons.diagnostics.warning },
-				{ name = "DiagnosticSignHint", text = theme.icons.diagnostics.hint },
-				{ name = "DiagnosticSignInfo", text = theme.icons.diagnostics.information },
-			}
-
-			for _, sign in ipairs(signs) do
-				vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-			end
-			vim.diagnostic.config({
-				-- virtual_text = false,
-				virtual_text = { prefix = "●", source = "always" },
-				update_in_insert = false,
-				underline = true,
-				severity_sort = true,
-				float = {
-					focusable = false,
-					style = "minimal",
-					border = "rounded",
-					source = "always",
-					header = "",
-					prefix = "",
-					format = function(d)
-						local t = vim.deepcopy(d)
-						local code = d.code or (d.user_data and d.user_data.lsp.code)
-						if code then
-							t.message = ("%s [%s]"):format(t.message, code):gsub("1. ", "")
-						end
-						return t.message
-					end,
-				},
-			})
-
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-				border = "rounded",
-			})
-			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-				border = "rounded",
-			})
-
+      require("plugins.lang.handlers").setup()
 			for _, server in pairs(servers) do
 				local opts = {
 					on_attach = require("plugins.lang.handlers").common_on_attach,
@@ -106,7 +66,7 @@ return function()
 				lspconfig[server].setup(opts)
 			end
 
-			require("plugins.lang.null-ls")
+			require("plugins.lang.null-ls").setup()
 		end,
 	}
 end
