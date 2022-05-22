@@ -67,7 +67,7 @@ M.options = {
 		title = true, -- set the title of window to the value of the titlestring
 		titlestring = "%<%F%=%l/%L - nvim", -- what the title of the window will be set to
 		background = "dark", -- background color of the window
-		guifont = "Victor Mono Nerd Font:h12",
+		guifont = "JetBrains Mono Nerd Font:h12",
 		guicursor = [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]],
 		errorbells = false, -- Ring the bell (beep or screen flash) for error messages.
 		visualbell = false, -- Use visual bell instead of beeping.

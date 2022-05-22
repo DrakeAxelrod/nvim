@@ -29,8 +29,24 @@ return function()
 						suggestions = 20,
 					},
 				},
-				operators = { gc = "Comments" },
-				key_labels = {},
+				operators = {
+          gc = "Comments",
+          d = "Delete",
+          c = "Change",
+          y = "Yank (copy)",
+          ["g~"] = "Toggle case",
+          ["gu"] = "Lowercase",
+          ["gU"] = "Uppercase",
+          [">"] = "Indent right",
+          ["<lt>"] = "Indent left",
+          ["zf"] = "Create fold",
+          ["!"] = "Filter though external program",
+        },
+				key_labels = {
+          ["<space>"] = "SPC",
+          ["<cr>"] = "RET",
+          ["<tab>"] = "TAB",
+        },
 				icons = {
 					breadcrumb = "…", --"»",
 					separator = icons.ui.arrow,
@@ -43,9 +59,10 @@ return function()
 				window = {
 					border = "rounded", --"single",
 					position = "bottom",
-					margin = { 1, 0, 1, 0 },
-					padding = { 2, 2, 2, 2 },
-					winblend = 0,
+          padding = { 0, 0, 0, 0 }, -- extra window padding [top, right, bottom, left]
+					-- margin = { 1, 0, 1, 0 },
+					-- padding = { 2, 2, 2, 2 },
+					-- winblend = 0,
 				},
 				layout = {
 					height = { min = 4, max = 25 },

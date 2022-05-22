@@ -52,6 +52,19 @@ M.standard = {
   { { "n" }, "<leader>ps", ":PackerSync<cr>", desc "Sync" },
   { { "n" }, "<leader>pS", ":PackerStatus<cr>", desc "Status" },
   { { "n" }, "<leader>pu", ":PackerUpdate<cr>", desc "Update" },
+  --> lsp <--
+  { { "n" }, "gK", vim.diagnostic.open_float, desc "Diagnostic float" },
+  { { "n" }, "gK", vim.lsp.buf.hover, desc "Hover" },
+  { { "n" }, "gD", vim.lsp.buf.declaration, desc "Declaration" },
+  { { "n" }, "gd", vim.lsp.buf.definition, desc "Definition" },
+  { { "n" }, "gi", vim.lsp.buf.implementation, desc "Implementation" },
+  { { "n" }, "<c-k>", vim.lsp.buf.signature_help, desc "Signature help" },
+  { { "n" }, "gr", vim.lsp.buf.references, desc "References" },
+  { { "n" }, "grn", vim.lsp.buf.rename, desc "Rename" },
+  { { "n" }, "<leader>l", ":Lsp", desc "Lsp" },
+  { { "n" }, "<leader>li", ":LspInfo<cr>", desc "Info" },
+  { { "n" }, "<leader>lf", ":LspFormat<cr>", desc "Format" },
+  { { "n" }, "<leader>lC", ":LspCodeAction<cr>", desc "Code Action" },
 }
 
 M.telescope = function()

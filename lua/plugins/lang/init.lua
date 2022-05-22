@@ -29,6 +29,8 @@ return function()
 			local servers = {
 				"sumneko_lua",
 				"bashls",
+        "ccls",
+        -- "rust-analyzer"
 			}
 			lsp_installer.setup({
 				automatic_installation = true,

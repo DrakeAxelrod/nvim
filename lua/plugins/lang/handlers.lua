@@ -1,9 +1,9 @@
 local M = {}
-local lib = require("lib")
+local lib = require "lib"
 local fs = lib.fs
 local fn = lib.fn
 local vim = vim
-local theme = require("theme")
+local theme = require "theme"
 
 M.setup = function()
   local signs = {
@@ -18,7 +18,7 @@ M.setup = function()
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
   end
 
-  vim.diagnostic.config({
+  vim.diagnostic.config {
     -- virtual_text = false,
     virtual_text = { prefix = "●", source = "always" },
     update_in_insert = false,
@@ -35,12 +35,12 @@ M.setup = function()
         local t = vim.deepcopy(d)
         local code = d.code or (d.user_data and d.user_data.lsp.code)
         if code then
-          t.message = ("%s [%s]"):format( t.message, code):gsub("1. ", "")
+          t.message = ("%s [%s]"):format(t.message, code):gsub("1. ", "")
         end
         return t.message
       end,
     },
-  })
+  }
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",
@@ -62,6 +62,7 @@ M.setup = function()
       vim.lsp.util.jump_to_location(result, "utf-8")
     end
   end
+
 end
 
 local function lsp_highlight_document(client, bufnr)
@@ -74,27 +75,45 @@ local function lsp_highlight_document(client, bufnr)
 end
 
 M.common_on_attach = function(client, bufnr)
-  local cmds = require("core.cmds")
+  local cmds = require "core.cmds"
   local aerial_ok, aerial = pcall(require, "aerial")
   if aerial_ok then
     aerial.on_attach(client, bufnr)
   end
-  require("copilot").setup({})
+  require("copilot").setup {}
   cmds.lsp(bufnr)
   lsp_highlight_document(client)
 end
 
 M.common_capabilities = function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.preselectSupport = true
+  capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+  capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+  capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+  capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+  capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
+    properties = { "documentation", "detail", "additionalTextEdits" },
+  }
+  capabilities.textDocument.codeAction = {
+    dynamicRegistration = false,
+    codeActionLiteralSupport = {
+      codeActionKind = {
+        valueSet = {
+          "",
+          "quickfix",
+          "refactor",
+          "refactor.extract",
+          "refactor.inline",
+          "refactor.rewrite",
+          "source",
+          "source.organizeImports",
+        },
+      },
     },
   }
-
   local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
   if status_ok then
     capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
@@ -104,15 +123,15 @@ M.common_capabilities = function()
 end
 
 function M.enable_format_on_save()
-  fn.augroup("LspFormatOnSave")(function(autocmd)
+  fn.augroup "LspFormatOnSave"(function(autocmd)
     autocmd("BufWritePre", { pattern = "*" }, vim.lsp.buf.formatting)
   end)
   vim.notify "Enabled format on save"
 end
 
 function M.disable_format_on_save()
-  if vim.fn.exists("#LspFormatOnSave") == 1 then
-    vim.cmd("au! LspFormatOnSave")
+  if vim.fn.exists "#LspFormatOnSave" == 1 then
+    vim.cmd "au! LspFormatOnSave"
   end
   vim.notify "Disabled format on save"
 end

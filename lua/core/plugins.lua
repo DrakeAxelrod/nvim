@@ -11,6 +11,8 @@ plugins.add({ "mrjones2014/smart-splits.nvim", module = "smart-splits" })
 plugins.add("neotree")
 --> keybind popup <--
 plugins.add("which-key")
+--> terminal <--
+plugins.add("toggleterm")
 --> jump around <--
 plugins.add("hop")
 --> Dashboard <--
@@ -21,6 +23,8 @@ plugins.add("treesitter")
 plugins.add("autopairs")
 --> Autoclose tags <--
 plugins.add("autotag")
+--> color help <--
+plugins.add("colorizer")
 --> Commenting <--
 plugins.add("comment")
 --> Parenthesis highlighting <--
@@ -31,15 +35,14 @@ plugins.add({ "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-trees
 plugins.add("wilder")
 --> Completion engine / Snippets <--
 plugins.add("cmp")
---> cmp extensions <--
--- plugins.add("cmp-extensions")
 --> LSP <--
 plugins.add("lang")
 --> LSP symbols <--
-plugins.add({ "stevearc/aerial.nvim", module = "aerial", cmd = { "AerialToggle", "AerialOpen", "AerialInfo" } })
+plugins.add("aerial")
 --> Telescope <--
 plugins.add("telescope")
 --> Git <--
 plugins.add("gitsigns")
+plugins.add("neogit")
 
 return plugins

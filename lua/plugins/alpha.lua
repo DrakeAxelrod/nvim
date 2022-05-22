@@ -74,7 +74,7 @@ return function()
         local plugins_count = vim.fn.len(vim.fn.globpath(fs.join(vim.fn.stdpath("data"), "site", "pack", "packer", "start"), "*", 0, 1))
         local plugins = ("loaded %s plugins"):format(plugins_count)
         local website = "draxel.io"
-				return ("%s %s"):format(website, plugins)
+				return plugins
 			end
 			cfg.section.footer.val = footer()
 

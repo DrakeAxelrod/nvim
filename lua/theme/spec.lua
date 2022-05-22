@@ -97,7 +97,7 @@ M.theme = M.lush(function()
     DiffText                               { bg="#405d7e", }, -- DiffText       xxx cterm=bold ctermbg=9 guibg=#405d7e
     SignColumn                             { fg=M.colors.foreground, }, -- SignColumn     xxx ctermfg=14 ctermbg=242 guifg=#c8d0e0
     CursorLineSign                         { SignColumn }, -- CursorLineSign xxx links to SignColumn
-    Conceal                                { bg="#2e3440", }, -- Conceal        xxx ctermfg=7 ctermbg=242 guibg=#2e3440
+    Conceal                                { bg=M.colors.background, }, -- Conceal        xxx ctermfg=7 ctermbg=242 guibg=#2e3440
     SpellBad                               { fg=M.colors.br_red, gui="underline,italic", sp=M.colors.br_red, }, -- SpellBad       xxx ctermbg=9 gui=underline,italic guifg=#d57780 guisp=#d57780
     SpellCap                               { fg=M.colors.yellow, gui="underline,italic", sp=M.colors.yellow, }, -- SpellCap       xxx ctermbg=12 gui=underline,italic guifg=#ebcb8b guisp=#ebcb8b
     SpellRare                              { fg=M.colors.magenta, gui="underline,italic", sp=M.colors.magenta, }, -- SpellRare      xxx ctermbg=13 gui=underline,italic guifg=#b988b0 guisp=#b988b0
@@ -107,14 +107,14 @@ M.theme = M.lush(function()
     PmenuSbar                              { bg="#3b4252", }, -- PmenuSbar      xxx ctermbg=248 guibg=#3b4252
     PmenuThumb                             { bg=M.colors.foreground, }, -- PmenuThumb     xxx ctermbg=15 guibg=#c8d0e0
     TabLine                                { fg=M.colors.gray, bg=M.colors.background, }, -- TabLine        xxx cterm=underline ctermfg=15 ctermbg=242 guifg=#6c7a96 guibg=#353b49
-    TabLineSel                             { fg=M.colors.cyan, bg="#2e3440", }, -- TabLineSel     xxx cterm=bold guifg=#88c0d0 guibg=#2e3440
+    TabLineSel                             { fg=M.colors.cyan, bg=M.colors.background, }, -- TabLineSel     xxx cterm=bold guifg=#88c0d0 guibg=#2e3440
     TabLineFill                            { fg=M.colors.gray, bg=M.colors.background, }, -- TabLineFill    xxx cterm=reverse guifg=#6c7a96 guibg=#353b49
     CursorColumn                           { bg="#3b4252", }, -- CursorColumn   xxx ctermbg=242 guibg=#3b4252
     CursorLine                             { bg=M.colors.background, }, -- CursorLine     xxx cterm=underline guibg=#353b49
     ColorColumn                            { bg="#3b4252", }, -- ColorColumn    xxx ctermbg=1 guibg=#3b4252
     QuickFixLine                           { bg="#3b4252", gui="bold,italic", }, -- QuickFixLine   xxx gui=bold,italic guibg=#3b4252
     Whitespace                             { fg=M.colors.br_black, }, -- Whitespace     xxx guifg=#646a76
-    NormalNC                               { bg="#2e3440", }, -- NormalNC       xxx guibg=#2e3440
+    NormalNC                               { bg=M.colors.background, }, -- NormalNC       xxx guibg=#2e3440
     NormalFloat                            { fg=M.colors.foreground, bg="bg", }, -- NormalFloat    xxx guifg=#c8d0e0 guibg=#353b49
     FloatBorder                            { fg=M.colors.br_blue, bg="bg", }, -- FloatBorder    xxx guifg=#81a1c1 guibg=#353b49
     RedrawDebugNormal                      { gui="reverse", }, -- RedrawDebugNormal xxx cterm=reverse gui=reverse
@@ -248,7 +248,7 @@ M.theme = M.lush(function()
     WhichKeyValue                          { Comment }, -- WhichKeyValue  xxx links to Comment
     TelescopeResultsComment                { Comment }, -- TelescopeResultsComment xxx links to Comment
     Underlined                             { fg=M.colors.green, gui="underline", }, -- Underlined     xxx cterm=underline ctermfg=81 gui=underline guifg=#a3be8c
-    Ignore                                 { fg=M.colors.cyan, bg="#2e3440", gui="bold", }, -- Ignore         xxx ctermfg=0 gui=bold guifg=#88c0d0 guibg=#2e3440
+    Ignore                                 { fg=M.colors.cyan, bg=M.colors.background, gui="bold", }, -- Ignore         xxx ctermfg=0 gui=bold guifg=#88c0d0 guibg=#2e3440
     NvimInternalError                      { fg="red", bg="red", }, -- NvimInternalError xxx ctermfg=9 ctermbg=9 guifg=red guibg=red
     NvimFigureBrace                        { NvimInternalError }, -- NvimFigureBrace xxx links to NvimInternalError
     NvimSingleQuotedUnknownEscape          { NvimInternalError }, -- NvimSingleQuotedUnknownEscape xxx links to NvimInternalError
@@ -323,22 +323,22 @@ M.theme = M.lush(function()
     IndentBlanklineContextChar             { fg=M.colors.magenta, gui="nocombine", }, -- IndentBlanklineContextChar xxx gui=nocombine guifg=#b988b0
     IndentBlanklineChar                    { fg="#4c566a", gui="nocombine", }, -- IndentBlanklineChar xxx gui=nocombine guifg=#4c566a
     SneakScope                             { bg="#4c566a", }, -- SneakScope     xxx guibg=#4c566a
-    Sneak                                  { fg="#2e3440", bg=M.colors.foreground, }, -- Sneak          xxx guifg=#2e3440 guibg=#c8d0e0
+    Sneak                                  { fg=M.colors.background, bg=M.colors.foreground, }, -- Sneak          xxx guifg=#2e3440 guibg=#c8d0e0
     BufferInactiveTarget                   { fg=M.colors.br_red, bg=M.colors.background, gui="bold", }, -- BufferInactiveTarget xxx gui=bold guifg=#d57780 guibg=#353b49
     BufferInactiveSign                     { fg=M.colors.gray, bg=M.colors.background, }, -- BufferInactiveSign xxx guifg=#6c7a96 guibg=#353b49
     BufferInactiveMod                      { fg=M.colors.yellow, bg=M.colors.background, }, -- BufferInactiveMod xxx guifg=#ebcb8b guibg=#353b49
     BufferInactiveIndex                    { fg=M.colors.gray, bg=M.colors.background, }, -- BufferInactiveIndex xxx guifg=#6c7a96 guibg=#353b49
     BufferInactive                         { fg=M.colors.gray, bg=M.colors.background, }, -- BufferInactive xxx guifg=#6c7a96 guibg=#353b49
-    BufferVisibleTarget                    { fg=M.colors.br_red, bg="#2e3440", gui="bold", }, -- BufferVisibleTarget xxx gui=bold guifg=#d57780 guibg=#2e3440
-    BufferVisibleSign                      { fg=M.colors.gray, bg="#2e3440", }, -- BufferVisibleSign xxx guifg=#6c7a96 guibg=#2e3440
-    BufferVisibleMod                       { fg=M.colors.yellow, bg="#2e3440", gui="bold", }, -- BufferVisibleMod xxx gui=bold guifg=#ebcb8b guibg=#2e3440
-    BufferVisibleIndex                     { fg=M.colors.foreground, bg="#2e3440", }, -- BufferVisibleIndex xxx guifg=#c8d0e0 guibg=#2e3440
-    BufferVisible                          { fg=M.colors.foreground, bg="#2e3440", }, -- BufferVisible  xxx guifg=#c8d0e0 guibg=#2e3440
-    BufferCurrentTarget                    { fg=M.colors.br_red, bg="#2e3440", gui="bold", }, -- BufferCurrentTarget xxx gui=bold guifg=#d57780 guibg=#2e3440
-    BufferCurrentSign                      { fg=M.colors.cyan, bg="#2e3440", }, -- BufferCurrentSign xxx guifg=#88c0d0 guibg=#2e3440
-    BufferCurrentMod                       { fg=M.colors.yellow, bg="#2e3440", gui="bold", }, -- BufferCurrentMod xxx gui=bold guifg=#ebcb8b guibg=#2e3440
-    BufferCurrentIndex                     { fg=M.colors.foreground, bg="#2e3440", }, -- BufferCurrentIndex xxx guifg=#c8d0e0 guibg=#2e3440
-    BufferCurrent                          { fg=M.colors.foreground, bg="#2e3440", }, -- BufferCurrent  xxx guifg=#c8d0e0 guibg=#2e3440
+    BufferVisibleTarget                    { fg=M.colors.br_red, bg=M.colors.background, gui="bold", }, -- BufferVisibleTarget xxx gui=bold guifg=#d57780 guibg=#2e3440
+    BufferVisibleSign                      { fg=M.colors.gray, bg=M.colors.background, }, -- BufferVisibleSign xxx guifg=#6c7a96 guibg=#2e3440
+    BufferVisibleMod                       { fg=M.colors.yellow, bg=M.colors.background, gui="bold", }, -- BufferVisibleMod xxx gui=bold guifg=#ebcb8b guibg=#2e3440
+    BufferVisibleIndex                     { fg=M.colors.foreground, bg=M.colors.background, }, -- BufferVisibleIndex xxx guifg=#c8d0e0 guibg=#2e3440
+    BufferVisible                          { fg=M.colors.foreground, bg=M.colors.background, }, -- BufferVisible  xxx guifg=#c8d0e0 guibg=#2e3440
+    BufferCurrentTarget                    { fg=M.colors.br_red, bg=M.colors.background, gui="bold", }, -- BufferCurrentTarget xxx gui=bold guifg=#d57780 guibg=#2e3440
+    BufferCurrentSign                      { fg=M.colors.cyan, bg=M.colors.background, }, -- BufferCurrentSign xxx guifg=#88c0d0 guibg=#2e3440
+    BufferCurrentMod                       { fg=M.colors.yellow, bg=M.colors.background, gui="bold", }, -- BufferCurrentMod xxx gui=bold guifg=#ebcb8b guibg=#2e3440
+    BufferCurrentIndex                     { fg=M.colors.foreground, bg=M.colors.background, }, -- BufferCurrentIndex xxx guifg=#c8d0e0 guibg=#2e3440
+    BufferCurrent                          { fg=M.colors.foreground, bg=M.colors.background, }, -- BufferCurrent  xxx guifg=#c8d0e0 guibg=#2e3440
     LspDiagnosticsSignInformation          { fg=M.colors.green, }, -- LspDiagnosticsSignInformation xxx guifg=#a3be8c
     DiagnosticSignInfo                     { LspDiagnosticsSignInformation }, -- DiagnosticSignInfo xxx links to LspDiagnosticsSignInformation
     LspDiagnosticsFloatingInformation      { fg=M.colors.green, }, -- LspDiagnosticsFloatingInformation xxx guifg=#a3be8c
@@ -541,7 +541,7 @@ M.theme = M.lush(function()
     WhichKeySeperator                      { fg=M.colors.green, bg="bg" }, -- WhichKeySeperator xxx guifg=#a3be8c
     WhichKeySeparator                      { WhichKeySeperator }, -- WhichKeySeparator xxx links to WhichKeySeperator
     WhichKeyFloat                          { bg="bg" }, -- WhichKeyFloat  xxx guibg=#353b49
-    LspFloatWinNormal                      { fg=M.colors.foreground, bg="#2e3440", }, -- LspFloatWinNormal xxx guifg=#c8d0e0 guibg=#2e3440
+    LspFloatWinNormal                      { fg=M.colors.foreground, bg=M.colors.background, }, -- LspFloatWinNormal xxx guifg=#c8d0e0 guibg=#2e3440
     LspDiagnosticsHint                     { fg=M.colors.magenta, }, -- LspDiagnosticsHint xxx guifg=#b988b0
     LspDiagnosticsInformation              { fg=M.colors.green, }, -- LspDiagnosticsInformation xxx guifg=#a3be8c
     LspDiagnosticsWarning                  { fg=M.colors.orange, }, -- LspDiagnosticsWarning xxx guifg=#d08f70
@@ -558,7 +558,7 @@ M.theme = M.lush(function()
     CmpItemKindConstant                    { fg=M.colors.orange, }, -- CmpItemKindConstant xxx guifg=#d08f70
     CmpItemKindStruct                      { fg=M.colors.yellow, }, -- CmpItemKindStruct xxx guifg=#ebcb8b
     LspDiagnosticsError                    { fg=M.colors.red, }, -- LspDiagnosticsError xxx guifg=#bf616a
-    BufferLineFill                         { bg="#2e3440", }, -- BufferLineFill xxx guibg=#2e3440
+    BufferLineFill                         { bg=M.colors.background, }, -- BufferLineFill xxx guibg=#2e3440
     BufferLineIndicatorSelected            { fg=M.colors.yellow, }, -- BufferLineIndicatorSelected xxx guifg=#ebcb8b
     TargetWord                             { fg=M.colors.cyan, }, -- TargetWord     xxx guifg=#88c0d0
     ReferencesIcon                         { fg=M.colors.br_blue, }, -- ReferencesIcon xxx guifg=#81a1c1
@@ -586,17 +586,17 @@ M.theme = M.lush(function()
     lualine_a_inactive                     { fg=M.colors.gray, bg="none", gui="bold", }, -- lualine_a_inactive xxx gui=bold guifg=#6c7a96 guibg=none
     lualine_c_inactive                     { fg=M.colors.gray, bg=M.colors.background, }, -- lualine_c_inactive xxx guifg=#6c7a96 guibg=#353b49
     lualine_b_inactive                     { fg=M.colors.gray, bg="none", }, -- lualine_b_inactive xxx guifg=#6c7a96 guibg=none
-    lualine_a_command                      { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_a_command xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_b_command                      { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_b_command xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_a_visual                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_a_visual xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_b_visual                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_b_visual xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_a_normal                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_a_normal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_c_normal                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_c_normal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_b_normal                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_b_normal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_a_insert                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_a_insert xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_b_insert                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_b_insert xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_a_replace                      { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_a_replace xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_b_replace                      { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_b_replace xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_a_command                      { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_a_command xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_b_command                      { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_b_command xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_a_visual                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_a_visual xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_b_visual                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_b_visual xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_a_normal                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_a_normal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_c_normal                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_c_normal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_b_normal                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_b_normal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_a_insert                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_a_insert xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_b_insert                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_b_insert xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_a_replace                      { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_a_replace xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_b_replace                      { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_b_replace xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
     lualine_b_diff_added_normal            { fg=M.colors.green, bg=M.colors.foreground, }, -- lualine_b_diff_added_normal xxx guifg=#a3be8c guibg=#c8d0e0
     lualine_b_diff_added_insert            { fg=M.colors.green, bg=M.colors.foreground, }, -- lualine_b_diff_added_insert xxx guifg=#a3be8c guibg=#c8d0e0
     lualine_b_diff_added_visual            { fg=M.colors.green, bg=M.colors.foreground, }, -- lualine_b_diff_added_visual xxx guifg=#a3be8c guibg=#c8d0e0
@@ -667,7 +667,7 @@ M.theme = M.lush(function()
     GitSignsAddLn                          { fg=M.colors.green, }, -- GitSignsAddLn  xxx guifg=#a3be8c
     GitSignsAddLnVirtLn                    { GitSignsAddLn }, -- GitSignsAddLnVirtLn xxx links to GitSignsAddLn
     GitSignsAddNr                          { fg=M.colors.green, }, -- GitSignsAddNr  xxx guifg=#a3be8c
-    TelescopeNormal                        { fg=M.colors.foreground, bg="#2e3440", }, -- TelescopeNormal xxx guifg=#c8d0e0 guibg=#2e3440
+    TelescopeNormal                        { fg=M.colors.foreground, bg=M.colors.background, }, -- TelescopeNormal xxx guifg=#c8d0e0 guibg=#2e3440
     TelescopePreviewNormal                 { TelescopeNormal }, -- TelescopePreviewNormal xxx links to TelescopeNormal
     TelescopeBorder                        { TelescopeNormal }, -- TelescopeBorder xxx links to TelescopeNormal
     TelescopeResultsNormal                 { TelescopeNormal }, -- TelescopeResultsNormal xxx links to TelescopeNormal
@@ -676,31 +676,31 @@ M.theme = M.lush(function()
     TSStringEscape                         { fg=M.colors.orange, }, -- TSStringEscape xxx guifg=#d08f70
     TelescopeMatching                      { fg=M.colors.yellow, gui="bold", }, -- TelescopeMatching xxx gui=bold guifg=#ebcb8b
     TelescopeSelectionCaret                { fg=M.colors.cyan, }, -- TelescopeSelectionCaret xxx guifg=#88c0d0
-    lualine_z_terminal                     { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_z_terminal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_a_terminal                     { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_a_terminal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_b_terminal                     { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_b_terminal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_c_terminal                     { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_c_terminal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_y_terminal                     { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_y_terminal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_x_terminal                     { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_x_terminal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_z_visual                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_z_visual xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_c_visual                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_c_visual xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_y_visual                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_y_visual xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_x_visual                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_x_visual xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_z_replace                      { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_z_replace xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_c_replace                      { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_c_replace xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_y_replace                      { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_y_replace xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_x_replace                      { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_x_replace xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_z_normal                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_z_normal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_y_normal                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_y_normal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_x_normal                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_x_normal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_z_insert                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_z_insert xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_c_insert                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_c_insert xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_y_insert                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_y_insert xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_x_insert                       { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_x_insert xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_z_command                      { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_z_command xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_c_command                      { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_c_command xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_y_command                      { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_y_command xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
-    lualine_x_command                      { fg="#2e3440", bg=M.colors.foreground, gui="bold", }, -- lualine_x_command xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_z_terminal                     { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_z_terminal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_a_terminal                     { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_a_terminal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_b_terminal                     { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_b_terminal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_c_terminal                     { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_c_terminal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_y_terminal                     { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_y_terminal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_x_terminal                     { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_x_terminal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_z_visual                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_z_visual xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_c_visual                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_c_visual xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_y_visual                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_y_visual xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_x_visual                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_x_visual xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_z_replace                      { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_z_replace xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_c_replace                      { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_c_replace xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_y_replace                      { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_y_replace xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_x_replace                      { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_x_replace xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_z_normal                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_z_normal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_y_normal                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_y_normal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_x_normal                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_x_normal xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_z_insert                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_z_insert xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_c_insert                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_c_insert xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_y_insert                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_y_insert xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_x_insert                       { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_x_insert xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_z_command                      { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_z_command xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_c_command                      { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_c_command xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_y_command                      { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_y_command xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
+    lualine_x_command                      { fg=M.colors.background, bg=M.colors.foreground, gui="bold", }, -- lualine_x_command xxx gui=bold guifg=#2e3440 guibg=#c8d0e0
     DevIconPackedResource                  { fg="#6d8086", }, -- DevIconPackedResource xxx ctermfg=66 guifg=#6d8086
     DevIconFsx                             { fg="#519aba", }, -- DevIconFsx     xxx ctermfg=67 guifg=#519aba
     DevIconLicense                         { fg="#cbcb41", }, -- DevIconLicense xxx ctermfg=185 guifg=#cbcb41

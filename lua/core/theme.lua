@@ -60,7 +60,9 @@ theme.statusline.theme.terminal = {
 }
 
 local comp = theme.statusline.comp
-
+theme.statusline.disabled_filetypes = {
+  "alpha"
+}
 theme.statusline.sections = {
   lualine_a = { comp.space },
   lualine_b = { comp.mode, comp.filename, comp.filetype },
