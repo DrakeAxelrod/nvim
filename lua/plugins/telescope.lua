@@ -1,7 +1,6 @@
 return function()
   return {
     "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
     module = "telescope",
     requires = {
       {
@@ -42,13 +41,13 @@ return function()
           require("telescope").load_extension "frecency"
         end,
       },
-      {
-        "FeiyouG/command_center.nvim",
-        after = "telescope.nvim",
-        config = function()
-          require("telescope").load_extension "command_center"
-        end,
-      },
+      -- {
+      --   "FeiyouG/command_center.nvim",
+      --   after = "telescope.nvim",
+      --   config = function()
+      --     require("telescope").load_extension "command_center"
+      --   end,
+      -- },
       {
         "nvim-telescope/telescope-packer.nvim",
         after = "telescope.nvim",
@@ -77,15 +76,15 @@ return function()
       if aerial_present then
         telescope.load_extension "aerial"
       end
-      local command_center = require "command_center"
+      -- local command_center = require "command_center"
       local join = require("lib").fs.join
       local keys = require "core.keys"
       -- local fb_actions = require("telescope").extensions.file_browser.actions
       telescope.setup {
         defaults = {
-          prompt_prefix = " ",
-          selection_caret = "  ",
-          entry_prefix = " ",
+          prompt_prefix = "  ",
+          selection_caret = " ",
+          entry_prefix = "  ",
           multi_icon = "",
           initial_mode = "insert",
           path_display = { "truncate" },
@@ -218,21 +217,21 @@ return function()
             cwd_to_path = true,
             mappings = keys.telescope_fb_browser(),
           },
-          command_center = {
-            -- Below are default settings that can be overriden ...
-            -- Change what to show on telescope prompt and in which order
-            -- Currently support the following three components
-            -- Components may repeat
-            components = {
-              command_center.component.KEYBINDINGS,
-              command_center.component.DESCRIPTION,
-            },
-            -- Change the separator used to separate each component
-            separator = " ",
-            -- When set to false,
-            -- The description compoenent will be empty if it is not specified
-            auto_replace_desc_with_cmd = true,
-          },
+          -- command_center = {
+          --   -- Below are default settings that can be overriden ...
+          --   -- Change what to show on telescope prompt and in which order
+          --   -- Currently support the following three components
+          --   -- Components may repeat
+          --   components = {
+          --     command_center.component.KEYBINDINGS,
+          --     command_center.component.DESCRIPTION,
+          --   },
+          --   -- Change the separator used to separate each component
+          --   separator = " ",
+          --   -- When set to false,
+          --   -- The description compoenent will be empty if it is not specified
+          --   auto_replace_desc_with_cmd = true,
+          -- },
           packer = {
             layout_config = {
               height = 0.5,

@@ -41,6 +41,8 @@ plugins.add("lang")
 plugins.add("aerial")
 --> Telescope <--
 plugins.add("telescope")
+--> cheatsheet <--
+plugins.add("cheatsheet")
 --> Git <--
 plugins.add("gitsigns")
 plugins.add("neogit")

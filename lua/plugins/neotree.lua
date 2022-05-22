@@ -6,8 +6,9 @@ return function()
     cmd = "Neotree",
     requires = { { "MunifTanjim/nui.nvim", module = "nui" } },
     config = function()
-      vim.g.neo_tree_remove_legacy_commands = true
+      vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
       require("neo-tree").setup {
+        close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
         popup_border_style = "rounded",
         enable_diagnostics = false,
         default_component_configs = {
@@ -18,14 +19,19 @@ return function()
             indent_size = 2,
             padding = 0,
             with_markers = true,
+            indent_marker = " ",
+            last_indent_marker = " ",
+            -- expander config, needed for nesting files
+            with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
+            expander_collapsed = "",
+            expander_expanded = "",
             highlight = "NeoTreeIndentMarker",
-            with_expanders = false,
           },
           icon = {
             folder_closed = "",
             folder_open = "",
-            folder_empty = "",
-            default = "",
+            folder_empty = "",
+            default = "",
             highlight = "NeoTreeFileIcon",
           },
           modified = {
@@ -39,14 +45,14 @@ return function()
           },
           git_status = {
             symbols = {
-              added = "",
+              added = "★",
               deleted = "",
-              modified = "",
+              modified = "+",
               renamed = "➜",
-              untracked = "★",
-              ignored = ".",
-              unstaged = "",
-              staged = "✓",
+              untracked = "u",
+              ignored = "◌",
+              unstaged = "",
+              staged = "s",
               conflict = "",
             },
           },

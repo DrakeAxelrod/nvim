@@ -1,8 +1,10 @@
 return function()
+  local height = vim.api.nvim_win_get_height(0)
+  local width = vim.api.nvim_win_get_width(0)
   return {
     "akinsho/toggleterm.nvim",
     config = function()
-      require("toggleterm").setup {
+      require("toggleterm").setup({
         size = function(term)
           if term.direction == "horizontal" then
             return 15
@@ -25,15 +27,16 @@ return function()
         },
         float_opts = {
           border = "curved",
-          width = 20,
-          height = 20,
+          -- width = 20,
+          -- height = 20,
           winblend = 0,
           highlights = {
             border = "Special",
             background = "Normal",
           },
         },
-      }
+      })
+      require("core.keys").toggleterm(require("toggleterm.terminal").Terminal)
     end,
   }
 end

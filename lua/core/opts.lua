@@ -33,7 +33,7 @@ M.options = {
 		node_host_prog = "/bin/neovim-node-host",
 	},
 	opt = {
-	  autochdir = true, -- auto chdir
+	  -- autochdir = true, -- auto chdir
 		foldlevelstart = 99, -- Sets "foldlevel" when starting to edit another buffer in a window.
 		foldmethod = "expr", -- folding set to "expr" for treesitter based folding
 		foldexpr = "nvim_treesitter#foldexpr()", -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
