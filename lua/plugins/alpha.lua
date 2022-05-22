@@ -1,36 +1,3 @@
---[[
- .    '                   .  "   '
-            .  .  .                 '      '
-    "`       .   .
-                                     '     '
-  .    '      _______________
-          ==c(___(o(______(_()
-                  \=\
-                   )=\
-                  //|\\
-                 //|| \\
-                // ||  \\
-               //  ||   \\
-              //         \\
-
-      |\      _,,,---,,_
-ZZZzz /,`.-'`'    -.  ;-;;,_
-     |,4-  ) )-,_. ,\ (  `'-'
-    '---''(_/--'  `-'\_)
-
-\_____)\_____
-/--v____ __`<         
-        )/           
-        '
-
-       .
-      ":"
-    ___:____     |"\/"|
-  ,'        `.    \  /
-  |  O        \___/  |
-~^~^~^~^~^~^~^~^~^~^~^~^~
-]]
-
 return function()
 	return {
     "goolord/alpha-nvim",
@@ -49,7 +16,7 @@ return function()
 				[[         /\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \           ]],
 				[[         \ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\          ]],
 				[[          \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/          ]],
-				[[                                                                    ]],
+				-- [[                                                                    ]],
 				[[      .-.      _______                           .  '  *   .  . '   ]],
 				[[     {}``; |==|_______D                                . *  -+-  .  ]],
 				[[     / ('        /|\                             . '   * .    '  *  ]],
@@ -57,13 +24,13 @@ return function()
 			 ([[  \(_)_%s      /  |  \                           *   *  .   .       ]]):format("]]"),
 			}
 			cfg.section.buttons.val = {
-				-- cfg.button("f", icons.documents.file.files .. " Find file", ":Telescope find_files <CR>"),
 				cfg.button("e", icons.documents.file.default .. " New file", ":ene <BAR> startinsert <CR>"),
 				-- cfg.button(
-				-- 	"p",
-				-- 	icons.git.repo .. " Find project",
-				-- 	":lua require('telescope').extensions.projects.projects()<CR>"
+					-- "p",
+					-- icons.git.repo .. " Find project",
+					-- ":Telescope project<cr>"
 				-- ),
+				cfg.button("f", icons.documents.file.files .. " Find file", ":Telescope find_files <CR>"),
 				cfg.button("r", icons.ui.history .. " Recent files", ":Telescope frecency<CR>"),
 				cfg.button("t", icons.ui.list .. " Find text", ":Telescope live_grep <CR>"),
 				-- cfg.button("s", icons.ui.signin .. " Find Session", ":Telescope sessions save_current=false <CR>"),

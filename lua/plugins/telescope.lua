@@ -41,6 +41,13 @@ return function()
           require("telescope").load_extension "frecency"
         end,
       },
+      {
+        "nvim-telescope/telescope-project.nvim",
+        after = { "telescope.nvim" },
+        config = function()
+          require("telescope").load_extension "project"
+        end,
+      },
       -- {
       --   "FeiyouG/command_center.nvim",
       --   after = "telescope.nvim",
@@ -216,6 +223,20 @@ return function()
             grouped = true,
             cwd_to_path = true,
             mappings = keys.telescope_fb_browser(),
+          },
+          project = {
+            base_dirs = {
+              -- { path = "~/.config/nvim/" },
+              -- { path = "~/.config/lvim/" },
+              -- { path = "~/.config/kitty/" },
+              -- { path = "~/Documents/" },
+              -- { path = "~/Documents/Rust/" },
+              -- { path = "~/Documents/Go/" },
+              -- { path = "~/Documents/Cpp/" },
+              -- { path = "~/Documents/Python/" },
+            },
+            hidden_files = true, -- default: false
+            theme = "dropdown"
           },
           -- command_center = {
           --   -- Below are default settings that can be overriden ...

@@ -41,8 +41,9 @@ M.standard = {
   { { "t" }, "<C-l>", "<C-\\><C-N><C-w>l", desc "Terminal cursor to right buffer" },
   --> leader binds <--
   { { "n" }, "<leader>;", ":Alpha<cr>", desc "Dashboard" },
-  { { "n" }, "<leader>w", ":w!<cr>", desc "Save" },
-  { { "n" }, "<leader>:", ":Telescope command_center<cr>", desc "Command Palette" },
+  { { "n" }, "<leader>W", ":w!<cr>", desc "Save" },
+  { { "n" }, "<leader>Q", ":q!<cr>", desc "Quit" },
+  -- { { "n" }, "<leader>:", ":Telescope command_center<cr>", desc "Command Palette" },
   { { "n" }, "<leader>e", ":Neotree toggle<cr>", desc "File Explorer" },
   { { "n" }, "<leader><s-e>", ":Telescope file_browser path=%:p:h<CR>", desc "Telescope File Browser" },
   { { "n" }, "<leader>-", ":new<CR>", desc "Horizonal Split" },
@@ -140,6 +141,7 @@ M.telescope = function()
       ["<Up>"] = actions.move_selection_previous,
 
       ["<CR>"] = actions.select_default,
+      ["<C><CR>"] = actions.select_default,
       ["<C-x>"] = actions.select_horizontal,
       ["<C-v>"] = actions.select_vertical,
       ["<C-t>"] = actions.select_tab,
@@ -160,6 +162,7 @@ M.telescope = function()
     n = {
       ["<esc>"] = actions.close,
       ["<CR>"] = actions.select_default,
+      ["<C><CR>"] = actions.select_default,
       ["<C-x>"] = actions.select_horizontal,
       ["<C-v>"] = actions.select_vertical,
       ["<C-t>"] = actions.select_tab,
