@@ -257,7 +257,7 @@ M.theme = M.lush(function()
     GitSignsChange                         { fg=M.colors.blue, }, -- GitSignsChange xxx guifg=#5e81ac
     GitSignsAdd                            { fg=M.colors.green, }, -- GitSignsAdd    xxx guifg=#a3be8c
     WilderAccent                           { fg=M.colors.br_blue, bg="#3b4252", }, -- WilderAccent   xxx ctermfg=0 ctermbg=13 guifg=#81a1c1 guibg=#3b4252
-    WilderPopupMenuSelectedAccent          { bg="#4c566a", gui="bold,underline", }, -- WilderPopupMenuSelectedAccent xxx cterm=bold,underline ctermfg=242 ctermbg=0 gui=bold,underline guibg=#4c566a
+    WilderPopupMenuSelectedAccent          { bg=M.colors.background, gui="bold,underline", }, -- WilderPopupMenuSelectedAccent xxx cterm=bold,underline ctermfg=242 ctermbg=0 gui=bold,underline guibg=#4c566a
     NotifyERRORBorder                      { fg=M.colors.red, }, -- NotifyERRORBorder xxx guifg=#bf616a
     NotifyWARNBorder                       { fg=M.colors.orange, }, -- NotifyWARNBorder xxx guifg=#d08f70
     NotifyINFOBorder                       { fg=M.colors.green, }, -- NotifyINFOBorder xxx guifg=#a3be8c
@@ -321,8 +321,8 @@ M.theme = M.lush(function()
     DapStopped                             { fg=M.colors.green, }, -- DapStopped     xxx guifg=#a3be8c
     DapBreakpoint                          { fg=M.colors.br_red, }, -- DapBreakpoint  xxx guifg=#d57780
     IndentBlanklineContextChar             { fg=M.colors.magenta, gui="nocombine", }, -- IndentBlanklineContextChar xxx gui=nocombine guifg=#b988b0
-    IndentBlanklineChar                    { fg="#4c566a", gui="nocombine", }, -- IndentBlanklineChar xxx gui=nocombine guifg=#4c566a
-    SneakScope                             { bg="#4c566a", }, -- SneakScope     xxx guibg=#4c566a
+    IndentBlanklineChar                    { fg=M.colors.background, gui="nocombine", }, -- IndentBlanklineChar xxx gui=nocombine guifg=#4c566a
+    SneakScope                             { bg=M.colors.background, }, -- SneakScope     xxx guibg=#4c566a
     Sneak                                  { fg=M.colors.background, bg=M.colors.foreground, }, -- Sneak          xxx guifg=#2e3440 guibg=#c8d0e0
     BufferInactiveTarget                   { fg=M.colors.br_red, bg=M.colors.background, gui="bold", }, -- BufferInactiveTarget xxx gui=bold guifg=#d57780 guibg=#353b49
     BufferInactiveSign                     { fg=M.colors.gray, bg=M.colors.background, }, -- BufferInactiveSign xxx guifg=#6c7a96 guibg=#353b49

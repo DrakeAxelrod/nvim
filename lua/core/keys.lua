@@ -65,6 +65,9 @@ M.standard = {
   { { "n" }, "<leader>li", ":LspInfo<cr>", desc "Info" },
   { { "n" }, "<leader>lf", ":LspFormat<cr>", desc "Format" },
   { { "n" }, "<leader>lC", ":LspCodeAction<cr>", desc "Code Action" },
+  --> Git <--
+  { { "n" }, "<leader>g", "Git", desc "Git" },
+  { { "n" }, "<leader>gn", ":Neogit<cr>", desc "Neogit" }
 }
 
 M.telescope = function()
