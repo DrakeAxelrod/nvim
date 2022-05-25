@@ -33,11 +33,11 @@ M.options = {
 		node_host_prog = "/bin/neovim-node-host",
 	},
 	opt = {
-	  -- autochdir = true, -- auto chdir
+	  autochdir = true, -- auto chdir
 		foldlevelstart = 99, -- Sets "foldlevel" when starting to edit another buffer in a window.
 		foldmethod = "expr", -- folding set to "expr" for treesitter based folding
 		foldexpr = "nvim_treesitter#foldexpr()", -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
-		clipboard = "unnamedplus", -- Connection to the system clipboard
+		-- clipboard = "unnamedplus", -- Connection to the system clipboard
 		completeopt = { "menuone", "noselect" }, -- Options for insert mode completion
 		copyindent = true, -- Copy the previous indentation on autoindenting
 		cursorline = true, -- Highlight the text line of the cursor
@@ -67,7 +67,7 @@ M.options = {
 		title = true, -- set the title of window to the value of the titlestring
 		titlestring = "%<%F%=%l/%L - nvim", -- what the title of the window will be set to
 		background = "dark", -- background color of the window
-		guifont = "JetBrains Mono Nerd Font:h12",
+		guifont = "JetBrainsMono Nerd Font:h12",
 		guicursor = [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]],
 		errorbells = false, -- Ring the bell (beep or screen flash) for error messages.
 		visualbell = false, -- Use visual bell instead of beeping.
@@ -110,6 +110,8 @@ M.options = {
 }
 
 M.init = function(self)
+  vim.cmd([[set clipboard+=unnamedplus]])
+  -- vim.api.nvim_set_option("clipboard","unnamed")
   fn.options(self.options)
 end
 

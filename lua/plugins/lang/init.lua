@@ -30,6 +30,7 @@ return function()
 				"sumneko_lua",
 				"bashls",
         "ccls",
+        
         -- "rust-analyzer"
 			}
 			lsp_installer.setup({

@@ -118,11 +118,11 @@ M.standard = {
 }
 
 M.toggleterm = function(term)
-  -- local gitui = term:new({
-  --   cmd = "gitui",
-  --   direction = "float",
-  -- })
-  -- vim.keymap.set({ "n" }, "<leader>gt", function() gitui:toggle() end, desc "Gitui")
+  local lazygit = term:new({
+    cmd = "lazygit",
+    direction = "float",
+  })
+  vim.keymap.set({ "n" }, "<leader>gt", function() lazygit:toggle() end, desc "Lazygit")
 end
 
 M.telescope = function()

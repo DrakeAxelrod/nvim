@@ -25,15 +25,8 @@ return function()
 			}
 			cfg.section.buttons.val = {
 				cfg.button("e", icons.documents.file.default .. " New file", ":ene <BAR> startinsert <CR>"),
-				-- cfg.button(
-					-- "p",
-					-- icons.git.repo .. " Find project",
-					-- ":Telescope project<cr>"
-				-- ),
-				cfg.button("f", icons.documents.file.files .. " Find file", ":Telescope find_files <CR>"),
 				cfg.button("r", icons.ui.history .. " Recent files", ":Telescope frecency<CR>"),
 				cfg.button("t", icons.ui.list .. " Find text", ":Telescope live_grep <CR>"),
-				-- cfg.button("s", icons.ui.signin .. " Find Session", ":Telescope sessions save_current=false <CR>"),
 				cfg.button("c", icons.ui.gear .. " Config", ":e ~/.config/nvim/init.lua <CR>"),
 				cfg.button("q", icons.diagnostics.error .. " Quit", ":qa<CR>"),
 			}

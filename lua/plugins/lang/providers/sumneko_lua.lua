@@ -6,8 +6,8 @@ local opts = {
   cmd = { "lua-language-server" },
   filetypes = { "lua" },
   log_level = 2,
-  root_dir = function()
-    return vim.fn.getcwd()
+  root_dir = function(fname)
+    return require("lspconfig/util").find_git_ancestor(fname) or vim.fn.getcwd()
   end,
   settings = {
     Lua = {

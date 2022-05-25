@@ -30,8 +30,8 @@ local function custom_on_publish_diagnostics(a, params, client_id, c, config)
 end
 
 return {
-  root_dir = function()
-    return vim.fn.getcwd()
+  root_dir = function(fname)
+    return require("lspconfig/util").find_git_ancestor(fname) or vim.fn.getcwd()
   end,
   handlers = {
     ---@diagnostic disable-next-line: unused-vararg
