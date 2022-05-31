@@ -16,7 +16,6 @@ return function()
 				[[         /\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \           ]],
 				[[         \ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\          ]],
 				[[          \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/          ]],
-				-- [[                                                                    ]],
 				[[      .-.      _______                           .  '  *   .  . '   ]],
 				[[     {}``; |==|_______D                                . *  -+-  .  ]],
 				[[     / ('        /|\                             . '   * .    '  *  ]],
@@ -26,7 +25,7 @@ return function()
 			cfg.section.buttons.val = {
 				cfg.button("e", icons.documents.file.default .. " New file", ":ene <BAR> startinsert <CR>"),
 				cfg.button("r", icons.ui.history .. " Recent files", ":Telescope frecency<CR>"),
-				cfg.button("t", icons.ui.list .. " Find text", ":Telescope live_grep <CR>"),
+				cfg.button("u", icons.ui.package .. " Update Plugins", ":PackerSync<CR>"),
 				cfg.button("c", icons.ui.gear .. " Config", ":e ~/.config/nvim/init.lua <CR>"),
 				cfg.button("q", icons.diagnostics.error .. " Quit", ":qa<CR>"),
 			}

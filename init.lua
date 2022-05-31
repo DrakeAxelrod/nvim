@@ -14,3 +14,5 @@ end)(function()
   end)
 end)
 
+-- if vim.fn.exists("g:vscode") == 1 then
+-- end

@@ -30,8 +30,14 @@ return function()
 				"sumneko_lua",
 				"bashls",
         "ccls",
-        
-        -- "rust-analyzer"
+        "rust_analyzer",
+        "dockerls",
+        "jsonls",
+        "clangd",
+        "tsserver",
+        "yamlls",
+        "pyright",
+        "gopls"
 			}
 			lsp_installer.setup({
 				automatic_installation = true,

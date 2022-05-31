@@ -124,7 +124,9 @@ end
 
 function M.enable_format_on_save()
   fn.augroup "LspFormatOnSave"(function(autocmd)
-    autocmd("BufWritePre", { pattern = "*" }, vim.lsp.buf.formatting)
+    autocmd("BufWritePre", { pattern = "*" }, function()
+      vim.lsp.buf.format({ async = true })
+    end)
   end)
   vim.notify "Enabled format on save"
 end
@@ -144,6 +146,6 @@ function M.toggle_format_on_save()
   end
 end
 
-vim.cmd [[ command! LspToggleAutoFormat execute 'lua require("lang.handlers").toggle_format_on_save()' ]]
+vim.cmd [[ command! LspToggleAutoFormat execute 'lua require("plugins.lang.handlers").toggle_format_on_save()' ]]
 
 return M

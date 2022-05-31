@@ -31,7 +31,7 @@ return function()
           on_open = nil,
           on_close = nil,
           render = "default",
-          timeout = 5000,
+          timeout = 1000,
           background_colour = "Normal",
           minimum_width = 50,
           icons = {

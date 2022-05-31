@@ -131,8 +131,8 @@ M.theme = M.lush(function()
     NotifyDEBUGBody                        { Normal }, -- NotifyDEBUGBody xxx links to Normal
     NotifyTRACEBody                        { Normal }, -- NotifyTRACEBody xxx links to Normal
     TelescopeResultsFileIcon               { Normal }, -- TelescopeResultsFileIcon xxx links to Normal
-    FloatShadow                            { bg="black", blend="80", }, -- FloatShadow    xxx guibg=black blend=80
-    FloatShadowThrough                     { bg="black", blend="100", }, -- FloatShadowThrough xxx guibg=black blend=100
+    FloatShadow                            { bg="black", blend=80, }, -- FloatShadow    xxx guibg=black blend=80
+    FloatShadowThrough                     { bg="black", blend=100, }, -- FloatShadowThrough xxx guibg=black blend=100
     Error                                  { fg=M.colors.red, gui="bold,underline", }, -- Error          xxx ctermfg=15 ctermbg=9 gui=bold,underline guifg=#bf616a
     NvimInvalid                            { Error }, -- NvimInvalid    xxx links to Error
     luaBraceError                          { Error }, -- luaBraceError  xxx links to Error
