@@ -160,3 +160,4 @@ command! CmdResizeRight call <SID>ResizeRight(v:count)
 "      nnoremap <silent> <c-right> :CmdResizeRight<cr>
 "  endif
 ]])
+

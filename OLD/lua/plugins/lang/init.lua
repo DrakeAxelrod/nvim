@@ -29,7 +29,7 @@ return function()
 			local servers = {
 				"sumneko_lua",
 				"bashls",
-        "ccls",
+        -- "ccls",
         "rust_analyzer",
         "dockerls",
         "jsonls",

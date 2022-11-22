@@ -21,7 +21,7 @@ return function()
       {
         "nvim-telescope/telescope-smart-history.nvim",
         after = { "telescope.nvim" },
-        requires = { { "tami5/sqlite.lua", rocks = { "sqlite", "luv" } } },
+        requires = { { "kkharji/sqlite.lua", rocks = { "sqlite", "luv" } } },
         config = function()
           require("telescope").load_extension "smart_history"
         end,
@@ -36,7 +36,7 @@ return function()
       {
         "nvim-telescope/telescope-frecency.nvim",
         after = { "telescope.nvim" },
-        requires = { { "tami5/sqlite.lua", rocks = { "sqlite", "luv" } } },
+        requires = { { "kkharji/sqlite.lua", rocks = { "sqlite", "luv" } } },
         config = function()
           require("telescope").load_extension "frecency"
         end,

@@ -137,12 +137,12 @@ return function()
 			after = { "nvim-cmp", "copilot.lua" },
 			requires = {
 				"zbirenbaum/copilot.lua",
-				event = { "VimEnter" },
-				config = function()
-					vim.defer_fn(function()
-						require("copilot").setup()
-					end, 100)
-				end,
+				-- event = { "VimEnter" },
+				-- config = function()
+				-- 	vim.defer_fn(function()
+				-- 		require("copilot").setup()
+				-- 	end, 100)
+				-- end,
 			},
 		},
 	}

@@ -78,7 +78,7 @@ M.common_on_attach = function(client, bufnr)
   local cmds = require "core.cmds"
   local aerial_ok, aerial = pcall(require, "aerial")
   if aerial_ok then
-    aerial.on_attach(client, bufnr)
+--    aerial.on_attach(client, bufnr)
   end
   require("copilot").setup {}
   cmds.lsp(bufnr)
@@ -116,7 +116,7 @@ M.common_capabilities = function()
   }
   local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
   if status_ok then
-    capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+    capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
   end
 
   return capabilities
