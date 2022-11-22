@@ -1,7 +1,7 @@
 return {
   { "nvim-neo-tree/neo-tree.nvim",
-    requires = { "MunifTanjim/nui.nvim" },
-    config = function()
+    requires = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+    function()
       vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
       require("neo-tree").setup {
         close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab

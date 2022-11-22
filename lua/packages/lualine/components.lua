@@ -1,9 +1,4 @@
-local vim = vim
--- local M = {}
-local comp = {}
--- local lush = require("theme.spec")
-
--- local colors = lush.colors
+local M = {}
 
 local modes = {
 	["n"] = { text = "norm", hl = "%#StatusLineNormal#" }, -- normal
@@ -44,7 +39,7 @@ local hide_in_width = function()
   return vim.fn.winwidth(0) > 70
 end
 
-comp.space = {
+M.space = {
   function()
     return " "
   end,
@@ -52,7 +47,7 @@ comp.space = {
   cond = nil,
 }
 
-comp.mode =  {
+M.mode =  {
   function()
     local current = vim.api.nvim_get_mode().mode
     local m = modes[current]
@@ -63,7 +58,7 @@ comp.mode =  {
   cond = nil,
 }
 
-comp.branch = {
+M.branch = {
   "b:gitsigns_head",
   -- icon = {
   --   "",
@@ -74,7 +69,7 @@ comp.branch = {
   cond = hide_in_width,
 }
 
-comp.filename = {
+M.filename = {
   "filename",
   file_status = true,      -- Displays file status (readonly status, modified status)
   path = 0,                -- 0: Just the filename
@@ -83,7 +78,7 @@ comp.filename = {
                            -- 3: Absolute path, with tilde as the home directory
 
   shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
-                           -- for other components. (terrible name, any suggestions?)
+                           -- for other Monents. (terrible name, any suggestions?)
   symbols = {
     modified = '[+]',      -- Text to show when the file is modified.
     readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
@@ -93,7 +88,7 @@ comp.filename = {
   cond = hide_in_width,
 }
 
-comp.diff = {
+M.diff = {
   "diff",
   source = function()
     local gitsigns = vim.b.gitsigns_status_dict
@@ -114,7 +109,8 @@ comp.diff = {
   padding = { left = 0, right = 1 },
   cond = hide_in_width,
 }
-comp.diagnostics = {
+
+M.diagnostics = {
   "diagnostics",
   sources = { "nvim_diagnostic" },
   symbols = { error = " ", warn = " ", info = " ", hint = " " },
@@ -122,7 +118,7 @@ comp.diagnostics = {
   cond = hide_in_width,
 }
 
-comp.treesitter = {
+M.treesitter = {
   function()
     local b = vim.api.nvim_get_current_buf()
     if next(vim.treesitter.highlighter.active[b]) then
@@ -134,7 +130,7 @@ comp.treesitter = {
   padding = { left = 1, right = 0 },
   cond = hide_in_width,
 }
-comp.lsp = {
+M.lsp = {
   function(msg)
     msg = msg or "LS Inactive"
     local buf_clients = vim.lsp.buf_get_clients()
@@ -158,7 +154,7 @@ comp.lsp = {
   cond = hide_in_width,
 }
 
-comp.copilot = {
+M.copilot = {
   function()
     local active = false
     local buf_clients = vim.lsp.buf_get_clients()
@@ -178,17 +174,19 @@ comp.copilot = {
   cond = hide_in_width,
 }
 
-comp.location = {
+M.location = {
   "location",
-  padding = { left = 0, right = 0 },
+  padding = { left = 1, right = 0 },
   cond = hide_in_width
 }
-comp.progress = {
+
+M.progress = {
   "progress",
   padding = { left = 0, right = 1 },
   cond = hide_in_width
 }
-comp.spaces = {
+
+M.spaces = {
   function()
     if not vim.api.nvim_buf_get_option(0, "expandtab") then
       return "Tab size: " .. vim.api.nvim_buf_get_option(0, "tabstop") .. " "
@@ -202,25 +200,27 @@ comp.spaces = {
   padding = { left = 1, right = 0 },
   cond = hide_in_width,
 }
-comp.encoding = {
+
+M.encoding = {
   "o:encoding",
   fmt = string.upper,
   padding = { left = 1, right = 0 },
   cond = hide_in_width,
 }
-comp.filetype = {
+
+M.filetype = {
   "filetype",
   colored = true,   -- Displays filetype icon in color if set to true
   icon_only = true, -- Display only an icon for filetype
   icon = { align = 'right' }, -- Display filetype icon on the right hand side
   -- icon =    {'X', align='right'}
-  -- Icon string ^ in table is ignored in filetype component
+  -- Icon string ^ in table is ignored in filetype Monent
   padding = { left = 0, right = 1 },
   cond = hide_in_width
 }
 
 
-comp.scrollbar = {
+M.scrollbar = {
   function()
     local current_line = vim.fn.line "."
     local total_lines = vim.fn.line "$"
@@ -234,57 +234,4 @@ comp.scrollbar = {
   cond = nil,
 }
 
-
-return {
-  comp = comp,
-  theme = {
-    normal = {},
-    insert = {},
-    visual = {},
-    replace = {},
-    command = {},
-    inactive = {},
-    terminal = {},
-  },
-  sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {},
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {},
-  },
-  tabline = {},
-  extensions = {},
-  icons_enabled = true,
-  component_separators = { left = "", right = "" },
-  section_separators = { left = "", right = "" },
-  disabled_filetypes = {},
-  always_divide_middle = true,
-  globalstatus = true,
-  init = function(self)
-    require("lualine").setup({
-      options = {
-        icons_enabled = self.icons_enabled,
-        theme = self.theme,
-        component_separators = self.component_separators,
-        section_separators = self.section_separators,
-        disabled_filetypes = self.disabled_filetypes,
-        always_divide_middle = self.always_divide_middle,
-        globalstatus = self.globalstatus,
-      },
-      sections = self.sections,
-      inactive_sections = self.inactive_sections,
-      tabline = self.tabline,
-      extensions = self.extensions,
-    })
-  end
-}
+return M

@@ -1,9 +1,24 @@
 return {
-  { "nvim-tree/nvim-web-devicons" },
-  { "nvim-lualine/lualine.nvim" },
-  { "rafamadriz/neon",
+  {
+    "yamatsum/nvim-nonicons",
+    requires = { "kyazdani42/nvim-web-devicons" },
+  },
+  -- {
+  --   "folke/noice.nvim",
+  --   function()
+  --     require("noice").setup({
+  --         -- add any options here
+  --     })
+  --   end,
+  --   requires = {
+  --     "MunifTanjim/nui.nvim",
+  --     "rcarriga/nvim-notify",
+  --   }
+  -- },
+  {
+    "rafamadriz/neon",
     function()
-      vim.cmd[[colorscheme neon]]
+      vim.cmd [[colorscheme neon]]
     end,
     setup = function()
       vim.g.neon_style = "doom"
@@ -13,5 +28,5 @@ return {
       vim.g.neon_bold = true
     end,
   },
-  { "Mofiqul/vscode.nvim", disabled=true },
+  { "Mofiqul/vscode.nvim", disabled = true },
 }

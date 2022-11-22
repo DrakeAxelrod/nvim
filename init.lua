@@ -32,7 +32,7 @@ core.options {
     node_host_prog = "/bin/neovim-node-host",
   },
   opt = {
-    cmdheight = 0, -- hide command line unless entering command
+    cmdheight = 1, -- hide command line unless entering command
     clipboard = "unnamedplus", -- use system clipboard
     autochdir = true, -- auto chdir
     foldlevelstart = 99, -- Sets "foldlevel" when starting to edit another buffer in a window.
@@ -119,7 +119,24 @@ local desc = function(description)
   return { silent = true, noremap = true, desc = description }
 end
 
-local smart_splits = require('smart-splits')
+
+local smart_splits_ok, smart_splits = pcall(require, "smart-splits")
+if smart_splits_ok then
+  core.keys({
+    --> resize buffers <--
+    { { "n" }, "<s-h>", smart_splits.resize_left, desc "Resize buffer left" },
+    { { "n" }, "<s-j>", smart_splits.resize_down, desc "Resize buffer down" },
+    { { "n" }, "<s-k>", smart_splits.resize_up, desc "Resize buffer up" },
+    { { "n" }, "<s-l>", smart_splits.resize_right, desc "Resize buffer right" },
+    --> swap buffers <--
+    { { "n" }, "<c-h>", smart_splits.move_cursor_left, desc "Cursor to left buffer" },
+    { { "n" }, "<c-j>", smart_splits.move_cursor_down, desc "Cursor to bottom buffer" },
+    { { "n" }, "<c-k>", smart_splits.move_cursor_up, desc "Cursor to top buffer" },
+    { { "n" }, "<c-l>", smart_splits.move_cursor_right, desc "Cursor to right buffer" },
+    { { "n" }, "<leader>Br", smart_splits.start_resize_mode, desc "Resize Mode" },
+  })
+end
+
 core.keys({
   { { "n" }, "<esc>", "<Esc>:noh<CR>", desc "remove search highlights in normal mode" },
   { { "n", "x" }, "<space>", "<nop>", desc "Dont move cursor on space" },
@@ -130,19 +147,8 @@ core.keys({
   { { "i" }, "<a-j>", "<esc>:m .+1<CR>==gi", desc "move text up" },
   { { "x" }, "<a-j>", ":m '>+1<CR>gv-gv",  desc "move text up" },
   { { "x" }, "<a-k>", ":m '<-2<CR>gv-gv", desc "move text down" },
-	--> resize buffers <--
-	{ { "n" }, "<s-h>", smart_splits.resize_left, desc "Resize buffer left" },
-	{ { "n" }, "<s-j>", smart_splits.resize_down, desc "Resize buffer down" },
-	{ { "n" }, "<s-k>", smart_splits.resize_up, desc "Resize buffer up" },
-	{ { "n" }, "<s-l>", smart_splits.resize_right, desc "Resize buffer right" },
-	--> swap buffers <--
-	{ { "n" }, "<c-h>", smart_splits.move_cursor_left, desc "Cursor to left buffer" },
-	{ { "n" }, "<c-j>", smart_splits.move_cursor_down, desc "Cursor to bottom buffer" },
-	{ { "n" }, "<c-k>", smart_splits.move_cursor_up, desc "Cursor to top buffer" },
-	{ { "n" }, "<c-l>", smart_splits.move_cursor_right, desc "Cursor to right buffer" },
   --> general buffers <--
   { { "n" }, "<leader>B", "Buffer", desc "Buffer Control" },
-  { { "n" }, "<leader>Br", smart_splits.start_resize_mode, desc "Resize Mode" },
   --> quickfix <--
   { { "n" }, "]q", ":cnext<CR>", desc "Quickfix next" },
   { { "n" }, "[q", ":cprev<CR>", desc "Quickfix previous" },
@@ -218,8 +224,8 @@ core.keys({
   { { "n" }, "<leader>tC", ":Telescope commands<CR>", desc "Commands" },
 })
 
-
 -- language servers setup - https://github.com/junnplus/lsp-setup.nvim
+local lsp = require("lsp")
 core.lsp({
   prefix = "servers", -- directory name for lsp servers configs
   default_mappings = false,
@@ -227,8 +233,9 @@ core.lsp({
   on_attach = function(client, bufnr)
     -- Support custom the on_attach function for global
     -- Formatting on save as default
+    lsp.setup()
     require("lsp-setup.utils").format_on_save(client)
   end,
   -- Global capabilities
-  capabilities = vim.lsp.protocol.make_client_capabilities(),
+  capabilities = lsp.common_capabilities()
 })

@@ -1,7 +1,7 @@
 return {
   { "gelguy/wilder.nvim",
 		requires = { "romgrk/fzy-lua-native" },
-		config = function()
+		function()
       local ret = vim.api.nvim_get_hl_by_name("Keyword", true).foreground
       local accent_color = vim.api.nvim_get_hl_by_name("Keyword", true).foreground
 			local wilder = require("wilder")
@@ -29,7 +29,8 @@ return {
 						),
 					},
 					left = { " ", wilder.popupmenu_devicons() },
-					right = { " ", wilder.popupmenu_scrollbar() },
+					-- right = { " ", wilder.popupmenu_scrollbar() },
+          right = { " " },
 					pumblend = 0,
 					max_height = "50%", -- max height of the palette
 					min_height = 0, -- set to the same as "max_height" for a fixed height window
