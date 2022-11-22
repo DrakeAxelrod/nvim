@@ -3,6 +3,29 @@ return {
     "yamatsum/nvim-nonicons",
     requires = { "kyazdani42/nvim-web-devicons" },
   },
+  {
+    "alvarosevilla95/luatab.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    function()
+      require("luatab").setup {
+        -- title = function()
+        --   return ""
+        -- end,
+        -- modified = function()
+        --   return ""
+        -- end,
+        -- windowCount = function()
+        --   return ""
+        -- end,
+        -- devicon = function()
+        --   return ""
+        -- end,
+        -- separator = function()
+        --   return ""
+        -- end,
+      }
+    end,
+  },
   -- {
   --   "folke/noice.nvim",
   --   function()

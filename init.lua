@@ -38,7 +38,6 @@ core.options {
     foldlevelstart = 99, -- Sets "foldlevel" when starting to edit another buffer in a window.
     foldmethod = "expr", -- folding set to "expr" for treesitter based folding
     foldexpr = "nvim_treesitter#foldexpr()", -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
-    -- clipboard = "unnamedplus", -- Connection to the system clipboard
     completeopt = { "menuone", "noselect" }, -- Options for insert mode completion
     copyindent = true, -- Copy the previous indentation on autoindenting
     cursorline = true, -- Highlight the text line of the cursor
@@ -160,6 +159,12 @@ core.keys({
   { { "c" }, "<c-r><c-r>", "<Plug>(TelescopeFuzzyCommandSearch)", { noremap = false, nowait = true, desc = "search command history" } },
   { { "c" }, "<c-j>", 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true, noremap = true } },
   { { "c" }, "<c-k>", 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true, noremap = true } },
+  --> terminal mode <--
+  { { "t" }, "<esc>", "<C-\\><C-N>", desc "leave insert in terminal" },
+  { { "t" }, "<C-h>", "<C-\\><C-N><C-w>h", desc "Terminal cursor to left buffer" },
+  { { "t" }, "<C-j>", "<C-\\><C-N><C-w>j", desc "Terminal cursor to bottom buffer" },
+  { { "t" }, "<C-k>", "<C-\\><C-N><C-w>k", desc "Terminal cursor to top buffer" },
+  { { "t" }, "<C-l>", "<C-\\><C-N><C-w>l", desc "Terminal cursor to right buffer" },
   --> leader binds <--
   { { "n" }, "<leader>W", ":w!<cr>", desc "Save" },
   { { "n" }, "<leader>Q", ":q!<cr>", desc "Quit" },
@@ -208,20 +213,20 @@ core.keys({
   { { "n" }, "<leader>gC", ":Telescope git_bcommits<CR>", desc "Checkout commit(for current file)" },
   { { "n" }, "<leader>gd", ":Gitsigns diffthis HEAD<CR>", desc "Git Diff" },
   --> Telescope <--
-  { { "n" }, "<leader>t", "Telescope", desc "Telescope" },
-  { { "n" }, "<leader>t?", ":Telescope<cr>", desc "Telescope builtins" },
-  { { "n" }, "<leader>tF", ":Telescope frecency<cr>", desc "Frecency" },
-  { { "n" }, "<leader>tB", ":Telescope buffers<cr>", desc "Buffers" },
-  { { "n" }, "<leader>tb", ":Telescope git_branches<CR>", desc "Checkout branch" },
-  { { "n" }, "<leader>tc", ":Telescope colorscheme<CR>", desc "Colorscheme" },
-  { { "n" }, "<leader>tf", ":Telescope find_files<CR>", desc "Find File" },
-  { { "n" }, "<leader>th", ":Telescope help_tags<CR>", desc "Find Help" },
-  { { "n" }, "<leader>tM", ":Telescope man_pages<CR>", desc "Man Pages" },
-  { { "n" }, "<leader>tr", ":Telescope oldfiles<CR>", desc "Open Recent File" },
-  { { "n" }, "<leader>tR", ":Telescope registers<CR>", desc "Registers" },
-  { { "n" }, "<leader>tt", ":Telescope live_grep<CR>", desc "Text" },
-  { { "n" }, "<leader>tk", ":Telescope keymaps<CR>", desc "Keymaps" },
-  { { "n" }, "<leader>tC", ":Telescope commands<CR>", desc "Commands" },
+  { { "n" }, "<leader>s", "Search", desc "Search with telescope" },
+  { { "n" }, "<leader>s?", ":Telescope<cr>", desc "Telescope builtins" },
+  { { "n" }, "<leader>sF", ":Telescope frecency<cr>", desc "Frecency" },
+  { { "n" }, "<leader>sB", ":Telescope buffers<cr>", desc "Buffers" },
+  { { "n" }, "<leader>sb", ":Telescope git_branches<CR>", desc "Checkout branch" },
+  { { "n" }, "<leader>sc", ":Telescope colorscheme<CR>", desc "Colorscheme" },
+  { { "n" }, "<leader>sf", ":Telescope find_files<CR>", desc "Find File" },
+  { { "n" }, "<leader>sh", ":Telescope help_tags<CR>", desc "Find Help" },
+  { { "n" }, "<leader>sM", ":Telescope man_pages<CR>", desc "Man Pages" },
+  { { "n" }, "<leader>sr", ":Telescope oldfiles<CR>", desc "Open Recent File" },
+  { { "n" }, "<leader>sR", ":Telescope registers<CR>", desc "Registers" },
+  { { "n" }, "<leader>st", ":Telescope live_grep<CR>", desc "Text" },
+  { { "n" }, "<leader>sk", ":Telescope keymaps<CR>", desc "Keymaps" },
+  { { "n" }, "<leader>sC", ":Telescope commands<CR>", desc "Commands" },
 })
 
 -- language servers setup - https://github.com/junnplus/lsp-setup.nvim
@@ -238,4 +243,33 @@ core.lsp({
   end,
   -- Global capabilities
   capabilities = lsp.common_capabilities()
+})
+
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "*.json", "*.jsonc" },
+  -- enable wrap mode for json files only
+  command = "setlocal wrap",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "zsh",
+  callback = function()
+    -- let treesitter use bash highlight for zsh files as well
+    require("nvim-treesitter.highlight").attach(0, "bash")
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "neo-tree,Telescope,startup",
+  callback = function()
+    vim.b.miniindentscope_disable = true
+  end,
+})
+
+vim.api.nvim_create_autocmd("VimResized", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("tabdo wincmd =")
+  end,
 })
