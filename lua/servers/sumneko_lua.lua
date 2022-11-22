@@ -22,10 +22,51 @@ if status then
   })
 end
 
+local runtime_path = vim.split(package.path, ";")
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
 local server = {
   lspconfig = {
+    cmd = { "lua-language-server" },
+    log_level = 2,
     settings = {
+      root_dir = function(fname)
+        return require("lspconfig/util").find_git_ancestor(fname) or vim.fn.getcwd()
+      end,
       Lua = {
+        runtime = {
+          version = "LuaJIT",
+          path = runtime_path,
+        },
+        workspace = {
+          library = {
+            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+            [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+          },
+        },
+        diagnostics = {
+          globals = {
+            "vim",
+            "use",
+            "describe",
+            "it",
+            "assert",
+            "before_each",
+            "after_each",
+          },
+        },
+        disable = {
+          "lowercase-global",
+          "undefined-global",
+          "unused-local",
+          "unused-function",
+          "unused-vararg",
+          "trailing-space",
+        },
+        telemetry = {
+          enable = false,
+        },
         format = {
           enable = true,
         },
