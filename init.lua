@@ -184,6 +184,7 @@ setup({
       end,
       ["lsp"] = function(_, desc)
         return {
+          { { "n" }, "<leader>l", "LSP", desc "LSP" },
           { { "n" }, "gK", vim.diagnostic.open_float, desc "Diagnostic float" },
           { { "n" }, "gD", vim.lsp.buf.declaration, desc "Declaration" },
           { { "n" }, "gt", vim.lsp.buf.type_definition, desc "Type Definition" },
@@ -192,8 +193,7 @@ setup({
           { { "n" }, "gr", vim.lsp.buf.references, desc "References" },
           { { "n" }, "[d", vim.diagnostic.goto_prev, desc "References" },
           { { "n" }, "]d", vim.diagnostic.goto_next, desc "References" },
-          { { "n" }, "<leader>rn", vim.lsp.buf.rename, desc "Rename" },
-          { { "n" }, "<leader>l", "LSP", desc "Lsp" },
+          { { "n" }, "<leader>ln", vim.lsp.buf.rename, desc "Rename" },
           { { "n" }, "<leader>lk", vim.lsp.buf.signature_help, desc "Signature help" },
           { { "n" }, "<leader>lK", vim.lsp.buf.hover, desc "Hover" },
           { { "n" }, "<leader>li", ":LspInfo<cr>", desc "Info" },
@@ -208,6 +208,7 @@ setup({
       end,
       ["gitsigns"] = function(_, desc)
         return {
+          { { "n" }, "<leader>g", "Git", desc "Git" },
           { { "n" }, "<leader>gj", ":lua require 'gitsigns'.next_hunk()<CR>", desc "Next Hunk" },
           { { "n" }, "<leader>gk",  ":lua require 'gitsigns'.prev_hunk()<CR>", desc "Prev Hunk" },
           { { "n" }, "<leader>gl", ":lua require 'gitsigns'.blame_line()<CR>", desc "Blame" },

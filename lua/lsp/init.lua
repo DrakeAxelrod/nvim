@@ -60,10 +60,10 @@ end
 
 local function lsp_highlight_document(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
-    -- fn.augroup("LspHighlight")(function(autocmd)
-    --   autocmd("CursorHold", { buffer=bufnr }, vim.lsp.buf.document_highlight)
-    --   autocmd("CursorMoved", { buffer=bufnr }, vim.lsp.buf.clear_references)
-    -- end)
+    require("utils").augroup("LspHighlight")(function(autocmd)
+      autocmd("CursorHold", { buffer=bufnr }, vim.lsp.buf.document_highlight)
+      autocmd("CursorMoved", { buffer=bufnr }, vim.lsp.buf.clear_references)
+    end)
   end
 end
 
@@ -107,31 +107,5 @@ M.common_capabilities = function()
 
   return capabilities
 end
-
--- function M.enable_format_on_save()
---   fn.augroup "LspFormatOnSave"(function(autocmd)
---     autocmd("BufWritePre", { pattern = "*" }, function()
---       vim.lsp.buf.format({ async = true })
---     end)
---   end)
---   vim.notify "Enabled format on save"
--- end
-
--- function M.disable_format_on_save()
---   if vim.fn.exists "#LspFormatOnSave" == 1 then
---     vim.cmd "au! LspFormatOnSave"
---   end
---   vim.notify "Disabled format on save"
--- end
-
--- function M.toggle_format_on_save()
---   if vim.fn.exists "#format_on_save#BufWritePre" == 0 then
---     M.enable_format_on_save()
---   else
---     M.disable_format_on_save()
---   end
--- end
-
--- vim.cmd [[ command! LspToggleAutoFormat execute 'lua require("plugins.lang.handlers").toggle_format_on_save()' ]]
 
 return M

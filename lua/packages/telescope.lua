@@ -1,3 +1,4 @@
+local join = require("utils").join
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -6,7 +7,7 @@ return {
         "nvim-telescope/telescope-fzy-native.nvim",
         function()
           require("telescope").load_extension "fzy_native"
-        end
+        end,
       },
       {
         "nvim-telescope/telescope-smart-history.nvim",
@@ -164,31 +165,15 @@ return {
             ignore_patterns = { "*.git/*", "*/tmp/*" },
             disable_devicons = false,
             workspaces = {
-              -- ["config"] = join(os.getenv "HOME", ".config"),
-              -- ["data"] = join(os.getenv "HOME", ".local", "share"),
-              -- ["project"] = join(os.getenv "HOME", "Documents"),
+              ["config"] = join(os.getenv "HOME", ".config"),
+              ["data"] = join(os.getenv "HOME", ".local", "share"),
+              ["project"] = join(os.getenv "HOME", "Documents"),
             },
           },
-            hidden_files = true, -- default: false
-            theme = "dropdown"
-          },
-          -- command_center = {
-          --   -- Below are default settings that can be overriden ...
-          --   -- Change what to show on telescope prompt and in which order
-          --   -- Currently support the following three components
-          --   -- Components may repeat
-          --   components = {
-          --     command_center.component.KEYBINDINGS,
-          --     command_center.component.DESCRIPTION,
-          --   },
-          --   -- Change the separator used to separate each component
-          --   separator = " ",
-          --   -- When set to false,
-          --   -- The description compoenent will be empty if it is not specified
-          --   auto_replace_desc_with_cmd = true,
-          -- },
-        -- },
+          hidden_files = true, -- default: false
+          theme = "dropdown",
+        },
       }
-    end
-  }
+    end,
+  },
 }
