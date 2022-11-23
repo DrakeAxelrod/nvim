@@ -1,6 +1,9 @@
-local core = require("core")
+-- if vim.fn.exists("g:vscode") == 1 then
+-- end
 
-core({
+local setup = require("setup")
+
+setup({
   package_prefix = "packages",
   servers_prefix = "servers",
 
@@ -256,6 +259,7 @@ core({
   },
 
   commands = function()
+    return {}
   end,
 
   lsp = function()
