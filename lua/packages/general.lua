@@ -4,6 +4,7 @@ return {
     { "nvim-lua/plenary.nvim" },
     { "kkharji/sqlite.lua" },
     { "romgrk/fzy-lua-native" },
+    { "tpope/vim-repeat" },
     { "nathom/filetype.nvim",
       function()
         require("filetype").setup({})

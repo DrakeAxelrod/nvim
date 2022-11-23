@@ -176,13 +176,13 @@ M.copilot = {
 
 M.location = {
   "location",
-  padding = { left = 1, right = 0 },
+  padding = { left = 1, right = 1 },
   cond = hide_in_width
 }
 
 M.progress = {
   "progress",
-  padding = { left = 0, right = 1 },
+  padding = { left = 1, right = 1 },
   cond = hide_in_width
 }
 

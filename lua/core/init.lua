@@ -1,15 +1,19 @@
-local M = {}
+---@diagnostic disable: lowercase-global
 
-M.colorscheme = function(colorscheme)
-  colorscheme = colorscheme or "default"
-  local ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
-  if not ok then
-    vim.cmd "colorscheme default" -- if the above fails, then use default
-  end
+-- M.colorscheme = function(colorscheme)
+--   colorscheme = colorscheme or "default"
+--   local ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
+--   if not ok then
+--     vim.cmd "colorscheme default" -- if the above fails, then use default
+--   end
+-- end
+
+import = function(mod, fn)
+  local ok, m = pcall(require, mod)
+  if ok then fn(m) end
 end
 
-
-M.options = function(options)
+local options = function(options)
   for scope, table in pairs(options) do
     for setting, value in pairs(table) do
       vim[scope][setting] = value
@@ -17,61 +21,75 @@ M.options = function(options)
   end
 end
 
-M.keys = function(mappings)
+local desc = function(description)
+  return { silent = true, noremap = true, desc = description }
+end
+
+local map = function(mappings)
   for _, m in ipairs(mappings) do
     local mode, keys, cmd, opts = unpack(m)
     vim.keymap.set(mode, keys, cmd, opts)
   end
 end
 
+local packages = function(prefix)
+  local path = vim.fn.stdpath("data") .. "/site/pack/deps/opt/dep"
+  if vim.fn.empty(vim.fn.glob(path)) > 0 then
+    vim.fn.system({ "git", "clone", "--depth=1", "https://github.com/chiyadev/dep", path })
+  end
+  vim.cmd("packadd dep")
 
-M.packages = setmetatable({}, {
-  __call = function(_, prefix)
-    local path = vim.fn.stdpath("data") .. "/site/pack/deps/opt/dep"
-    if vim.fn.empty(vim.fn.glob(path)) > 0 then
-      vim.fn.system({ "git", "clone", "--depth=1", "https://github.com/chiyadev/dep", path })
+  -- get all file or directory names in the given directory
+  local files = vim.fn.readdir(vim.fn.stdpath("config") .. "/lua/" .. prefix .. "/")
+  -- remove the extension from the file name if it exists
+  local modules = vim.tbl_map(function(file)
+    return file:match("(.*)%.lua") or file
+  end, files)
+  modules.prefix = prefix .. "."
+  return require("dep")({
+    modules = modules
+  })
+end
+
+local core = setmetatable({}, {
+  __call = function(self, cfg)
+    -- setup impatient if available
+    import("impatient", function(m)
+      m.enable_profile()
+    end)
+
+    options(cfg.options())
+
+    cfg.packages_prefix = cfg.packages_prefix or "packages"
+    packages(cfg.packages_prefix)
+
+    map(cfg.mappings.standard(desc))
+
+    -- vim.pretty_print(cfg.mappings.packages)
+    for key, fn in pairs(cfg.mappings.packages) do
+
+      import(key, function(mod)
+        map(fn(mod, desc))
+      end)
     end
-    vim.cmd("packadd dep")
 
-    -- get all file or directory names in the given directory
-    local files = vim.fn.readdir(vim.fn.stdpath("config") .. "/lua/" .. prefix .. "/")
-    -- remove the extension from the file name if it exists
-    local modules = vim.tbl_map(function(file)
-      return file:match("(.*)%.lua") or file
-    end, files)
-    modules.prefix = prefix .. "."
-    return require("dep")({
-      modules = modules
-    })
+    local lsp = cfg.lsp()
+    cfg.servers_prefix = cfg.servers_prefix or "servers"
+    import("lsp-setup", function(mod)
+      mod.setup({
+        prefix = cfg.servers_prefix, -- directory name for lsp servers configs
+        default_mappings = false,
+        on_attach = lsp.on_attach,
+        capabilities = lsp.capabilities
+      })
+    end)
+
+    for _, tbl in pairs(cfg.autocommands()) do
+      vim.api.nvim_create_autocmd(unpack(tbl))
+    end
+
   end,
 })
 
 
-M.lsp = setmetatable({}, {
-  __call = function(self, config)
-    config.servers = config.servers or {}
-    config.prefix = config.prefix or "servers"
-    -- replace / with . for the module name
-    config.prefix = config.prefix:gsub("/", ".")
-    -- change . to / for the path
-    local path = vim.fn.stdpath("config") .. "/lua/" .. config.prefix:gsub("%.", "/")
-    -- get all contents of the directory
-    for _, file in ipairs(vim.fn.readdir(path)) do
-      -- get the file name without the extension
-      local name = file:match("(.*)%.lua")
-      -- if the file name is not nil
-      if name then
-        local server = require(config.prefix .. "." .. name)
-        server.disabled = server.disabled or false
-        if not server.disabled then
-          config.servers[name] = server
-        end
-      end
-    end
-    local status, lib = pcall(require, "lsp-setup")
-    if not status then return end
-    lib.setup(self)
-  end,
-})
-
-return M
+return core

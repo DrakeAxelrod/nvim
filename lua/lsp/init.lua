@@ -10,13 +10,10 @@ M.setup = function()
     { name = "DiagnosticSignHint", text = icons.get("hint")},
     { name = "DiagnosticSignInfo", text = icons.get("info")},
   }
-
   for _, sign in ipairs(signs) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
   end
-
   vim.diagnostic.config {
-    -- virtual_text = false,
     virtual_text = { prefix = "●", source = "always" },
     update_in_insert = false,
     underline = true,
@@ -59,7 +56,6 @@ M.setup = function()
       vim.lsp.util.jump_to_location(result, "utf-8")
     end
   end
-
 end
 
 local function lsp_highlight_document(client, bufnr)

@@ -80,12 +80,7 @@ return {
   {
 		"lewis6991/gitsigns.nvim",
 		function()
-			local ok, gitsigns = pcall(require, "gitsigns")
-			if not ok then
-				return
-			end
-
-			local cfg = {
+			require("gitsigns").setup {
 				signs = {
 					add = { hl = "GitSignsAdd", text = "+", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
 					change = {
@@ -150,8 +145,6 @@ return {
 				update_debounce = 200,
 				status_formatter = nil, -- Use default
 			}
-
-			gitsigns.setup(cfg)
 		end,
 	}
 }
