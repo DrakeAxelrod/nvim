@@ -132,7 +132,6 @@ M.treesitter = {
 }
 M.lsp = {
   function(msg)
-    local icons = require "nvim-nonicons"
     msg = msg or "LS Inactive"
     local buf_clients = vim.lsp.buf_get_clients()
     if next(buf_clients) == nil then
@@ -149,7 +148,6 @@ M.lsp = {
         table.insert(buf_client_names, client.name)
       end
     end
-  
     return "[" .. table.concat(buf_client_names, ", ") .. "]"
   end,
   padding = { left = 1, right = 0 },
