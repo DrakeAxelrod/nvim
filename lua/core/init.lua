@@ -39,9 +39,11 @@ local options = function(options)
   end
 end
 
+
 return setmetatable({
   packages_dir = "packages",
   options = {},
+  keymaps = {},
 }, {
   __call = function(self, ...)
     import("impatient", function(impatient)

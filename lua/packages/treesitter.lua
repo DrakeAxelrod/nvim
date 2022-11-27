@@ -19,7 +19,7 @@ return {
           -- True is same as normal
           tailwind = false, -- Enable tailwind colors
           -- parsers can contain values used in |user_default_options|
-          sass = { enable = false, parsers = { css }, }, -- Enable sass colors
+          sass = { enable = false, parsers = { "css" }, }, -- Enable sass colors
           virtualtext = "■",
         },
         -- all the sub-options of filetypes apply to buftypes
@@ -46,7 +46,46 @@ return {
           -- use_languagetree = true,
           enable = true, -- false will disable the whole extension
           -- disable = { "css", "html" }, -- list of language that will be disabled
-          disable = { "css", "latex" }, -- list of language that will be disabled
+          disable = function(lang, buf)
+            if vim.tbl_contains({ "latex" }, lang) then
+              return true
+            end
+    
+            local max_filesize = 1024 * 1024
+            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+            if ok and stats and stats.size > max_filesize then
+              local ok, illuminate = pcall(require, "illuminate")
+              if ok then
+                illuminate.pause_buf()
+              end
+    
+              vim.schedule(function()
+                vim.api.nvim_buf_call(buf, function()
+                  vim.cmd "setlocal noswapfile noundofile"
+    
+                  if vim.tbl_contains({ "json" }, lang) then
+                    vim.cmd "NoMatchParen"
+                    vim.cmd "syntax off"
+                    vim.cmd "syntax clear"
+                    vim.cmd "setlocal nocursorline nolist bufhidden=unload"
+    
+                    vim.api.nvim_create_autocmd({ "BufDelete" }, {
+                      callback = function()
+                        vim.cmd "DoMatchParen"
+                        vim.cmd "syntax on"
+                      end,
+                      buffer = buf,
+                    })
+                  end
+                end)
+              end)
+    
+              vim.notify({
+                text = "File larger than 1MB, turned off treesitter for this buffer"
+              })
+              return true
+            end
+          end,
           additional_vim_regex_highlighting = true,
         },
         -- incremental selection

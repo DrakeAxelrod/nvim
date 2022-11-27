@@ -154,19 +154,14 @@ return {
     },
     function()
       local cmp_ok, cmp = pcall(require, "cmp")
-      if not cmp_ok then
+      local luasnip_ok, luasnip = pcall(require, "luasnip")
+      local kind_ok, kind = pcall(require, "lspkind")
+      local cmp_under_ok, comparator = pcall(require, "cmp-under-comparator")
+      if not cmp_ok and not luasnip_ok and not kind_ok and not cmp_under_ok then
         return
       end
-      local luasnip_ok, luasnip = pcall(require, 'luasnip')
-      if not luasnip_ok then
-        return
-      end
-      local kind_icons = require "lspkind"
-      require("cmp").setup {
-        confirm_opts = {
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = false,
-        },
+
+      cmp.setup {
         completion = {
           ---@usage The minimum length of a word to complete on.
           keyword_length = 1,
@@ -176,10 +171,22 @@ return {
           native_menu = false,
         },
         preselect = cmp.PreselectMode.None,
+        sorting = {
+          comparators = {
+              cmp.config.compare.offset,
+              cmp.config.compare.exact,
+              cmp.config.compare.score,
+              comparator.under,
+              cmp.config.compare.kind,
+              cmp.config.compare.sort_text,
+              cmp.config.compare.length,
+              cmp.config.compare.order,
+          },
+        },
         formatting = {
           fields = { "kind", "abbr", "menu" },
           max_width = 0,
-          kind_icons = kind_icons,
+          kind_icons = kind,
           source_names = {
             nvim_lsp = "(LSP)",
             emoji = "(Emoji)",
@@ -201,7 +208,7 @@ return {
           },
           duplicates_default = 0,
           format = function(entry, vim_item)
-            vim_item.kind = ("%s"):format(kind_icons[vim_item.kind])
+            vim_item.kind = ("%s"):format(kind[vim_item.kind])
             -- NOTE: order matters
             vim_item.menu = ({
               nvim_lsp = "(LSP)",
@@ -230,62 +237,6 @@ return {
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
-        },
-        sources = {
-          {
-            name = "copilot",
-            -- keyword_length = 0,
-            max_item_count = 3,
-            trigger_characters = {
-              {
-                ".",
-                ":",
-                "(",
-                "'",
-                '"',
-                "[",
-                ",",
-                "#",
-                "*",
-                "@",
-                "|",
-                "=",
-                "-",
-                "{",
-                "/",
-                "\\",
-                "+",
-                "?",
-                " ",
-                -- "\t",
-                -- "\n",
-              },
-            },
-          },
-          {
-            name = "nvim_lsp",
-            entry_filter = function(entry, ctx)
-              local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
-              if kind == "Snippet" and ctx.prev_context.filetype == "java" then
-                return false
-              end
-              if kind == "Text" then
-                return false
-              end
-              return true
-            end,
-          },
-    
-          { name = "path" },
-          { name = "luasnip" },
-          { name = "cmp_tabnine" },
-          { name = "nvim_lua" },
-          { name = "buffer" },
-          { name = "calc" },
-          { name = "emoji" },
-          { name = "treesitter" },
-          { name = "crates" },
-          { name = "tmux" },
         },
         mapping = cmp.mapping.preset.insert {
           ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
@@ -345,7 +296,73 @@ return {
             fallback() -- if not exited early, always fallback
           end),
         },
+        sources = {
+          {
+            name = "copilot",
+            -- keyword_length = 0,
+            max_item_count = 3,
+            trigger_characters = {
+              {
+                ".",
+                ":",
+                "(",
+                "'",
+                '"',
+                "[",
+                ",",
+                "#",
+                "*",
+                "@",
+                "|",
+                "=",
+                "-",
+                "{",
+                "/",
+                "\\",
+                "+",
+                "?",
+                " ",
+                -- "\t",
+                -- "\n",
+              },
+            },
+          },
+          {
+            name = "nvim_lsp",
+            entry_filter = function(entry, ctx)
+              local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
+              if kind == "Snippet" and ctx.prev_context.filetype == "java" then
+                return false
+              end
+              if kind == "Text" then
+                return false
+              end
+              return true
+            end,
+          },
+
+          { name = "path" },
+          { name = "luasnip" },
+          { name = "cmp_tabnine" },
+          { name = "nvim_lua" },
+          { name = "buffer" },
+          { name = "calc" },
+          { name = "emoji" },
+          { name = "treesitter" },
+          { name = "crates" },
+          { name = "tmux" },
+        },
       }
+
+      -- Set configuration for specific filetype.
+      cmp.setup.filetype("gitcommit", {
+        sources = cmp.config.sources({
+          { name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
+        }, {
+          { name = "buffer" },
+        }),
+      })
+
     end,
-  },
+  }
 }

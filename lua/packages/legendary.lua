@@ -44,7 +44,7 @@ return {
         which_key = {
           -- Automatically add which-key tables to legendary
           -- see ./doc/WHICH_KEY.md for more details
-          auto_register = false,
+          auto_register = true,
           -- you can put which-key.nvim tables here,
           -- or alternatively have them auto-register,
           -- see ./doc/WHICH_KEY.md

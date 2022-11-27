@@ -13,6 +13,19 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "yamatsum/nvim-nonicons",
+      "onsails/lspkind.nvim",
+    },
+    deps = {
+      { "SmiteshP/nvim-navic" },
+      {
+        "glepnir/lspsaga.nvim",
+        function()
+            local saga = require("lspsaga")
+            saga.init_lsp_saga({
+                -- your configuration
+            })
+        end,
+      }
     },
     function()
       local servers = {}
@@ -55,6 +68,10 @@ return {
         -- Global on_attach
         on_attach = function(client, bufnr)
           -- Support custom the on_attach function for global
+          local naivc_ok, navic = pcall(require, "nvim-navic")
+          if naivc_ok and client.server_capabilities.documentSymbolProvider then
+            navic.attach(client, bufnr)
+          end
           -- Formatting on save as default
           require("lsp-setup.utils").format_on_save(client)
         end,
