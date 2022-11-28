@@ -36,7 +36,7 @@ local server = {
       end,
       Lua = {
         runtime = {
-          version = "LuaJIT",
+          -- version = "LuaJIT",
           path = runtime_path,
         },
         workspace = {

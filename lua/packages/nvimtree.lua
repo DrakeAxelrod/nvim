@@ -2,7 +2,7 @@ return {
   {
     "kyazdani42/nvim-tree.lua",
     function()
-      local icons = require("utils").icons()
+      local icons = require("core").utils.icons
       local function telescope_find_files(_)
         require("lvim.core.nvimtree").start_telescope "find_files"
       end
@@ -27,10 +27,10 @@ return {
           enable = true,
           show_on_dirs = false,
           icons = {
-            hint = icons.diagnostics.hint,
-            info = icons.diagnostics.info,
-            warning = icons.diagnostics.warn,
-            error = icons.diagnostics.error,
+            hint = icons.diagnostics.Hint,
+            info = icons.diagnostics.Info,
+            warning = icons.diagnostics.Warn,
+            error = icons.diagnostics.Error,
           },
         },
         update_focused_file = {

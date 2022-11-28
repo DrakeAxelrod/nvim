@@ -1,5 +1,6 @@
 return {
   {
+    disable = true,
     "mrjones2014/legendary.nvim",
     function()
       local mappings = require "mappings"

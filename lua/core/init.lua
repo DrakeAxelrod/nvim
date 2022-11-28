@@ -1,11 +1,6 @@
----@diagnostic disable: lowercase-global
+local M = {}
 
-import = function(mod, fn)
-  local ok, m = pcall(require, mod)
-  if ok then
-    fn(m)
-  end
-end
+M.utils  = require "core.utils"
 
 local packages = function(prefix)
   local path = vim.fn.stdpath "data" .. "/site/pack/deps/opt/dep"
@@ -39,17 +34,45 @@ local options = function(options)
   end
 end
 
+local mappings = function()
+  require("mappings")
+end
 
-return setmetatable({
-  packages_dir = "packages",
-  options = {},
-  keymaps = {},
-}, {
-  __call = function(self, ...)
-    import("impatient", function(impatient)
-      impatient.enable_profile()
-    end)
-    options(self.options)
-    packages(self.packages_dir)
-  end,
-})
+M.on_attach_list = {}
+
+--- Add a function to the on_attach_list
+---@param fn fun(client: number, bufnr: number)
+M.on_attach = function(fn)
+  -- add the function to the list
+  table.insert(M.on_attach_list, fn)
+end
+
+M.options = function()
+  return options
+end
+
+M.packages = function()
+  return packages
+end
+
+M.mappings = function()
+  return mappings
+end
+
+
+return M
+
+-- return setmetatable({
+--   packages_dir = "packages",
+--   options = {},
+--   keymaps = function() end,
+--   autocmds = function() end,
+-- }, {
+--   __call = function(self, ...)
+--     import("impatient", function(impatient)
+--       impatient.enable_profile()
+--     end)
+--     options(self.options)
+--     packages(self.packages_dir)
+--   end,
+-- })

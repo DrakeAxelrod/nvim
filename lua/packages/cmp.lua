@@ -121,7 +121,7 @@ return {
       { "L3MON4D3/LuaSnip" },
       { "rafamadriz/friendly-snippets" },
       { "lukas-reineke/cmp-under-comparator" },
-      { "onsails/lspkind.nvim" },
+      -- { "onsails/lspkind.nvim" },
     },
     deps = {
       -- Snippet completion source
@@ -153,11 +153,12 @@ return {
       },
     },
     function()
+      local core = require("core")
       local cmp_ok, cmp = pcall(require, "cmp")
       local luasnip_ok, luasnip = pcall(require, "luasnip")
-      local kind_ok, kind = pcall(require, "lspkind")
+      -- local kind_ok, kind = pcall(require, "lspkind")
       local cmp_under_ok, comparator = pcall(require, "cmp-under-comparator")
-      if not cmp_ok and not luasnip_ok and not kind_ok and not cmp_under_ok then
+      if not cmp_ok and not luasnip_ok and not cmp_under_ok then
         return
       end
 
@@ -186,7 +187,7 @@ return {
         formatting = {
           fields = { "kind", "abbr", "menu" },
           max_width = 0,
-          kind_icons = kind,
+          kind_icons = core.utils.icons.kind,
           source_names = {
             nvim_lsp = "(LSP)",
             emoji = "(Emoji)",
@@ -208,7 +209,7 @@ return {
           },
           duplicates_default = 0,
           format = function(entry, vim_item)
-            vim_item.kind = ("%s"):format(kind[vim_item.kind])
+            vim_item.kind = ("%s"):format(core.utils.icons.kind[vim_item.kind])
             -- NOTE: order matters
             vim_item.menu = ({
               nvim_lsp = "(LSP)",

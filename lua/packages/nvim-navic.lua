@@ -3,7 +3,7 @@ return {
   {
     "SmiteshP/nvim-navic",
     require = {
-      "onsails/lspkind.nvim",
+      -- "onsails/lspkind.nvim",
       "nvim-web-devicons",
     },
     function()
@@ -12,8 +12,7 @@ return {
         return
       end
 
-      local kind = require "lspkind"
-      local icons = require("utils").icons()
+      local icons = require("core").utils.icons
       local winbar_filetype_exclude = {
         "help",
         "startify",
@@ -44,17 +43,17 @@ return {
       local get_filename = function()
         local filename = vim.fn.expand "%:t"
         local extension = vim.fn.expand "%:e"
-        local f = require "utils"
+
       
-        if not f.isempty(filename) then
+        if not filename:isempty() then
           local file_icon, file_icon_color =
             require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
       
           local hl_group = "FileIconColor" .. extension
       
           vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color })
-          if f.isempty(file_icon) then
-            file_icon = icons.documents.file.default
+          if file_icon:isempty() then
+            file_icon = icons.us.File
           end
       
           local buf_ft = vim.bo.filetype
@@ -64,15 +63,15 @@ return {
           end
       
           if buf_ft == "dapui_stacks" then
-            file_icon = icons.ui.stacks
+            file_icon = icons.ui.Stacks
           end
       
           if buf_ft == "dapui_scopes" then
-            file_icon = icons.ui.scopes
+            file_icon = icons.ui.Scopes
           end
       
           if buf_ft == "dapui_watches" then
-            file_icon = icons.ui.watches
+            file_icon = icons.ui.Watches
           end
       
       
@@ -98,8 +97,8 @@ return {
           return ""
         end
       
-        if not require("utils").isempty(gps_location) then
-          return "%#NavicSeparator#" .. icons.ui.chevronright .. "%* " .. gps_location
+        if not gps_location:isempty() then
+          return "%#NavicSeparator#" .. icons.ui.ChevronRight .. "%* " .. gps_location
         else
           return ""
         end
@@ -113,21 +112,21 @@ return {
         if excludes() then
           return
         end
-        local f = require "utils"
+        local f = require("core").utils
         local value = get_filename()
       
         local gps_added = false
-        if not f.isempty(value) then
+        if not value:isempty() then
           local gps_value = get_gps()
           value = value .. " " .. gps_value
-          if not f.isempty(gps_value) then
+          if not gps_value:isempty() then
             gps_added = true
           end
         end
       
-        if not f.isempty(value) and f.get_buf_option "mod" then
+        if not value:isempty() and f.get_buf_option "mod" then
           -- TODO: replace with circle
-          local mod = "%#LspCodeLens#" .. icons.ui.circle .. "%*"
+          local mod = "%#LspCodeLens#" .. icons.ui.Circle .. "%*"
           if gps_added then
             value = value .. " " .. mod
           else
@@ -137,7 +136,7 @@ return {
       
         local num_tabs = #vim.api.nvim_list_tabpages()
       
-        if num_tabs > 1 and not f.isempty(value) then
+        if num_tabs > 1 and not value:isempty() then
           local tabpage_number = tostring(vim.api.nvim_tabpage_get_number(0))
           value = value .. "%=" .. tabpage_number .. "/" .. tostring(num_tabs)
         end
@@ -169,13 +168,15 @@ return {
     
       create_winbar()
       navic.setup({
-        icons = kind,
+        icons = icons.kind,
         highlight = true,
-        separator = " " .. icons.ui.chevronright .. " ",
+        separator = " " .. icons.ui.ChevronRight .. " ",
         depth_limit = 0,
         depth_limit_indicator = "..",
         safe_output = true
       })
+
+      require("core").on_attach(navic.attach)
     end
   }
 }

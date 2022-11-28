@@ -2,8 +2,8 @@ return {
   { "gelguy/wilder.nvim",
 		requires = { "romgrk/fzy-lua-native" },
 		function()
-      local utils = require("utils")
-      local colors = utils.colors()
+      local utils = require("core").utils
+      local colors = utils.colors.term_colors()
       local accent_color = colors.bright_cyan
 			local wilder = require("wilder")
 			wilder.setup({ modes = { ":", "/", "?" } })

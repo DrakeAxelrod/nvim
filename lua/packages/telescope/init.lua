@@ -1,4 +1,4 @@
-local join = require("utils").join
+local join = require("core").utils.fs.join
 return {
   {
     "nvim-telescope/telescope.nvim",

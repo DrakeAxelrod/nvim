@@ -1,22 +1,22 @@
-local handlers = require "packages.lsp.handlers"
-
+local handlers = require "packages.language.handlers"
+local core = require("core")
 return {
   {
     "junnplus/lsp-setup.nvim",
     requires = {
       {
         "neovim/nvim-lspconfig",
-        -- function()
-        --   local lspconfig = require("lspconfig")
-        -- end
+        function()
+          local lspconfig = require("lspconfig")
+        end
       },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "yamatsum/nvim-nonicons",
-      "onsails/lspkind.nvim",
+      -- "onsails/lspkind.nvim",
+      { "SmiteshP/nvim-navic" },
     },
     deps = {
-      { "SmiteshP/nvim-navic" },
       {
         "glepnir/lspsaga.nvim",
         function()
@@ -29,14 +29,14 @@ return {
     },
     function()
       local servers = {}
-      local path = vim.fn.stdpath("config") .. "/lua/packages/lsp/servers"
+      local path = vim.fn.stdpath("config") .. "/lua/packages/language/servers"
       -- get all contents of the directory
       for _, file in ipairs(vim.fn.readdir(path)) do
         -- get the file name without the extension
         local name = file:match("(.*)%.lua")
         -- if the file name is not nil
         if name then
-          local server = require("packages.lsp.servers." .. name)
+          local server = require("packages.language.servers." .. name)
           server.disabled = server.disabled or false
           if not server.disabled then
             servers[name] = server
@@ -67,11 +67,11 @@ return {
         mappings = {},
         -- Global on_attach
         on_attach = function(client, bufnr)
-          -- Support custom the on_attach function for global
-          local naivc_ok, navic = pcall(require, "nvim-navic")
-          if naivc_ok and client.server_capabilities.documentSymbolProvider then
-            navic.attach(client, bufnr)
+          handlers.common_setup()
+          for _, fn in ipairs(core.on_attach_list) do
+            fn(client, bufnr)
           end
+
           -- Formatting on save as default
           require("lsp-setup.utils").format_on_save(client)
         end,

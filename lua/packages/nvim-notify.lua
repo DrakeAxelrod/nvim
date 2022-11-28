@@ -3,9 +3,7 @@ return {
     "rcarriga/nvim-notify",
     after = { "nvim-lua/popup.nvim", "yamatsum/nvim-nonicons"},
     function()
-      -- local icons = require "nvim-nonicons"
-      local utils = require("utils")
-      local icons = utils.icons()
+      local icons = require("core").utils.icons
       vim.notify = require("notify")
       vim.notify.setup({
         stages = "slide",
@@ -16,11 +14,11 @@ return {
         background_colour = "Normal",
         minimum_width = 50,
         icons = {
-          ERROR = "",
-          WARN = "",
-          INFO = "",
-          DEBUG = "",
-          TRACE = "✎",
+          ERROR = icons.diagnostics.Error,
+          WARN = icons.diagnostics.Warn,
+          INFO = icons.diagnostics.Info,
+          DEBUG = icons.diagnostics.Debug,
+          TRACE = icons.diagnostics.Trace,
         },
       })
     end

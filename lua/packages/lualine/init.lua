@@ -1,7 +1,8 @@
 local components = require("packages.lualine.components")
 
 return {
-  { "nvim-lualine/lualine.nvim",
+  {
+    "nvim-lualine/lualine.nvim",
     function()
       require("lualine").setup {
         options = {
