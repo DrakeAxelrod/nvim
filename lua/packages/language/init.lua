@@ -13,8 +13,8 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "yamatsum/nvim-nonicons",
-      -- "onsails/lspkind.nvim",
       { "SmiteshP/nvim-navic" },
+      { "folke/neodev.nvim" },
     },
     deps = {
       {
