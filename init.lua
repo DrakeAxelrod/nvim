@@ -11,8 +11,6 @@ t.init_packages({
   "interface",
   "completion"
 })
--- init theme
-require("theme").setup()
 -- set commands
 require("commands")
 -- set keymaps
