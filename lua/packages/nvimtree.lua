@@ -2,7 +2,7 @@ return {
   {
     "kyazdani42/nvim-tree.lua",
     function()
-      local icons = require("core").utils.icons
+      local icons = require("theme.icons")
       local function telescope_find_files(_)
         require("lvim.core.nvimtree").start_telescope "find_files"
       end

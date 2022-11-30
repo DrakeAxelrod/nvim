@@ -1,4 +1,3 @@
-local join = require("core").utils.fs.join
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -165,9 +164,9 @@ return {
             ignore_patterns = { "*.git/*", "*/tmp/*" },
             disable_devicons = false,
             workspaces = {
-              ["config"] = join(os.getenv "HOME", ".config"),
-              ["data"] = join(os.getenv "HOME", ".local", "share"),
-              ["project"] = join(os.getenv "HOME", "Documents"),
+              ["config"] = joinpath(os.getenv "HOME", ".config"),
+              ["data"] = joinpath(os.getenv "HOME", ".local", "share"),
+              ["project"] = joinpath(os.getenv "HOME", "Documents"),
             },
           },
           hidden_files = true, -- default: false
