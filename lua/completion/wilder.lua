@@ -2,9 +2,7 @@ return {
   { "gelguy/wilder.nvim",
 		requires = { "romgrk/fzy-lua-native" },
 		function()
-      local utils = require("core").utils
-      local colors = utils.colors.term_colors()
-      local accent_color = colors.bright_cyan
+      local accent_color = require("theme.colors").magenta
 			local wilder = require("wilder")
 			wilder.setup({ modes = { ":", "/", "?" } })
 			wilder.set_option("use_python_remote_plugin", 0) -- Disable Python remote plugin

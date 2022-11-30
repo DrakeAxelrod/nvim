@@ -12,7 +12,7 @@ return {
         return
       end
 
-      local icons = require("core").utils.icons
+      local icons = require("theme.icons")
       local winbar_filetype_exclude = {
         "help",
         "startify",
@@ -39,20 +39,23 @@ return {
         "noice",
         "",
       }
-      
+      local isempty = function(str)
+        return str == nil or str == ""
+      end
+
       local get_filename = function()
         local filename = vim.fn.expand "%:t"
         local extension = vim.fn.expand "%:e"
 
       
-        if not filename:isempty() then
+        if not isempty(filename) then
           local file_icon, file_icon_color =
             require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
       
           local hl_group = "FileIconColor" .. extension
       
           vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color })
-          if file_icon:isempty() then
+          if isempty(file_icon) then
             file_icon = icons.us.File
           end
       
@@ -97,7 +100,7 @@ return {
           return ""
         end
       
-        if not gps_location:isempty() then
+        if not isempty(gps_location) then
           return "%#NavicSeparator#" .. icons.ui.ChevronRight .. "%* " .. gps_location
         else
           return ""
@@ -107,12 +110,21 @@ return {
       local excludes = function()
         return vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype)
       end
+
+      local get_buf_option = function(opt)
+        local status_ok, buf_option = pcall(vim.api.nvim_buf_get_option, 0, opt)
+        if not status_ok then
+          return nil
+        else
+          return buf_option
+        end
+      end
       
       local get_winbar = function()
         if excludes() then
           return
         end
-        local f = require("core").utils
+
         local value = get_filename()
       
         local gps_added = false
@@ -124,7 +136,7 @@ return {
           end
         end
       
-        if not value:isempty() and f.get_buf_option "mod" then
+        if not isempty(value) and get_buf_option "mod" then
           -- TODO: replace with circle
           local mod = "%#LspCodeLens#" .. icons.ui.Circle .. "%*"
           if gps_added then
@@ -136,7 +148,7 @@ return {
       
         local num_tabs = #vim.api.nvim_list_tabpages()
       
-        if num_tabs > 1 and not value:isempty() then
+        if num_tabs > 1 and not isempty(value) then
           local tabpage_number = tostring(vim.api.nvim_tabpage_get_number(0))
           value = value .. "%=" .. tabpage_number .. "/" .. tostring(num_tabs)
         end
@@ -167,8 +179,15 @@ return {
       end
     
       create_winbar()
+      -- local kind = icons.kind
+      -- create a new table with the same keys and values but
+      -- with a space appended to the end of each value
+      -- local kind_symbols = {}
+      -- for k, v in pairs(kind) do
+      --   kind_symbols[k] = v .. " "
+      -- end
       navic.setup({
-        icons = icons.kind,
+        icons = icons.kind_with_space,
         highlight = true,
         separator = " " .. icons.ui.ChevronRight .. " ",
         depth_limit = 0,
@@ -176,7 +195,7 @@ return {
         safe_output = true
       })
 
-      require("core").on_attach(navic.attach)
+      require("tools").on_attach(navic.attach)
     end
   }
 }

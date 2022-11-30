@@ -7,10 +7,10 @@ return {
   { "nvim-lua/popup.nvim" },
   { "nvim-lua/plenary.nvim" },
   { "kyazdani42/nvim-web-devicons" },
-  {
-    "yamatsum/nvim-nonicons",
-    requires = { "kyazdani42/nvim-web-devicons" },
-  },
+  -- {
+  --   "yamatsum/nvim-nonicons",
+  --   requires = { "kyazdani42/nvim-web-devicons" },
+  -- },
   { "romgrk/fzy-lua-native" },
   {
     "antoinemadec/FixCursorHold.nvim",
@@ -42,7 +42,7 @@ return {
   "rcarriga/nvim-notify",
   after = { "nvim-lua/popup.nvim", "yamatsum/nvim-nonicons"},
   function()
-    local icons = require("core").utils.icons
+    local icons = require("theme.icons")
     vim.notify = require("notify")
     vim.notify.setup({
       stages = "slide",
