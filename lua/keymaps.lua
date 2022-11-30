@@ -54,17 +54,20 @@ imap({
   { "<s-tab>", "<c-d>", opts(noremap, silent, "Indent right") },
   { "<tab>", "<c-d>", opts(noremap, silent, "Indent right") },
 })
+
 xmap({
 
   { "<a-j>", ":m '>+1<cr>gv-gv", opts(noremap, silent, "Move line down") },
   { "<a-k>", ":m '<-2<cr>gv-gv", opts(noremap, silent, "Move line up") },
 })
+
 tmap({
   { "<esc>", "<C-\\><C-N><C-w>h", opts(noremap, silent, "Move to left window") },
   { "<esc>", "<C-\\><C-N><C-w>j", opts(noremap, silent, "Move to bottom window") },
   { "<esc>", "<C-\\><C-N><C-w>k", opts(noremap, silent, "Move to top window") },
   { "<esc>", "<C-\\><C-N><C-w>l", opts(noremap, silent, "Move to right window") },
 })
+
 cmap({
   { "<c-r><c-r>", "<Plug>(TelescopeFuzzyCommandSearch)", opts(noremap, nowait, "search command history") },
   { "<c-j>", 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', opts(expr, noremap, "Move to next item") },
