@@ -1,6 +1,7 @@
 return {
   {
     "echasnovski/mini.indentscope",
+    disable = true,
     function()
       require("mini.indentscope").setup {
         draw = {

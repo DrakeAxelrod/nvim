@@ -39,7 +39,10 @@ table.insert(M, {
       caching = false, -- Use caching for the theme?
       cache_path = vim.fn.expand(vim.fn.stdpath "cache" .. "/onedarkpro/"), -- The path to the cache directory
       colors = {}, -- Override default colors by specifying colors for 'onelight' or 'onedark' themes
-      highlights = {}, -- Override default highlight and/or filetype groups
+      highlights = {
+
+        BarbecueSeparator = { fg = "${white}", bg = "NONE" },
+      }, -- Override default highlight and/or filetype groups
       filetypes = { -- Override which filetype highlight groups are loaded
         javascript = true,
         lua = true,

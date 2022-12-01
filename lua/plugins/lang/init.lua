@@ -30,11 +30,11 @@ local after = {
 
 local servers = function()
   local s = {}
-  local path = joinpath(vim.fn.stdpath "config", "lua", "lang", "servers")
+  local path = joinpath(vim.fn.stdpath "config", "lua", "plugins", "lang", "servers")
   local files = readdir(path)
   for _, file in ipairs(files) do
     if file then
-      local server = require("lang.servers." .. file)
+      local server = require("plugins.lang.servers." .. file)
       server.disabled = server.disabled or false
       if not server.disabled then
         s[file] = server

@@ -85,7 +85,7 @@ mkm("telescope", { "n" }, "<leader>ld", ":Telescope lsp_definitions<cr>", { desc
 mkm("telescope", { "n" }, "<leader>li", ":Telescope lsp_implementations<cr>", { desc = "Implementations" })
 mkm("lsp-setup", { "n" }, "<leader>lc", ":Lspsaga code_action<cr>", { desc = "Code Action" })
 mkm("lsp-setup", { "n" }, "<leader>lR", ":Lspsaga rename<cr>", { desc = "Rename" })
-mkm("lsp-setup", { "n" }, "<leader>lf", ":lua vim.lsp.buf.formatting()<cr>", { desc = "Format" })
+mkm("lsp-setup", { "n" }, "<leader>lf", ":lua vim.lsp.buf.format()<cr>", { desc = "Format" })
 mkm("lsp-setup", { "n" }, "<leader>lp", ":Lspsaga peek_definition<cr>", { desc = "Peek", silent = true })
 mkm("lsp-setup", { "n" }, "<leader>lm", "Mason", { desc = "Mason" })
 mkm("lsp-setup", { "n" }, "<leader>lmm", ":Mason<cr>", { desc = "Open" })
