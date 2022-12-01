@@ -93,6 +93,7 @@ mkm("lsp-setup", { "n" }, "<leader>lml", ":MasonLog<cr>", { desc = "Log" })
 --> git <--
 km({ "n" }, "<leader>g", "Git", { desc = "Git" })
 mkm("neogit", { "n" }, "<leader>gg", ":Neogit<cr>", { desc = "Neogit" })
+mkm("gitsigns", { "n" }, "<leader>gn", ":Neotree git_status<CR>", { desc = "Neotree git status" })
 mkm("gitsigns", { "n" }, "<leader>gj", ":lua require 'gitsigns'.next_hunk()<CR>", { desc = "Next Hunk" })
 mkm("gitsigns", { "n" }, "<leader>gk", ":lua require 'gitsigns'.prev_hunk()<CR>", { desc = "Prev Hunk" })
 mkm("gitsigns", { "n" }, "<leader>gl", ":lua require 'gitsigns'.blame_line()<CR>", { desc = "Blame" })
