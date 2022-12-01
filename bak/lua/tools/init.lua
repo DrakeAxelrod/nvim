@@ -1,7 +1,6 @@
 if not import then
   require("tools.globals")
 end
-
 local M = {}
 
 --- list of on_attach callbacks
@@ -109,6 +108,78 @@ M.autocmd = function(event, command, opts)
   vim.api.nvim_create_autocmd(event, opts)
 end
 
+--- Initializes Dep (installs if needed)
+--- - prefix is the path to the plugins folder
+--- - the default prefix is "packages" (relative to the lua folder in nvim config directory)
+--- @param directories table the name of the plugin configs folders
+-- M.init_packages = function(directories)
+--   local path = vim.fn.stdpath "data" .. "/site/pack/deps/opt/dep"
+--   if vim.fn.empty(vim.fn.glob(path)) > 0 then
+--     vim.fn.system { "git", "clone", "--depth=1", "https://github.com/chiyadev/dep", path }
+--   end
+--   vim.cmd "packadd dep"
+
+--   local modules = {}
+--   for _, dir in ipairs(directories) do
+--     local packages_dir = vim.fn.stdpath "config" .. "/lua/" .. dir .. "/"
+--     if vim.fn.empty(vim.fn.glob(packages_dir)) > 0 then
+--       return
+--     end
+--     local files = vim.fn.readdir(packages_dir)
+--     local plugins = vim.tbl_map(function(file)
+--       return file:match "(.*)%.lua" or file
+--     end, files)
+--     -- check if valid plugin files actually return a table
+--     for _, plugin in ipairs(plugins) do
+--       local ok, mod = pcall(require, dir .. "." .. plugin)
+--       if ok and type(mod) ~= "boolean" then
+--         table.insert(modules, mod)
+--       end
+--     end
+--   end
+--   return require "dep" {
+--     modules = modules,
+--   }
+-- end
+
+-- M.packages = function(...)
+--   local path = joinpath(vim.fn.stdpath "data", "site", "pack", "deps", "opt", "dep")
+--   if vim.fn.empty(vim.fn.glob(path)) > 0 then
+--     vim.fn.system { "git", "clone", "--depth=1", "https://github.com/chiyadev/dep", path }
+--   end
+--   vim.cmd "packadd dep"
+
+--   require("dep").setup(...)
+-- end
+
+local bootstrap_package_manager =function()
+  local path = vim.fn.stdpath "data" .. "/site/pack/deps/opt/dep"
+  if vim.fn.empty(vim.fn.glob(path)) > 0 then
+    vim.fn.system { "git", "clone", "--depth=1", "https://github.com/chiyadev/dep", path }
+  end
+  vim.cmd "packadd dep"
+  
+  local ok, dep = pcall(require, "dep")
+  if not ok then
+    Log:warn("Failed to load dep")
+  end
+  return dep
+end
+
+M.plugins = function(prefix)
+  prefix = prefix or "plugins"
+  local dep = bootstrap_package_manager()
+  local packages = readdir(prefix)
+  if dep then
+    dep({
+      modules = {
+        prefix = "%s." % prefix,
+        table.unpack(packages),
+      }
+    })
+  end
+end
+
 M.checkmod = function(mod)
   local ok, _ = pcall(require, mod)
   if ok then
@@ -134,8 +205,11 @@ if not Config then
     end
   end
 
-  Config.plugin = require("tools.pack").register_plugin
-
+  Config.plugins = function(dir)
+    cfg.plugins = function()
+      M.plugins(dir)
+    end
+  end
 
   Config.options = function(dir)
     cfg.options = function()
@@ -168,12 +242,10 @@ if not Config then
   end
 
   Config.load = function()
-    local pack = require("tools.pack")
     M.impatient()
-    pack.ensure_plugins()
     cfg.leader()
     cfg.options()
-    pack.load_compile()
+    cfg.plugins()
     cfg.keymaps()
     cfg.commands()
     cfg.autocommands()

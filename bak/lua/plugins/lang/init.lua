@@ -11,7 +11,7 @@ local before = {
   -- { "yamatsum/nvim-nonicons" },
   { "SmiteshP/nvim-navic" },
   { "folke/neodev.nvim" },
-  lspsaga,
+  -- lspsaga,
 }
 
 local after = {

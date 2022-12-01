@@ -31,7 +31,7 @@ t.options({
     node_host_prog = "/bin/neovim-node-host",
   },
   opt = {
-    -- showtabline = 2, -- always show tabline
+    showtabline = 2, -- always show tabline
     cmdheight = 1, -- hide command line unless entering command
     laststatus = 3, -- always show status line
     clipboard = "unnamedplus", -- use system clipboard
