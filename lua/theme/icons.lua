@@ -35,6 +35,7 @@ M.kind = {
   Unit = "",
   Value = "",
   Variable = "",
+  Copilot = ""
 }
 
 M.kind_with_space = {}

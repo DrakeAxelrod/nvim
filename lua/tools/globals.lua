@@ -5,8 +5,9 @@ local unpack = unpack or table.unpack
 local loadstring = loadstring or load
 
 --[[=============================[  Tables  ]=============================]]
---
 
+
+table.unpack = table.unpack or unpack
 --- returns the string representation of the table callable with {}:tostring()
 --- @param self table the table to print
 --- @return string the string representation of the table
@@ -259,6 +260,16 @@ brequire = function(...)
   vim.cmd("source %s" % joinpath(vim.fn.stdpath("config"), ...))
 end
 
+
+get_relative_dir = function()
+  local init_path = debug.getinfo(1, "S").source
+  return init_path:sub(2):match("(.*[/\\])"):sub(1, -2)
+end
+
+rrequire = function(...)
+  return assert(loadfile(joinpath(get_relative_dir(), ...)))
+end
+
 --- import(mod, fn) - import a module and call a function with it
 --- if the module is not found, do nothing
 --- @param mod string - the module to import
@@ -377,6 +388,19 @@ R = function(...)
   return require(...)
 end
 
+--- reads all files and directories in a directory and returns them as a table
+--- @param dir string - the path to the directory
+--- @return table
+readdir = function(dir)
+  local packages_dir = vim.fn.stdpath "config" .. "/lua/" .. dir .. "/"
+  if vim.fn.empty(vim.fn.glob(packages_dir)) > 0 then
+    return {}
+  end
+  return vim.tbl_map(function(file)
+    return file:match "(.*)%.lua" or file
+  end, vim.fn.readdir(packages_dir))
+end
+
 --[[=============================[  Log  ]=============================]]
 
 Log = {
@@ -390,22 +414,44 @@ Log = {
   }
 }
 
-Log.debug = function(self, msg, opt)
-  vim.notify(msg, self.level.DEBUG, opt)
+--- Log a debug message
+--- @param msg string the message to log
+--- @param opt? table the options to pass to log
+Log.debug = function(msg, opt)
+  opt = opt or {}
+  vim.notify(msg, Log.level.DEBUG, opt)
 end
 
-Log.error = function(self, msg, opt)
-  vim.notify(msg, self.level.ERROR, opt)
+--- Log an error message
+--- @param msg string the message to log
+--- @param opt? table the options to pass to log
+Log.error = function(msg, opt)
+  opt = opt or {}
+  vim.notify(msg, Log.level.ERROR, opt)
 end
 
-Log.info = function(self, msg, opt)
-  vim.notify(msg, self.level.INFO, opt)
+--- Log an info message
+--- @param msg string the message to log
+--- @param opt? table the options to pass to log
+Log.info = function(msg, opt)
+  opt = opt or {}
+  vim.notify(msg, Log.level.INFO, opt)
 end
 
-Log.trace = function(self, msg, opt)
-  vim.notify(msg, self.level.TRACE, opt)
+--- Log a trace message
+--- @param msg string the message to log
+--- @param opt? table the options to pass to log
+Log.trace = function(msg, opt)
+  opt = opt or {}
+  vim.notify(msg, Log.level.TRACE, opt)
 end
 
-Log.warn = function(self, msg, opt)
-  vim.notify(msg, self.level.WARN, opt)
+--- Log a warn message
+--- @param msg string the message to log
+--- @param opt? table the options to pass to log
+Log.warn = function(msg, opt)
+  opt = opt or {}
+  vim.notify(msg, Log.level.WARN, opt)
 end
+
+Config = nil

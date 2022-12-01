@@ -1,6 +1,6 @@
-local tools = require("tools")
+local t = require("tools")
 
-tools.set({
+t.options({
   g = {
     do_filetype_lua = 1, -- use filetype.lua
     did_load_filetypes = 0, -- don't use filetype.vim
@@ -31,7 +31,8 @@ tools.set({
     node_host_prog = "/bin/neovim-node-host",
   },
   opt = {
-    cmdheight = 0, -- hide command line unless entering command
+    cmdheight = 1, -- hide command line unless entering command
+    laststatus = 3, -- always show status line
     clipboard = "unnamedplus", -- use system clipboard
     autochdir = false, -- auto chdir
     foldlevelstart = 99, -- Sets "foldlevel" when starting to edit another buffer in a window.
