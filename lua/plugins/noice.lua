@@ -4,7 +4,6 @@ return function()
       enabled = true,
       view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
       opts = {}, -- global options for the cmdline. See section on views
-      ---@type table<string, CmdlineFormat>
       format = {
         -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
         -- view: (default is cmdline view)
@@ -128,9 +127,7 @@ return function()
         enabled = true,
         -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
         -- See the section on formatting for more details on how to customize.
-        --- @type NoiceFormat|string
         format = "lsp_progress",
-        --- @type NoiceFormat|string
         format_done = "lsp_progress_done",
         throttle = 1000 / 30, -- frequency to update lsp progress message
         view = "mini",
@@ -146,7 +143,6 @@ return function()
       hover = {
         enabled = true,
         -- view = nil, -- when nil, use defaults from documentation
-        ---@type NoiceViewOptions
         opts = {}, -- merged with defaults from documentation
       },
       signature = {
@@ -158,7 +154,6 @@ return function()
           throttle = 50, -- Debounce lsp signature help request by 50ms
         },
         -- view = nil, -- when nil, use defaults from documentation
-        ---@type NoiceViewOptions
         opts = {}, -- merged with defaults from documentation
       },
       message = {
@@ -170,7 +165,6 @@ return function()
       -- defaults for hover and signature help
       documentation = {
         view = "hover",
-        ---@type NoiceViewOptions
         opts = {
           lang = "markdown",
           replace = true,
