@@ -172,6 +172,14 @@ if not CONF then
     end
   end
 
+  -- CONF.ensure_plugins = function()
+  --   M.packer.ensure_plugins()
+  -- end
+
+  -- CONF.load_compiled = function()
+  --   M.packer.load_compile()
+  -- end
+
   CONF.servers = function(path)
     cfg.servers = function()
       M.set_servers_path(path)

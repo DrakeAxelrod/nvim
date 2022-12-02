@@ -29,6 +29,7 @@ t.options({
     node_host_prog = "/bin/neovim-node-host",
   },
   opt = {
+    -- shortmess = "filnxtToOFcsACS", -- shortmess
     -- showtabline = 2, -- always show tabline
     cmdheight = 0, -- hide command line unless entering command
     laststatus = 3, -- always show status line
@@ -108,10 +109,14 @@ t.options({
   },
 })
 
+-- filnxtToOFcsAS
 vim.opt.spelllang:append "cjk" -- disable spellchecking for asian characters (VIM algorithm does not support it)
-vim.opt.shortmess:append "csACS" -- don't show redundant messages from ins-completion-menu
--- vim.opt.shortmess:append "I" -- don't show the default intro message
+-- -- vim.opt.shortmess:append "I" -- don't show the default intro message
 vim.opt.whichwrap:append "<,>,[,],h,l"
+vim.opt.shortmess:append "c"
+vim.opt.shortmess:append "s"
+vim.opt.shortmess:append "A"
+vim.opt.shortmess:append "A"
 
 vim.api.nvim_set_hl(0, "Search", {
   ctermfg = 0,
