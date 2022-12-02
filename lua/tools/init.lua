@@ -1,14 +1,17 @@
+local M = {}
 if not import then
-  require("tools.globals")
+  require "tools.globals"
 end
 
-local M = {}
-
+if not M.packer then
+  M.packer = require "tools.pack"
+end
 --- list of on_attach callbacks
 --- @type table<fun(client: number, bufnr: number)>
 M.on_attach_list = {}
-
+M.servers_path = joinpath(vim.fn.stdpath "config", "lua", "servers")
 local cfg = {
+  servers = function() end,
   plugins = function() end,
   options = function() end,
   keymaps = function() end,
@@ -42,17 +45,17 @@ end
 --- @param opts table | string | nil The options for the keymap defaults: { noremap = true, silent = true }
 M.modkeymap = function(mod, mode, lhs, rhs, opts)
   if M.checkmod(mod) then
-  opts = vim.tbl_deep_extend("force", { noremap = true, silent = true }, opts or {})
+    opts = vim.tbl_deep_extend("force", { noremap = true, silent = true }, opts or {})
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 end
 
 M.leader = function(c)
   c = vim.api.nvim_replace_termcodes(c, true, true, true)
-  if c == ' ' then
-    vim.keymap.set('n', '<Space>', '<NOP>')
-    vim.keymap.set('v', '<Space>', '<NOP>')
-    vim.keymap.set('x', '<Space>', '<NOP>')
+  if c == " " then
+    vim.keymap.set("n", "<Space>", "<NOP>", { noremap = true, silent = true })
+    vim.keymap.set("v", "<Space>", "<NOP>", { noremap = true, silent = true })
+    vim.keymap.set("x", "<Space>", "<NOP>", { noremap = true, silent = true })
   end
   vim.g.mapleader = c
 end
@@ -79,21 +82,21 @@ end
 --- @param group string The name of the augroup
 --- @return fun(autocmds: fun(event: table | string, opts: table, command: function | string))
 M.augroup = function(group)
-	-- local id = vim.api.nvim_create_augroup(group, { clear = true })
-	vim.api.nvim_create_augroup(group, { clear = true })
-	---@param autocmds fun(autocmd: fun(event: table | string, opts: table, command: function | string))
-	return function(autocmds)
-		autocmds(function(event, opts, command)
-			-- opts.group = id
-			opts.group = group
-			if type(command) == "function" then
-				opts.callback = command
-			else
-				opts.command = command
-			end
-			vim.api.nvim_create_autocmd(event, opts)
-		end)
-	end
+  -- local id = vim.api.nvim_create_augroup(group, { clear = true })
+  vim.api.nvim_create_augroup(group, { clear = true })
+  ---@param autocmds fun(autocmd: fun(event: table | string, opts: table, command: function | string))
+  return function(autocmds)
+    autocmds(function(event, opts, command)
+      -- opts.group = id
+      opts.group = group
+      if type(command) == "function" then
+        opts.callback = command
+      else
+        opts.command = command
+      end
+      vim.api.nvim_create_autocmd(event, opts)
+    end)
+  end
 end
 
 --- Creates a new autocmd
@@ -109,12 +112,31 @@ M.autocmd = function(event, command, opts)
   vim.api.nvim_create_autocmd(event, opts)
 end
 
+
 M.checkmod = function(mod)
   local ok, _ = pcall(require, mod)
   if ok then
     return true
   end
   return false
+end
+
+M.servers = function()
+  local servers = {}
+  local path = M.servers_path
+  local files = readdir(path)
+  -- remove vim.fn.stdpath "config" / "lua" from path
+  path = path:gsub(joinpath(vim.fn.stdpath "config", "lua"), ""):gsub("/", ".")
+  for _, file in ipairs(files) do
+    if file then
+      local server = require(path .. "." .. file)
+      server.disabled = server.disabled or false
+      if not server.disabled then
+        servers[file] = server
+      end
+    end
+  end
+  return servers
 end
 
 --- Add a function to the on_attach_list
@@ -124,56 +146,76 @@ M.on_attach = function(fn)
   table.insert(M.on_attach_list, fn)
 end
 
-if not Config then
-  Config = {}
+--- register a plugin with packer
+--- @param tbl Plugin The plugin to register
+M.plugin = function(tbl)
+  M.packer.register_plugin(tbl)
+end
 
-  local init = function(dir)
-    local ok, _ = pcall(require, dir)
+M.set_servers_path = function(path)
+  M.servers_path = path
+end
+
+if not CONF then
+  CONF = {}
+
+  local init = function(path)
+    local ok, _ = pcall(require, path)
     if not ok then
-      Log:warn("Failed to load config: %s" % dir)
+      Log:warn("Failed to load config: %s" % path)
     end
   end
 
-  Config.plugin = require("tools.pack").register_plugin
+  CONF.plugins = function(path)
+    cfg.plugins = function()
+      M.packer.set_plugins_dir(path)
+    end
+  end
 
+  CONF.servers = function(path)
+    cfg.servers = function()
+      M.set_servers_path(path)
+    end
+  end
 
-  Config.options = function(dir)
+  CONF.options = function(path)
     cfg.options = function()
-      init(dir)
+      init(path)
     end
   end
 
-  Config.keymaps = function(dir)
+  CONF.keymaps = function(path)
     cfg.keymaps = function()
-      init(dir)
+      init(path)
     end
   end
 
-  Config.autocommands = function(dir)
+  CONF.autocommands = function(path)
     cfg.autocommands = function()
-      init(dir)
+      init(path)
     end
   end
 
-  Config.commands = function(dir)
+  CONF.commands = function(path)
     cfg.commands = function()
-      init(dir)
+      init(path)
     end
   end
 
-  Config.leader = function(key)
+  CONF.leader = function(key)
     cfg.leader = function()
       M.leader(key)
     end
   end
 
-  Config.load = function()
-    local pack = require("tools.pack")
+  CONF.load = function()
     M.impatient()
-    pack.ensure_plugins()
     cfg.leader()
+    cfg.servers()
+    cfg.plugins()
+    M.packer.ensure_plugins()
     cfg.options()
-    pack.load_compile()
+    M.packer.load_compile()
     cfg.keymaps()
     cfg.commands()
     cfg.autocommands()

@@ -1,10 +1,17 @@
-local uv, api = vim.loop, vim.api
-local vim_path = vim.fn.stdpath "config"
-local data_dir = joinpath(vim.fn.stdpath "data", "site")
-local modules_dir = joinpath(vim_path, "lua", "plugins")
-local packer_compiled = joinpath(data_dir, "lua", "packer_compiled.lua")
-local packer = nil
 
+local M = {}
+
+M.data_dir = joinpath(vim.fn.stdpath "data", "site")
+M.nvim_path = vim.fn.stdpath "config"
+M.plugins_dir = joinpath(M.nvim_path, "lua", "plugins")
+M.packer_compiled = joinpath(M.data_dir, "lua", "packer_compiled.lua")
+M.set_plugins_dir = function(dir)
+  M.plugins_dir = joinpath(M.nvim_path, "lua", dir)
+end
+
+local uv, api = vim.loop, vim.api
+
+local packer = nil
 local Packer = {}
 Packer.__index = Packer
 
@@ -15,7 +22,7 @@ function Packer:load_plugins()
     -- git all files and directories in the modules dir
     -- local modules = vim.fn.globpath(modules_dir, "*", true, true)
     -- recursively search for all files named plugins.lua
-    local list = vim.fn.globpath(modules_dir, "**/plugins.lua", true, true)
+    local list = vim.fn.globpath(M.plugins_dir, "**/plugins.lua", true, true)
     -- remove all files that are not named plugins.lua
     for i, f in ipairs(list) do
       list[i] = string.match(f, "lua/(.+).lua$")
@@ -35,7 +42,7 @@ function Packer:load_packer()
     packer = require "packer"
   end
   packer.init {
-    compile_path = packer_compiled,
+    compile_path = M.packer_compiled,
     disable_commands = true,
     display = {
       open_fn = require("packer.util").float,
@@ -57,12 +64,12 @@ function Packer:load_packer()
 end
 
 function Packer:init_ensure_plugins()
-  local packer_dir = joinpath(data_dir, "pack", "packer", "opt", "packer.nvim")
+  local packer_dir = joinpath(M.data_dir, "pack", "packer", "opt", "packer.nvim")
   local state = uv.fs_stat(packer_dir)
   if not state then
     local cmd = "!git clone https://github.com/wbthomason/packer.nvim " .. packer_dir
     api.nvim_command(cmd)
-    uv.fs_mkdir(data_dir .. "lua", 511, function()
+    uv.fs_mkdir(M.data_dir .. "lua", 511, function()
       assert "make compile path dir failed"
     end)
     self:load_packer()
@@ -78,7 +85,7 @@ function Packer:cli_compile()
   end, 1000)
 end
 
-local plugins = setmetatable({}, {
+local plugins = setmetatable(M, {
   __index = function(_, key)
     if key == "Packer" then
       return Packer
@@ -103,7 +110,7 @@ end
 
 function plugins.auto_compile()
   local file = api.nvim_buf_get_name(0)
-  if not file:match(vim_path) then
+  if not file:match(M.nvim_path) then
     return
   end
 
@@ -115,7 +122,7 @@ function plugins.auto_compile()
 end
 
 function plugins.load_compile()
-  if vim.fn.filereadable(packer_compiled) == 1 then
+  if vim.fn.filereadable(M.packer_compiled) == 1 then
     require "packer_compiled"
   end
 

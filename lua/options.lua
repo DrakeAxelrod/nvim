@@ -2,8 +2,6 @@ local t = require("tools")
 
 t.options({
   g = {
-    do_filetype_lua = 1, -- use filetype.lua
-    did_load_filetypes = 0, -- don't use filetype.vim
     cursorhold_updatetime = 100, -- cursorhold updatetime
     highlighturl_enabled = true, -- highlight URLs by default
     zipPlugin = false, -- disable zip
@@ -66,7 +64,7 @@ t.options({
     tabstop = 2, -- Number of space in a tab
     termguicolors = true, -- Enable 24-bit RGB color in the TUI
     title = true, -- set the title of window to the value of the titlestring
-    titlestring = "%<%F%=%l/%L - nvim", -- what the title of the window will be set to
+    -- titlestring = "%<%F%=%l/%L - nvim", -- what the title of the window will be set to
     background = "dark", -- background color of the window
     guifont = "JetBrainsMono Nerd Font:h12",
     guicursor = [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]],

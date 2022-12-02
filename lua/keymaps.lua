@@ -2,14 +2,14 @@ local t = require("tools")
 local km = t.keymap
 local mkm = t.modkeymap
 
-km({ "n" }, "<esc>", "<cmd>noh<cr>", { desc = "Remove search highlights in normal mode" })
+km({ "n" }, "<esc>", ":noh<cr>", { desc = "Remove search highlights in normal mode" })
 km({ "n", "x" }, "<space>", "<nop>", { desc = "Dont move cursor on space" })
 --> top-level leader <--
-mkm("neo-tree", { "n" }, "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle NvimTree" })
-mkm("hop", { "n" }, "<leader>j", "<cmd>HopWord<cr>", { desc = "Hop!" })
+km({ "n" }, "<leader>e", ":NvimTreeToggle<cr>", { desc = "Toggle NvimTree" })
+km({ "n" }, "<leader>j", ":HopWord<cr>", { desc = "Hop!" })
 --> splits <--
-km({ "n" }, "<leader>-", "<cmd>new<cr>", { desc = "Horizonal split" })
-km({ "n" }, "<leader>\\", "<cmd>vnew<cr>", { desc = "Vertical split" })
+km({ "n" }, "<leader>-", ":new<cr>", { desc = "Horizonal split" })
+km({ "n" }, "<leader>\\", ":vnew<cr>", { desc = "Vertical split" })
 --> indentation <--
 km({ "v" }, "<", "<gv", { desc = "Indent left" })
 km({ "v" }, ">", ">gv", { desc = "Indent right" })
@@ -26,15 +26,15 @@ km({ "v" }, "<a-k>", ":m '<-2<cr>gv=gv", { desc = "Move line up" })
 km({ "x" }, "<a-j>", ":m '>+1<cr>gv-gv", { desc = "Move line down" })
 km({ "x" }, "<a-k>", ":m '<-2<cr>gv-gv", { desc = "Move line up" })
 --> move between windows <--
-mkm("smart-splits", { "n" }, "<c-h>", ":SmartCursorMoveLeft<cr>", { desc = "Move to left window" })
-mkm("smart-splits", { "n" }, "<c-j>", ":SmartCursorMoveDown<cr>", { desc = "Move to bottom window" })
-mkm("smart-splits", { "n" }, "<c-k>", ":SmartCursorMoveUp<cr>", { desc = "Move to top window" })
-mkm("smart-splits", { "n" }, "<c-l>", ":SmartCursorMoveRight<cr>", { desc = "Move to right window" })
+km({ "n" }, "<c-h>", ":SmartCursorMoveLeft<cr>", { desc = "Move to left window" })
+km({ "n" }, "<c-j>", ":SmartCursorMoveDown<cr>", { desc = "Move to bottom window" })
+km({ "n" }, "<c-k>", ":SmartCursorMoveUp<cr>", { desc = "Move to top window" })
+km({ "n" }, "<c-l>", ":SmartCursorMoveRight<cr>", { desc = "Move to right window" })
 --> resize windows <--
-mkm("smart-splits", { "n" }, "<s-h>", ":SmartCursorMoveLeft<cr>", { desc = "Resize Left" })
-mkm("smart-splits", { "n" }, "<s-j>", ":SmartCursorMoveDown<cr>", { desc = "Resize Down" })
-mkm("smart-splits", { "n" }, "<s-k>", ":SmartCursorMoveUp<cr>", { desc = "Resize Up" })
-mkm("smart-splits", { "n" }, "<s-l>", ":SmartCursorMoveRight<cr>", { desc = "Resize Right" })
+km({ "n" }, "<s-h>", ":SmartCursorMoveLeft<cr>", { desc = "Resize Left" })
+km({ "n" }, "<s-j>", ":SmartCursorMoveDown<cr>", { desc = "Resize Down" })
+km({ "n" }, "<s-k>", ":SmartCursorMoveUp<cr>", { desc = "Resize Up" })
+km({ "n" }, "<s-l>", ":SmartCursorMoveRight<cr>", { desc = "Resize Right" })
 --> move between tabs <--
 km({ "n" }, "<a-h>", ":tabprevious<cr>", { desc = "Move to left tab" })
 km({ "n" }, "<a-l>", ":tabnext<cr>", { desc = "Move to right tab" })
@@ -45,9 +45,11 @@ km({ "t" }, "<esc>", "<C-\\><C-N><C-w>j", { desc = "Move to bottom window" })
 km({ "t" }, "<esc>", "<C-\\><C-N><C-w>k", { desc = "Move to top window" })
 km({ "t" }, "<esc>", "<C-\\><C-N><C-w>l", { desc = "Move to right window" })
 --> command mode <--
-mkm("telescope", { "c" }, "<c-r><c-r>", "<Plug>(TelescopeFuzzyCommandSearch)", { noremap = false, nowait = true, desc = "search command history" })
+mkm("telescope", { "c" }, "<c-r><c-r>", "<Plug>(TelescopeFuzzyCommandSearch)",
+  { noremap = false, nowait = true, desc = "search command history" })
 km({ "c" }, "<c-j>", 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true, noremap = true, desc = "Move to next item" })
-km({ "c" }, "<c-k>", 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true, noremap = true, desc = "Move to previous item" })
+km({ "c" }, "<c-k>", 'pumvisible() ? "\\<C-p>" : "\\<C-k>"',
+  { expr = true, noremap = true, desc = "Move to previous item" })
 --> Dep (Package Manager) <--
 mkm("packer", { "n" }, "<leader>p", "Packer", { desc = "Package Manager" })
 mkm("packer", { "n" }, "<leader>ps", ":PackerSync<cr>", { desc = "Sync" })
@@ -116,7 +118,7 @@ mkm("telescope", { "n" }, "<leader>tb", ":Telescope git_branches<CR>", { desc = 
 mkm("telescope", { "n" }, "<leader>tc", ":Telescope colorscheme<CR>", { desc = "Colorscheme" })
 mkm("telescope", { "n" }, "<leader>tf", ":Telescope find_files<CR>", { desc = "Find File" })
 mkm("telescope", { "n" }, "<leader>th", ":Telescope help_tags<CR>", { desc = "Find Help" })
-mkm("telescope", { "n" }, "<leader>tM", ":Telescope man_pages<cr>", { desc = "Man Pages"})
+mkm("telescope", { "n" }, "<leader>tM", ":Telescope man_pages<cr>", { desc = "Man Pages" })
 mkm("telescope", { "n" }, "<leader>tm", ":Telescope oldfiles<cr>", { desc = "Old files" })
 mkm("telescope", { "n" }, "<leader>tr", ":Telescope registers<cr>", { desc = "Registers" })
 mkm("telescope", { "n" }, "<leader>tt", ":Telescope live_grep<cr>", { desc = "Text" })

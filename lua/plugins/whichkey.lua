@@ -48,7 +48,7 @@ return function()
       scroll_up = "<c-u>",
     },
     window = {
-      border = "none",
+      border = "none", -- "rounded", --"none",
       position = "bottom",
       -- padding = { 0, 0, 0, 0 }, -- extra window padding [top, right, bottom, left]
       margin = { 1, 0, 1, 0 },
@@ -58,12 +58,14 @@ return function()
     layout = {
       height = { min = 4, max = 25 },
       width = { min = 20, max = 50 },
-      spacing = 3,
+      spacing = 10,
       align = "left",
     },
     ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
     hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
-    show_help = true,
+    -- show_help = true,
+    show_help = false,
+    show_key = false,
     triggers = "auto",
     triggers_blacklist = {
       i = { "j", "k" },
