@@ -14,6 +14,8 @@ plugin({
 })
 -- plugin({ "romgrk/fzy-lua-native" })
 
+plugin({ "m4xshen/autoclose.nvim" })
+
 plugin({ "antoinemadec/FixCursorHold.nvim" })
 
 plugin({
@@ -127,6 +129,7 @@ plugin({
 })
 
 --> telescope <--
+
 plugin({
   "nvim-telescope/telescope.nvim",
   requires = {
@@ -143,6 +146,15 @@ plugin({
     { "rcarriga/nvim-notify" },
   },
   config = configs.telescope,
+})
+
+plugin({
+  "sudormrfbin/cheatsheet.nvim",
+  requires = {
+    { 'nvim-telescope/telescope.nvim' },
+    { 'nvim-lua/popup.nvim' },
+    { 'nvim-lua/plenary.nvim' },
+  }
 })
 --> treesitter <--
 

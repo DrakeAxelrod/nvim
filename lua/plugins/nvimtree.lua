@@ -14,20 +14,21 @@ return function()
   local function telescope_live_grep(_)
     start_telescope "live_grep"
   end
+
   require("nvim-tree").setup {
-    disable_netrw       = true,
-    hijack_netrw        = true,
-    ignore_ft_on_setup = {
+    disable_netrw        = true,
+    hijack_netrw         = true,
+    ignore_ft_on_setup   = {
       "startify",
       "dashboard",
       "alpha",
     },
     auto_reload_on_write = false,
-    hijack_directories = {
+    hijack_directories   = {
       enable = false,
     },
-    update_cwd = true,
-    diagnostics = {
+    update_cwd           = true,
+    diagnostics          = {
       enable = true,
       show_on_dirs = false,
       icons = {
@@ -37,21 +38,21 @@ return function()
         error = icons.diagnostics.Error,
       },
     },
-    update_focused_file = {
+    update_focused_file  = {
       enable = true,
       update_cwd = true,
       ignore_list = {},
     },
-    system_open = {
+    system_open          = {
       cmd = nil,
       args = {},
     },
-    git = {
+    git                  = {
       enable = true,
       ignore = false,
       timeout = 200,
     },
-    view = {
+    view                 = {
       width = 30,
       hide_root_folder = false,
       side = "left",
@@ -64,13 +65,14 @@ return function()
           { key = "C", action = "cd" },
           { key = "gtf", action = "telescope_find_files", action_cb = telescope_find_files },
           { key = "gtg", action = "telescope_live_grep", action_cb = telescope_live_grep },
+          { key = "?", action = "toggle_help" },
         },
       },
       number = false,
       relativenumber = false,
       signcolumn = "yes",
     },
-    renderer = {
+    renderer             = {
       indent_markers = {
         enable = false,
         icons = {
@@ -85,16 +87,16 @@ return function()
       group_empty = false,
       root_folder_modifier = ":t",
     },
-    filters = {
+    filters              = {
       dotfiles = false,
       custom = { "node_modules", "\\.cache" },
       exclude = {},
     },
-    trash = {
+    trash                = {
       cmd = "trash",
       require_confirm = true,
     },
-    log = {
+    log                  = {
       enable = false,
       truncate = false,
       types = {
@@ -106,7 +108,7 @@ return function()
         profile = false,
       },
     },
-    actions = {
+    actions              = {
       use_system_clipboard = true,
       change_dir = {
         enable = true,

@@ -7,6 +7,10 @@ km({ "n", "x" }, "<space>", "<nop>", { desc = "Dont move cursor on space" })
 --> top-level leader <--
 km({ "n" }, "<leader>e", ":NvimTreeToggle<cr>", { desc = "Toggle NvimTree" })
 km({ "n" }, "<leader>j", ":HopWord<cr>", { desc = "Hop!" })
+km({ "n" }, "<leader>?", ":Cheatsheet<cr>", { desc = "Cheatsheet" })
+km({ "n" }, "<leader>w", ":w<cr>", { desc = "Save" })
+km({ "n" }, "<leader>Q", ":wq!<cr>", { desc = "Save and quit" })
+km({ "n" }, "<c-t>", ":ToggleTerm<cr>", { desc = "Terminal" })
 --> splits <--
 km({ "n" }, "<leader>-", ":new<cr>", { desc = "Horizonal split" })
 km({ "n" }, "<leader>\\", ":vnew<cr>", { desc = "Vertical split" })
@@ -15,9 +19,15 @@ km({ "v" }, "<", "<gv", { desc = "Indent left" })
 km({ "v" }, ">", ">gv", { desc = "Indent right" })
 km({ "n" }, "<tab>", ">>_", { desc = "Indent left" })
 km({ "n" }, "<s-tab>", "<<_", { desc = "Indent right" })
-km({ "i" }, "<s-tab>", "<c-d>", { desc = "Indent right" })
-km({ "v" }, "<tab>", ">gv", { desc = "Indent left" })
-km({ "v" }, "<s-tab>", "<gv", { desc = "Indent right" })
+-- indent in insert mode
+-- km({ "i" }, "<tab>", "v:lua.tab_complete()", { expr = true, desc = "Indent left" })
+-- km({ "i" }, "<s-tab>", "v:lua.s_tab_complete()", { expr = true, desc = "Indent right" })
+km({ "i" }, "<tab>", "<c-t>", { desc = "Indent right" })
+km({ "i" }, "<s-tab>", "<c-d>", { desc = "Indent left" })
+
+
+-- km({ "v" }, "<tab>", ">gv", { desc = "Indent left" })
+-- km({ "v" }, "<s-tab>", "<gv", { desc = "Indent right" })
 --> move lines <--
 km({ "n" }, "<a-j>", ":m .+1<cr>==", { desc = "Move line down" })
 km({ "n" }, "<a-k>", ":m .-2<cr>==", { desc = "Move line up" })
