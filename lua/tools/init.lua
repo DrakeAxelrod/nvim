@@ -20,6 +20,16 @@ local cfg = {
   leader = function() end,
 }
 
+M.plugin_count = function()
+  local start = vim.fn.len(vim.fn.globpath(joinpath(vim.fn.stdpath("data"), "site", "pack", "packer", "start"), "*", 0, 1))
+  local opt = vim.fn.len(vim.fn.globpath(joinpath(vim.fn.stdpath("data"), "site", "pack", "packer", "opt"), "*", 0, 1))
+  return {
+    start = start,
+    opts = opt,
+    total = start + opt,
+  }
+end
+
 --- loads impatient if it is installed to speed up startup
 M.impatient = function()
   import("impatient", function(imp)

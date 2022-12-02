@@ -41,7 +41,7 @@ plugin({
 
 plugin({
   "folke/which-key.nvim",
-  event = "BufWinEnter",
+  -- event = "BufWinEnter",
   config = configs.whichkey,
 })
 
@@ -116,7 +116,7 @@ plugin({
 plugin({
   "goolord/alpha-nvim",
   requires = { "nvim-tree/nvim-web-devicons" },
-  event = "BufWinEnter",
+  -- event = "BufWinEnter",
   config = configs.alpha,
 })
 
@@ -143,6 +143,7 @@ plugin({
       requires = { "kkharji/sqlite.lua" },
     },
     { "nvim-telescope/telescope-ui-select.nvim" },
+    { "nvim-telescope/telescope-file-browser.nvim" },
     { "rcarriga/nvim-notify" },
   },
   config = configs.telescope,

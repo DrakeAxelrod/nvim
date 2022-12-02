@@ -47,6 +47,14 @@ return function()
       NoiceLspProgressTitle = { bg = colors.none },
       -- NormalFloat = { bg = colors.bg, fg = colors.fg },
       BarbecueSeparator = { fg = colors.white, bg = colors.none },
+      TelescopeNormal = {
+        bg = colors.bg,
+        fg = colors.fg,
+      },
+      TelescopeBorder = {
+        bg = colors.bg,
+        fg = colors.fg,
+      },
       -- WhichKeyBorder = { fg = colors.fg, bg = colors.none },
     }, -- Override default highlight and/or filetype groups
     filetypes = { -- Override which filetype highlight groups are loaded
