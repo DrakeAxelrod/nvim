@@ -8,8 +8,9 @@ plugin({ "lewis6991/impatient.nvim" })
 -- plugin({ "nvim-lua/popup.nvim" })
 plugin({ "nvim-lua/plenary.nvim" })
 
-plugin({ "kyazdani42/nvim-web-devicons"
-  -- "yamatsum/nvim-nonicons", requires = { "kyazdani42/nvim-web-devicons" } 
+plugin({
+  "kyazdani42/nvim-web-devicons",
+  -- "yamatsum/nvim-nonicons", requires = { "kyazdani42/nvim-web-devicons" }
 })
 -- plugin({ "romgrk/fzy-lua-native" })
 
@@ -73,6 +74,7 @@ plugin({
 
 plugin({
   "folke/noice.nvim",
+  -- disable = true,
   config = configs.noice,
   after = { "which-key.nvim" },
   requires = {
@@ -188,8 +190,40 @@ plugin({
     "neovim/nvim-lspconfig",
     { "williamboman/mason.nvim", config = configs.language.mason },
     { "williamboman/mason-lspconfig.nvim", config = configs.language.mason_lspconfig },
+    -- { "simrat39/rust-tools.nvim" },
+    -- { "p00f/clangd_extensions.nvim" },
   },
   config = configs.language.lsp_setup,
+})
+
+plugin({
+  "utilyre/barbecue.nvim",
+  requires = {
+    "neovim/nvim-lspconfig",
+    "smiteshp/nvim-navic",
+    "kyazdani42/nvim-web-devicons", -- optional
+  },
+  config = function()
+    require("barbecue").setup()
+  end,
+})
+
+plugin({
+  "jose-elias-alvarez/null-ls.nvim",
+  after = { "lsp-setup.nvim" },
+  config = configs.language.null_ls,
+  requires = { "nvim-lua/plenary.nvim" },
+})
+
+plugin({
+  "rcarriga/nvim-dap-ui",
+  requires = {
+    "mfussenegger/nvim-dap",
+    "theHamsta/nvim-dap-virtual-text",
+    "nvim-telescope/telescope-dap.nvim",
+  },
+  config = configs.language.dap,
+  cmd = { "DapToggleRepl" },
 })
 
 --> cmp <--
@@ -222,7 +256,7 @@ plugin({
         config = configs.copilot,
       },
       config = configs.copilot_cmp,
-    }
+    },
   },
 })
 

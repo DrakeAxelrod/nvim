@@ -2,7 +2,7 @@ local t = require("tools")
 local km = t.keymap
 local mkm = t.modkeymap
 
-km({ "n" }, "<esc>", ":noh<cr>", { desc = "Remove search highlights in normal mode" })
+km({ "n" }, "<esc><esc>", "<cmd>noh<cr>", { desc = "Remove search highlights in normal mode" })
 km({ "n", "x" }, "<space>", "<nop>", { desc = "Dont move cursor on space" })
 --> top-level leader <--
 km({ "n" }, "<leader>e", ":NvimTreeToggle<cr>", { desc = "Toggle NvimTree" })
@@ -59,7 +59,7 @@ mkm("packer", { "n" }, "<leader>pc", ":PackerClean<cr>", { desc = "Clean" })
 mkm("packer", { "n" }, "<leader>pC", ":PackerCompile<cr>", { desc = "Compile" })
 --> buffers <--
 km({ "n" }, "<leader>b", "Buffer", { desc = "Buffer" })
-mkm("neo-tree", { "n" }, "<leader>bs", ":Neotree buffers<cr>", { desc = "Show open buffers" })
+km({ "n" }, "<leader>bc", ":close<cr>", { desc = "Show open buffers" })
 --> lsp <--
 -- mkm("lsp-setup", { "n" }, "gh", ":Lspsaga lsp_finder<cr>", { desc = "LSP Finder" })
 mkm("lsp-setup", { "n" }, "gD", ":lua vim.lsp.buf.declaration()<cr>", { desc = "LSP Declaration" })
@@ -94,7 +94,6 @@ mkm("lsp-setup", { "n" }, "<leader>lml", ":MasonLog<cr>", { desc = "Log" })
 --> git <--
 km({ "n" }, "<leader>g", "Git", { desc = "Git" })
 mkm("neogit", { "n" }, "<leader>gg", ":Neogit<cr>", { desc = "Neogit" })
-mkm("gitsigns", { "n" }, "<leader>gn", ":Neotree git_status<CR>", { desc = "Neotree git status" })
 mkm("gitsigns", { "n" }, "<leader>gj", ":lua require 'gitsigns'.next_hunk()<CR>", { desc = "Next Hunk" })
 mkm("gitsigns", { "n" }, "<leader>gk", ":lua require 'gitsigns'.prev_hunk()<CR>", { desc = "Prev Hunk" })
 mkm("gitsigns", { "n" }, "<leader>gl", ":lua require 'gitsigns'.blame_line()<CR>", { desc = "Blame" })

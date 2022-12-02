@@ -70,7 +70,7 @@ local branch = icons.git.Branch
 
 M.mode = {
   function()
-    return " " .. icons.misc.Package .. " " .. modes[vim.fn.mode()].text .. " "
+    return " ".. icons.misc.Package .. "  " .. modes[vim.fn.mode()].text .. "  "
   end,
   padding = { left = 0, right = 0 },
   color = {},

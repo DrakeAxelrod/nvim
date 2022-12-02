@@ -6,7 +6,6 @@ return function()
     mappings = {},
     on_attach = function(client, bufnr) -- Global on_attach
       handlers.setup() -- vim.diagnostics.config setup
-
       --- @param fn fun(client: number, bufnr: number)
       for _, fn in ipairs(t.on_attach_list) do
         fn(client, bufnr)

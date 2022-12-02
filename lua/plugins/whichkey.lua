@@ -1,5 +1,6 @@
 return function()
   local wk = require "which-key"
+  local icons = require("theme.icons")
   wk.setup {
     plugins = {
       marks = true, -- shows a list of your marks on ' and `
@@ -39,9 +40,9 @@ return function()
       ["<tab>"] = "TAB",
     },
     icons = {
-      breadcrumb = "…", --"»",
-      separator = "->",
-      group = "+",
+      breadcrumb = icons.ui.Ellipsis,
+      separator = icons.ui.ChevronShortRight,
+      group = icons.ui.Plus,
     },
     popup_mappings = {
       scroll_down = "<c-d>",
@@ -63,9 +64,10 @@ return function()
     },
     ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
     hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
-    -- show_help = true,
+    -- show_help = false,
+    -- show_keys = false,
     show_help = false,
-    show_key = false,
+    show_keys = false,
     triggers = "auto",
     triggers_blacklist = {
       i = { "j", "k" },

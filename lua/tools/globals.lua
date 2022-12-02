@@ -414,45 +414,45 @@ Log = {
   }
 }
 
---- Log a debug message
---- @param msg string the message to log
---- @param opt? table the options to pass to log
-Log.debug = function(msg, opt)
-  opt = opt or {}
-  vim.notify(msg, Log.level.DEBUG, opt)
-end
+-- --- Log a debug message
+-- --- @param msg string the message to log
+-- --- @param opt? table the options to pass to log
+-- Log.debug = function(msg, opt)
+--   opt = opt or {}
+--   vim.notify(msg, Log.level.DEBUG, opt)
+-- end
 
---- Log an error message
---- @param msg string the message to log
---- @param opt? table the options to pass to log
-Log.error = function(msg, opt)
-  opt = opt or {}
-  vim.notify(msg, Log.level.ERROR, opt)
-end
+-- --- Log an error message
+-- --- @param msg string the message to log
+-- --- @param opt? table the options to pass to log
+-- Log.error = function(msg, opt)
+--   opt = opt or {}
+--   vim.notify(msg, Log.level.ERROR, opt)
+-- end
 
---- Log an info message
---- @param msg string the message to log
---- @param opt? table the options to pass to log
-Log.info = function(msg, opt)
-  opt = opt or {}
-  vim.notify(msg, Log.level.INFO, opt)
-end
+-- --- Log an info message
+-- --- @param msg string the message to log
+-- --- @param opt? table the options to pass to log
+-- Log.info = function(msg, opt)
+--   opt = opt or {}
+--   vim.notify(msg, Log.level.INFO, opt)
+-- end
 
---- Log a trace message
---- @param msg string the message to log
---- @param opt? table the options to pass to log
-Log.trace = function(msg, opt)
-  opt = opt or {}
-  vim.notify(msg, Log.level.TRACE, opt)
-end
+-- --- Log a trace message
+-- --- @param msg string the message to log
+-- --- @param opt? table the options to pass to log
+-- Log.trace = function(msg, opt)
+--   opt = opt or {}
+--   vim.notify(msg, Log.level.TRACE, opt)
+-- end
 
---- Log a warn message
---- @param msg string the message to log
---- @param opt? table the options to pass to log
-Log.warn = function(msg, opt)
-  opt = opt or {}
-  vim.notify(msg, Log.level.WARN, opt)
-end
+-- --- Log a warn message
+-- --- @param msg string the message to log
+-- --- @param opt? table the options to pass to log
+-- Log.warn = function(msg, opt)
+--   opt = opt or {}
+--   vim.notify(msg, Log.level.WARN, opt)
+-- end
 
 CONF = nil
 

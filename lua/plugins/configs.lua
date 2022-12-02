@@ -8,7 +8,7 @@ M.notify = function()
     on_open = nil,
     on_close = nil,
     render = "default",
-    timeout = 5000,
+    timeout = 1000,
     background_colour = "Normal",
     minimum_width = 50,
     icons = {
@@ -60,7 +60,6 @@ M.alpha = require("plugins.alpha")
 M.toggleterm = require("plugins.toggleterm")
 M.gitsigns = require("plugins.gitsigns")
 M.telescope = require("plugins.telescope")
-
 return M
 
 -- table.insert(M, { "yamatsum/nvim-nonicons", requires = { "kyazdani42/nvim-web-devicons" } })

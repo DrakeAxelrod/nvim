@@ -30,7 +30,7 @@ t.options({
   },
   opt = {
     -- showtabline = 2, -- always show tabline
-    cmdheight = 1, -- hide command line unless entering command
+    cmdheight = 0, -- hide command line unless entering command
     laststatus = 3, -- always show status line
     clipboard = "unnamedplus", -- use system clipboard
     autochdir = false, -- auto chdir
@@ -70,7 +70,7 @@ t.options({
     guicursor = [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]],
     errorbells = false, -- Ring the bell (beep or screen flash) for error messages.
     visualbell = false, -- Use visual bell instead of beeping.
-    timeoutlen = 100, -- Length of time to wait for a mapped sequence
+    timeoutlen = 300, -- Length of time to wait for a mapped sequence
     undofile = true, -- Enable persistent undo
     updatetime = 300, -- Length of time to wait before triggering the plugin
     wrap = false, -- Disable wrapping of lines longer than the width of window
@@ -107,6 +107,11 @@ t.options({
     },
   },
 })
+
+vim.opt.spelllang:append "cjk" -- disable spellchecking for asian characters (VIM algorithm does not support it)
+vim.opt.shortmess:append "csACS" -- don't show redundant messages from ins-completion-menu
+-- vim.opt.shortmess:append "I" -- don't show the default intro message
+vim.opt.whichwrap:append "<,>,[,],h,l"
 
 vim.api.nvim_set_hl(0, "Search", {
   ctermfg = 0,

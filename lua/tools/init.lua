@@ -162,7 +162,7 @@ if not CONF then
   local init = function(path)
     local ok, _ = pcall(require, path)
     if not ok then
-      Log:warn("Failed to load config: %s" % path)
+      vim.notify("Failed to load config: %s" % path)
     end
   end
 

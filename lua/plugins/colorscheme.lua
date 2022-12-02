@@ -41,9 +41,12 @@ return function()
     cache_path = vim.fn.expand(vim.fn.stdpath "cache" .. "/onedarkpro/"), -- The path to the cache directory
     colors = {}, -- Override default colors by specifying colors for 'onelight' or 'onedark' themes
     highlights = {
-      -- WhichKeyFloat = { bg = colors.bg },
+      WhichKeyFloat = { bg = colors.bg_statusline },
+      NoiceLspProgressClient = { bg = colors.none }, -- itle 	Lsp progress client name
+      NoiceLspProgressSpinner = { bg = colors.none }, -- Constant 	Lsp progress spinner
+      NoiceLspProgressTitle = { bg = colors.none },
       -- NormalFloat = { bg = colors.bg, fg = colors.fg },
-      -- BarbecueSeparator = { fg = colors.white, bg = colors.none },
+      BarbecueSeparator = { fg = colors.white, bg = colors.none },
       -- WhichKeyBorder = { fg = colors.fg, bg = colors.none },
     }, -- Override default highlight and/or filetype groups
     filetypes = { -- Override which filetype highlight groups are loaded
@@ -82,7 +85,7 @@ return function()
       underline = true, -- Use underline styles?
       undercurl = true, -- Use undercurl styles?
 
-      cursorline = true, -- Use cursorline highlighting?
+      cursorline = false, -- Use cursorline highlighting?
       transparency = false, -- Use a transparent background?
       terminal_colors = true, -- Use the theme's colors for Neovim's :terminal?
       window_unfocused_color = false, -- When the window is out of focus, change the normal background?
