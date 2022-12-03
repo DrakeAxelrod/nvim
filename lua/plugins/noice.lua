@@ -24,8 +24,7 @@ return function()
     },
     messages = {
       enabled = true,
-      -- view = "notify", -- default view for messages
-      view = "notify",
+      view = "notify", -- default view for messages
       view_error = "notify", -- view for errors
       view_warn = "notify", -- view for warnings
       view_history = "messages", -- view for :messages
@@ -42,8 +41,8 @@ return function()
       bottom_search = true, -- use a classic bottom cmdline for search
       command_palette = true, -- position the cmdline and popupmenu together
       long_message_to_split = true, -- long messages will be sent to a split
-      inc_rename = false, -- enables an input dialog for inc-rename.nvim
-      lsp_doc_border = false, -- add a border to hover docs and signature help
+      inc_rename = true, -- enables an input dialog for inc-rename.nvim
+      lsp_doc_border = true, -- add a border to hover docs and signature help
     },
     routes = {
       {
@@ -51,7 +50,7 @@ return function()
           event = "notify",
           min_height = 15,
         },
-        view = "vsplit",
+        view = "split",
       },
       {
         filter = {
@@ -114,6 +113,33 @@ return function()
         },
         win_options = {
           winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
+        },
+      },
+      confirm = {
+        backend = "popup",
+        relative = "editor",
+        focusable = false,
+        align = "center",
+        enter = false,
+        zindex = 80,
+        format = { "{confirm}" },
+        position = {
+          row = "50%",
+          col = "50%",
+        },
+        size = "auto",
+        border = {
+          style = "rounded",
+          padding = { 0, 1 },
+          text = {
+            top = " Confirm ",
+          },
+        },
+        win_options = {
+          winhighlight = {
+            Normal = "NoiceConfirm",
+            FloatBorder = "NoiceConfirmBorder",
+          },
         },
       },
     },

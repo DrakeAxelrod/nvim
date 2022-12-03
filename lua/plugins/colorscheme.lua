@@ -74,7 +74,7 @@ return function()
     },
     plugins = { -- Override which plugin highlight groups are loaded
       -- See the Supported Plugins section for a list of available plugins
-      barbar = false,
+      -- barbar = false,
     },
     styles = { -- Choose from "bold,italic,underline"
       types = "NONE", -- Style that is applied to types
