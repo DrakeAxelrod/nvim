@@ -20,12 +20,13 @@ return function()
    ([[  \(_)_%s      /  |  \                           *   *  .   .       ]]):format("]]"),
   }
   cfg.section.buttons.val = {
-    cfg.button("e", icons.ui.File .. " New file", ":ene <BAR> startinsert <CR>"),
-    cfg.button("r", icons.ui.History .. " Recent files", ":Telescope frecency<CR>"),
-    cfg.button("u", icons.ui.Package .. " Update Plugins", ":PackerSync<CR>"),
-    cfg.button("c", icons.ui.Gear .. " Config", ":e ~/.config/nvim/init.lua <CR>"),
+    cfg.button("e", icons.ui.File .. "  New file", ":ene <BAR> startinsert <CR>"),
+    cfg.button("r", icons.ui.History .. "  Recent files", ":Telescope frecency<CR>"),
+    cfg.button("u", icons.ui.Package .. "  Update Plugins", ":PackerSync<CR>"),
+    -- silent! is needed to prevent the error message when the file doesn't exist
+    cfg.button("c", icons.ui.Gear .. "  Config", ":silent e ~/.config/nvim/init.lua <CR>"),
     -- cfg.button("k", icons.ui.Gear .. " Config", ":e ~/.config/nvim/lua/keymaps.lua <CR>"),
-    cfg.button("q", icons.diagnostics.Error .. " Quit", ":qa<CR>"),
+    cfg.button("q", icons.diagnostics.Error .. "  Quit", ":qa<CR>"),
   }
   local footer = function()
     local plugin_count = t.plugin_count()

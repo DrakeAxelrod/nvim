@@ -1,5 +1,6 @@
 local t = require("tools")
 
+
 t.augroup("UserMisc")(function(ac)
   -- highlight on yank
   ac("TextYankPost", {
@@ -22,29 +23,25 @@ t.augroup("UserMisc")(function(ac)
     require("nvim-treesitter.highlight").attach(0, "bash")
   end)
 
-  -- hide statusline on certain filetypes
-  ac("FileType", {
-    desc = "Hide statusline on certain filetypes",
-    pattern = { "dashboard", "NvimTree", "packer", "alpha", "Scratch" },
+  ac("User", {
+    pattern = "AlphaReady",
   }, function()
-    vim.wo.statusline = ""
+    vim.opt.laststatus = 0
+  end)
+  ac("User", {
+    pattern = "AlphaClosed",
+  }, function()
+    vim.opt.laststatus = 3
+    vim.opt.showtabline = 2
   end)
 
-  ac("FileType", {
-    desc = "Hide statusline on certain filetypes",
-    pattern = { "alpha" },
-  }, function()
-    -- vim.cmd([[
-    --   nnoremap <silent> <buffer> q :qa<CR>
-    --   nnoremap <silent> <buffer> <esc> :qa<CR>
-    --   set statusline=
-    --   set nobuflisted
-    -- ]])
-    vim.keymap.set("n", "q", ":qa<CR>", { silent = true, buffer = true })
-    vim.keymap.set("n", "<esc>", ":qa<CR>", { silent = true, buffer = true })
-    vim.wo.statusline = ""
-    vim.bo.buflisted = false
-  end)
+  -- if NvimTree is the only buffer
+  -- ac("FileType", {
+  --   pattern = "NvimTree*",
+  -- }, function()
+  -- end)
+
+
 
   -- ac("FileType", {
   --   desc = "Disable miniindent for NvimTree, Telescope and startup",
@@ -72,6 +69,7 @@ t.augroup("UserMisc")(function(ac)
   }, function()
     vim.cmd("wincmd =")
   end)
+
 end)
 
 -- vim.api.nvim_create_autocmd('BufWinEnter', {

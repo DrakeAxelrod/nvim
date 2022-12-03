@@ -26,7 +26,9 @@ M.gitsigns = require("plugins.gitsigns")
 M.neogit = require("plugins.neogit")
 M.telescope = require("plugins.telescope")
 -- M.illuminate = require("plugins.treesitter.illuminate")
-
+M.auto_save = require("plugins.auto-save")
+M.lspsaga = require("plugins.language.lspsaga")
+M.barbar = require("plugins.barbar")
 return M
 
 -- table.insert(M, { "yamatsum/nvim-nonicons", requires = { "kyazdani42/nvim-web-devicons" } })

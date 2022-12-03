@@ -30,8 +30,8 @@ t.options({
   },
   opt = {
     -- shortmess = "filnxtToOFcsACS", -- shortmess
-    -- showtabline = 2, -- always show tabline
-    cmdheight = 0, -- hide command line unless entering command
+    showtabline = 0, -- always show tabline
+    cmdheight = 1, -- hide command line unless entering command
     laststatus = 3, -- always show status line
     clipboard = "unnamedplus", -- use system clipboard
     autochdir = false, -- auto chdir

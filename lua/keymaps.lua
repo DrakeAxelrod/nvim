@@ -83,23 +83,48 @@ km({ "n" }, "<leader>PC", cmd("PackerCompile"), { desc = "Compile" })
 
 -- ===========================[[ LSP ]]=========================== --
 
--- km({ "n" }, "gh", ":Lspsaga lsp_finder<cr>", { desc = "LSP Finder" })
--- km({ "n" }, "gD", ":lua vim.lsp.buf.declaration()<cr>", { desc = "LSP Declaration" })
--- km({ "n" }, "gd", ":lua vim.lsp.buf.definition()<cr>", { desc = "LSP Definition" })
--- km({ "n" }, "gt", ":lua vim.lsp.buf.type_definition()<cr>", { desc = "LSP Type Definition" })
--- km({ "n" }, "gi", ":lua vim.lsp.buf.implementation()<cr>", { desc = "LSP Implementation" })
--- km({ "n" }, "gR", ":lua vim.lsp.buf.references()<cr>", { desc = "LSP References" })
--- km({ "n" }, "K", ":lua vim.lsp.buf.hover()<cr>", { desc = "LSP Hover" })
--- km({ "n" }, "<C-k>", ":lua vim.lsp.buf.signature_help()<cr>", { desc = "LSP Signature Help" })
+-- -- Diagnsotic jump can use `<c-o>` to jump back
+-- keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true })
+-- keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true })
+
+-- -- Outline
+-- keymap("n","<leader>o", "<cmd>LSoutlineToggle<CR>",{ silent = true })
+
+-- -- Hover Doc
+-- keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
+
+-- -- Float terminal
+-- keymap("n", "<A-d>", "<cmd>Lspsaga open_floaterm<CR>", { silent = true })
+-- -- if you want pass somc cli command into terminal you can do like this
+-- -- open lazygit in lspsaga float terminal
+-- keymap("n", "<A-d>", "<cmd>Lspsaga open_floaterm lazygit<CR>", { silent = true })
+-- -- close floaterm
+-- keymap("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
+
+km({ "n" }, "g", "Goto", { desc = "Goto" })
+km({ "n" }, "gh", cmd("Lspsaga lsp_finder"), { desc = "LSP Finder" })
+km({ "n" }, "gD", lua("vim.lsp.buf.declaration()"), { desc = "LSP Declaration" })
+km({ "n" }, "gd", ":lua vim.lsp.buf.definition()<cr>", { desc = "LSP Definition" })
+km({ "n" }, "gt", lua("vim.lsp.buf.type_definition()"), { desc = "LSP Type Definition" })
+km({ "n" }, "gi", lua("vim.lsp.buf.implementation()"), { desc = "LSP Implementation" })
+km({ "n" }, "gR", lua("vim.lsp.buf.references()"), { desc = "LSP References" })
+km({ "n" }, "K", cmd("Lspsaga hover_doc"), { desc = "Hover Documentation" })
+km({ "n" }, "<C-k>", lua("vim.lsp.buf.signature_help()"), { desc = "LSP Signature Help" })
 -- km({ "n" }, "[d", ":lua vim.diagnostic.goto_prev()<cr>", { desc = "LSP Goto Previous" })
 -- km({ "n" }, "]d", ":lua vim.diagnostic.goto_next()<cr>", { desc = "LSP Goto Next" })
--- km({ "n" }, "gp", ":Lspsaga peek_definition<cr>", { desc = "Peek", silent = true })
+km({ "n" }, "gp", cmd("Lspsaga peek_definition"), { desc = "Peek", silent = true })
+km({ "n" }, "[e", cmd("Lspsaga diagnostic_jump_prev"), { desc = "Diagnostic Goto Previous" })
+km({ "n" }, "]e", cmd("Lspsaga diagnostic_jump_next"), { desc = "Diagnostic Goto Next" })
+km({ "n" }, "[E", lua("require('lspsaga.diagnostic').goto_prev({ severity = vim.diagnostic.severity.ERROR })"), { desc = "LSP Goto Previous Error" })
+km({ "n" }, "]E", lua("require('lspsaga.diagnostic').goto_next({ severity = vim.diagnostic.severity.ERROR })"), { desc = "LSP Goto Next Error" })
+km({ "n" }, "gp", cmd("Lspsaga peek_definition"), { desc = "Peek", silent = true })
 
 km({ "n" }, "<leader>L", "LSP", { desc = "LSP" })
--- km({ "n" }, "<leader>lc", ":Lspsaga code_action<cr>", { desc = "Code Action" })
--- km({ "n" }, "<leader>lR", ":Lspsaga rename<cr>", { desc = "Rename" })
-km({ "n" }, "<leader>lf", ":lua vim.lsp.buf.format()<cr>", { desc = "Format" })
--- km({ "n" }, "<leader>lp", ":Lspsaga peek_definition<cr>", { desc = "Peek", silent = true })
+km({ "n" }, "<leader>Lc", cmd("Lspsaga code_action"), { desc = "Code Action" })
+km({ "n" }, "<leader>LR", cmd("Lspsaga rename"), { desc = "Rename" })
+km({ "n" }, "<leader>Lf", lua("vim.lsp.buf.format()"), { desc = "Format" })
+km({ "n" }, "<leader>Lp", cmd("Lspsaga peek_definition"), { desc = "Peek", silent = true })
+km({ "n" }, "<leader>Lo", cmd("LSoutlineToggle"),{ silent = true })
 
 --> Info <--
 km({ "n" }, "<leader>LI", "Info", { desc = "Info" })
@@ -110,7 +135,7 @@ km({ "n" }, "<leader>LIm", cmd("Mason"), { desc = "Mason" })
 km({ "n" }, "<leader>LIL", cmd("MasonLog"), { desc = "Mason Log" })
 --> Treesitter <--
 km({ "n" }, "<leader>LT", "Treesitter", { desc = "Treesitter" })
-km({ "n" }, "<leader>tTT", cmd("Telescope treesitter"), { desc = "Telescope" })
+km({ "n" }, "<leader>LTT", cmd("Telescope treesitter"), { desc = "Telescope" })
 --> Copilot <--
 km({ "n" }, "<leader>LC", "Copilot", { desc = "Copilot" })
 km({ "n" }, "<leader>LCp", cmd("Copilot panel"), { desc = "Panel" })
@@ -132,26 +157,26 @@ km({ "n" }, "<leader>LTO", cmd("Telescope lsp_incoming_calls"), { desc = "Outgoi
 
 -- ===========================[[ Git ]]=========================== --
 
-km({ "n" }, "<leader>g", "Git", { desc = "Git" })
-km({ "n" }, "<leader>gg", cmd("Neogit"), { desc = "Neogit" })
-km({ "n" }, "<leader>gj", lua("require 'gitsigns'.next_hunk()"), { desc = "Next Hunk" })
-km({ "n" }, "<leader>gk", lua("require 'gitsigns'.prev_hunk()"), { desc = "Prev Hunk" })
-km({ "n" }, "<leader>gl", lua("require 'gitsigns'.blame_line()"), { desc = "Blame" })
-km({ "n" }, "<leader>gp", lua("require 'gitsigns'.preview_hunk()"), { desc = "Preview Hunk" })
-km({ "n" }, "<leader>gr", lua("require 'gitsigns'.reset_hunk()"), { desc = "Reset Hunk" })
-km({ "n" }, "<leader>gR", lua("require 'gitsigns'.reset_buffer()"), { desc = "Reset Buffer" })
-km({ "n" }, "<leader>gs", lua("require 'gitsigns'.stage_hunk()"), { desc = "Stage Hunk" })
-km({ "n" }, "<leader>gu", lua("require 'gitsigns'.undo_stage_hunk()"), { desc = "Undo Stage Hunk" })
-km({ "n" }, "<leader>gd", cmd("Gitsigns diffthis HEAD"), { desc = "Git Diff" })
+km({ "n" }, "<leader>G", "Git", { desc = "Git" })
+km({ "n" }, "<leader>Gg", cmd("Neogit"), { desc = "Neogit" })
+km({ "n" }, "<leader>Gj", lua("require 'gitsigns'.next_hunk()"), { desc = "Next Hunk" })
+km({ "n" }, "<leader>Gk", lua("require 'gitsigns'.prev_hunk()"), { desc = "Prev Hunk" })
+km({ "n" }, "<leader>Gl", lua("require 'gitsigns'.blame_line()"), { desc = "Blame" })
+km({ "n" }, "<leader>Gp", lua("require 'gitsigns'.preview_hunk()"), { desc = "Preview Hunk" })
+km({ "n" }, "<leader>Gr", lua("require 'gitsigns'.reset_hunk()"), { desc = "Reset Hunk" })
+km({ "n" }, "<leader>GR", lua("require 'gitsigns'.reset_buffer()"), { desc = "Reset Buffer" })
+km({ "n" }, "<leader>Gs", lua("require 'gitsigns'.stage_hunk()"), { desc = "Stage Hunk" })
+km({ "n" }, "<leader>Gu", lua("require 'gitsigns'.undo_stage_hunk()"), { desc = "Undo Stage Hunk" })
+km({ "n" }, "<leader>Gd", cmd("Gitsigns diffthis HEAD"), { desc = "Git Diff" })
 --> Git Telescope <--
-km({ "n" }, "<leader>gT", "Telescope", { desc = "Telescope" })
+km({ "n" }, "<leader>GT", "Telescope", { desc = "Telescope" })
 km({ "n" }, "<leader>GTf", cmd("Telescope git_files"), { desc = "Git Files" })
-km({ "n" }, "<leader>gTs", cmd("Telescope git_status"), { desc = "Status" })
-km({ "n" }, "<leader>gTS", cmd("Telescope git_stash"), { desc = "Stash" })
-km({ "n" }, "<leader>gTb", cmd("Telescope git_branches"), { desc = "Branches" })
-km({ "n" }, "<leader>gTc", cmd("Telescope git_commits"), { desc = "Commits" })
-km({ "n" }, "<leader>gTC", cmd("Telescope git_bcommits"), { desc = "Current File Commits" })
-km({ "n" }, "<leader>gTd", cmd("Gitsigns diffthis HEAD"), { desc = "Git Diff" })
+km({ "n" }, "<leader>GTs", cmd("Telescope git_status"), { desc = "Status" })
+km({ "n" }, "<leader>GTS", cmd("Telescope git_stash"), { desc = "Stash" })
+km({ "n" }, "<leader>GTb", cmd("Telescope git_branches"), { desc = "Branches" })
+km({ "n" }, "<leader>GTc", cmd("Telescope git_commits"), { desc = "Commits" })
+km({ "n" }, "<leader>GTC", cmd("Telescope git_bcommits"), { desc = "Current File Commits" })
+km({ "n" }, "<leader>GTd", cmd("Gitsigns diffthis HEAD"), { desc = "Git Diff" })
 
 -- ===========================[[ Telescope ]]=========================== --
 

@@ -11,7 +11,7 @@ return function()
         fn(client, bufnr)
       end
 
-      require("lsp-setup.utils").format_on_save(client) -- Formatting on save as default
+      -- require("lsp-setup.utils").format_on_save(client) -- Formatting on save as default
       -- keybind this is you want it available
       -- require("lsp-setup.utils").disable_formatting(client)
     end,

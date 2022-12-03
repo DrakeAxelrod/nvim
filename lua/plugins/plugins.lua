@@ -4,7 +4,8 @@ local plugin = t.plugin
 
 -- ===========================[[ Utility ]]=========================== --
 
-plugin({ "lewis6991/impatient.nvim",
+plugin({
+  "lewis6991/impatient.nvim",
   config = function()
     require("impatient").enable_profile()
   end,
@@ -12,11 +13,11 @@ plugin({ "lewis6991/impatient.nvim",
 
 plugin({
   "nvim-lua/plenary.nvim",
-  after = { "impatient.nvim" }
+  after = { "impatient.nvim" },
 })
 plugin({
   "nvim-lua/popup.nvim",
-  after = { "impatient.nvim" }
+  after = { "impatient.nvim" },
 })
 plugin({
   "kyazdani42/nvim-web-devicons",
@@ -36,7 +37,7 @@ plugin({
     "plenary.nvim",
     "FixCursorHold.nvim",
   },
-  config = configs.notify
+  config = configs.notify,
 })
 
 plugin({
@@ -76,6 +77,12 @@ plugin({
   },
 })
 
+plugin({
+  "Pocco81/auto-save.nvim",
+  after = { "nvim-notify" },
+  config = configs.auto_save,
+})
+
 -- ===========================[[ Interface ]]=========================== --
 
 plugin({
@@ -102,7 +109,7 @@ plugin({
 
 plugin({
   "folke/noice.nvim",
-  disable = true,
+  -- disable = true,
   config = configs.noice,
   after = { "which-key.nvim" },
   requires = {
@@ -116,7 +123,7 @@ plugin({
 
 plugin({
   "nvim-lualine/lualine.nvim",
-  after = { "lsp-setup.nvim", "onedarkpro.nvim" },
+  after = { "onedarkpro.nvim" },
   config = configs.lualine,
 })
 
@@ -155,6 +162,21 @@ plugin({
   cmd = { "ToggleTerm" },
 })
 
+-- ===========================[[ Bufferline ]]=========================== --
+
+-- plugin({
+--   "akinsho/bufferline.nvim",
+--   tag = "v3.*",
+--   after = { "nvim-notify" },
+--   config = configs.bufferline,
+-- })
+
+-- plugin({
+--   "romgrk/barbar.nvim",
+--   after = { "nvim-notify" },
+--   config = configs.barbar,
+-- })
+
 -- ===========================[[ Telescope ]]=========================== --
 
 plugin({
@@ -169,7 +191,7 @@ plugin({
     { "nvim-telescope/telescope-fzy-native.nvim", after = { "fzy-lua-native" } },
     { "nvim-telescope/telescope-smart-history.nvim", after = { "sqlite.lua" } },
     { "nvim-telescope/telescope-frecency.nvim", after = { "sqlite.lua" } },
-    { "sudormrfbin/cheatsheet.nvim" }
+    { "sudormrfbin/cheatsheet.nvim" },
   },
   config = configs.telescope,
 })
@@ -230,20 +252,26 @@ plugin({
 
 --> lsp <--
 
-plugin({"folke/neodev.nvim", ft = { "lua" }, config = configs.neodev })
+plugin({ "folke/neodev.nvim", ft = { "lua" }, config = configs.neodev })
+
+plugin({
+  "glepnir/lspsaga.nvim",
+  branch = "main",
+  config = configs.lspsaga,
+})
 
 plugin({
   "junnplus/lsp-setup.nvim",
-  after = { "neodev.nvim", "nvim-notify" },
+  after = { "neodev.nvim", "nvim-notify", "lspsaga.nvim" },
   requires = {
     "neovim/nvim-lspconfig",
     {
       "williamboman/mason.nvim",
-      config = configs.mason
+      config = configs.mason,
     },
     {
       "williamboman/mason-lspconfig.nvim",
-      config = configs.mason_lspconfig
+      config = configs.mason_lspconfig,
     },
     -- { "simrat39/rust-tools.nvim" },
     -- { "p00f/clangd_extensions.nvim" },
@@ -285,7 +313,7 @@ plugin({
   cmd = { "DapToggleRepl" },
 })
 
---> cmp <--
+-- ===========================[[ Completion ]]=========================== --
 
 plugin({
   "hrsh7th/nvim-cmp",
@@ -304,6 +332,7 @@ plugin({
     { "kyazdani42/nvim-web-devicons" },
     {
       "zbirenbaum/copilot-cmp", -- Copilot completion source
+      after = { "nvim-cmp" },
       event = "InsertEnter",
       requires = {
         "zbirenbaum/copilot.lua", -- Copilot

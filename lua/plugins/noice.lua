@@ -60,13 +60,6 @@ return function()
         },
         opts = { skip = true },
       },
-      {
-        filter = {
-          event = "echo",
-          kind = "",
-        },
-        opts = { skip = true },
-      },
     },
     views = {
       cmdline_popup = {
@@ -78,6 +71,7 @@ return function()
           width = 60,
           height = "auto",
         },
+        zindex = 100,
       },
       mini = {
         relative = "editor",
@@ -94,7 +88,7 @@ return function()
         border = {
           style = "none",
         },
-        zindex = 60,
+        zindex = 20,
         win_options = {
           winblend = 30,
           winhighlight = {
