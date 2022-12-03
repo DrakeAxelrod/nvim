@@ -123,7 +123,7 @@ return function()
         enter = false,
         zindex = 80,
         format = {
-          "{message}"
+          "{message} something something"
         },
         position = {
           row = "50%",
