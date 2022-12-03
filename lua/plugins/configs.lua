@@ -29,6 +29,7 @@ M.telescope = require("plugins.telescope")
 M.auto_save = require("plugins.auto-save")
 M.lspsaga = require("plugins.language.lspsaga")
 M.barbar = require("plugins.barbar")
+M.cmp = require("plugins.cmp")
 return M
 
 -- table.insert(M, { "yamatsum/nvim-nonicons", requires = { "kyazdani42/nvim-web-devicons" } })

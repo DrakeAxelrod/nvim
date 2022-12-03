@@ -111,7 +111,7 @@ plugin({
   "folke/noice.nvim",
   -- disable = true,
   config = configs.noice,
-  after = { "which-key.nvim" },
+  after = { "which-key.nvim", "lsp-setup.nvim" },
   requires = {
     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
     "MunifTanjim/nui.nvim",
@@ -329,7 +329,6 @@ plugin({
     { "hrsh7th/cmp-path" }, -- Path completion source
     { "hrsh7th/cmp-nvim-lua" }, -- Nvim api completion source
     { "hrsh7th/cmp-nvim-lsp-signature-help" },
-    { "kyazdani42/nvim-web-devicons" },
     {
       "zbirenbaum/copilot-cmp", -- Copilot completion source
       after = { "nvim-cmp" },
@@ -342,6 +341,7 @@ plugin({
       config = configs.copilot_cmp,
     },
   },
+  config = configs.cmp,
 })
 
 -- example of custom plugin
