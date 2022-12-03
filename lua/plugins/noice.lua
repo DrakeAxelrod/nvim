@@ -122,7 +122,9 @@ return function()
         align = "center",
         enter = false,
         zindex = 80,
-        format = { "{confirm}" },
+        format = {
+          "{message}"
+        },
         position = {
           row = "50%",
           col = "50%",
