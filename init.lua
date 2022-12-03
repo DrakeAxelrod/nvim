@@ -1,7 +1,7 @@
 if vim.fn.exists("g:vscode") == 1 then
   return
 else
-  require("tools")
+  pcall(require, "tools")
   CONF.leader("<space>")
   CONF.colorscheme("onedarkpro")
   CONF.options("options")
@@ -10,5 +10,5 @@ else
   CONF.keymaps("keymaps")
   CONF.autocommands("autocommands")
   CONF.commands("commands")
-  CONF.load()
+  pcall(CONF.load)
 end

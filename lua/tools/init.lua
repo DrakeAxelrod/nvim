@@ -3,9 +3,9 @@ if not import then
   require("tools.globals")
 end
 
-if not M.packer then
-  M.packer = require("tools.pack")
-end
+-- if not M.packer then
+  -- M.packer = require("tools.pack")
+-- end
 --- list of on_attach callbacks
 --- @type table<fun(client: number, bufnr: number)>
 M.on_attach_list = {}
@@ -168,7 +168,7 @@ end
 --- register a plugin with packer
 --- @param tbl Plugin The plugin to register
 M.plugin = function(tbl)
-  M.packer.register_plugin(tbl)
+  require("tools.pack").register_plugin(tbl)
 end
 
 M.set_servers_path = function(path)
@@ -187,7 +187,7 @@ if not CONF then
 
   CONF.plugins = function(path)
     cfg.plugins = function()
-      M.packer.set_plugins_dir(path)
+      require("tools.pack").set_plugins_dir(path)
     end
   end
 
@@ -246,9 +246,9 @@ if not CONF then
     cfg.leader()
     cfg.servers()
     cfg.plugins()
-    M.packer.ensure_plugins()
+    require("tools.pack").ensure_plugins()
     cfg.options()
-    M.packer.load_compile()
+    require("tools.pack").load_compile()
     cfg.keymaps()
     cfg.commands()
     cfg.autocommands()
