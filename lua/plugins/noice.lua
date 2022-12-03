@@ -52,13 +52,13 @@ return function()
         },
         view = "split",
       },
-      {
-        filter = {
-          event = "msg_show",
-          kind = "",
-        },
-        opts = { skip = true },
-      },
+      -- {
+      --   filter = {
+      --     event = "msg_show",
+      --     kind = "",
+      --   },
+      --   opts = { skip = true },
+      -- },
     },
     views = {
       cmdline_popup = {
@@ -123,7 +123,7 @@ return function()
         enter = false,
         zindex = 80,
         format = {
-          "{message} something something"
+          "{config}"
         },
         position = {
           row = "50%",
@@ -135,6 +135,7 @@ return function()
           padding = { 0, 1 },
           text = {
             top = " Confirm ",
+
           },
         },
         win_options = {
