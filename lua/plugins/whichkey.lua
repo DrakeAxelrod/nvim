@@ -49,7 +49,7 @@ return function()
       scroll_up = "<c-u>",
     },
     window = {
-      border = "none", -- "rounded", --"none",
+      border = "rounded", -- "rounded", --"none",
       position = "bottom",
       -- padding = { 0, 0, 0, 0 }, -- extra window padding [top, right, bottom, left]
       margin = { 1, 0, 1, 0 },

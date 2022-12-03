@@ -1,4 +1,5 @@
 return function()
+  local icons = require("theme.icons")
   require("mason").setup({
     -- The directory in which to install packages.
     install_root_dir = joinpath(vim.fn.stdpath("data"), "mason"),
@@ -45,9 +46,9 @@ return function()
       -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
       border = "none",
       icons = {
-        package_installed = "✓",
-        package_pending = "➜",
-        package_uninstalled = "✗",
+        package_installed = icons.installer.Success,
+        package_pending = icons.installer.Working,
+        package_uninstalled = icons.installer.Removed,
       },
       keymaps = {
         -- Keymap to expand a package

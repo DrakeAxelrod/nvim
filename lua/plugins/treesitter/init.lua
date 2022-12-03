@@ -3,6 +3,8 @@ return function()
   if not ok then
     return
   end
+  local odp = require("onedarkpro")
+  local colors = odp.get_colors()
   ts.setup({
     ensure_installed = { "lua" }, --"all", -- one of "all" or a list of languages
     sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
@@ -69,42 +71,17 @@ return function()
       },
       disable = { "css", "yaml" },
     },
-    playground = {
-      enable = true,
-      disable = {},
-      updatetime = 25,
-      persist_queries = false,
-      keybindings = {
-        toggle_query_editor = "o",
-        toggle_hl_groups = "i",
-        toggle_injected_languages = "t",
-        toggle_anonymous_nodes = "a",
-        toggle_language_display = "I",
-        focus_language = "f",
-        unfocus_language = "F",
-        update = "R",
-        goto_node = "<cr>",
-        show_help = "?",
-      },
-    },
-    autopairs = {
-      enable = true,
-    },
-    autotag = {
-      enable = true,
-      disable = { "xml" },
-    },
     rainbow = {
       enable = true,
       extended_mode = false, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-      -- colors = {
-      --   c.white,
-      --   c.yellow,
-      --   c.magenta,
-      --   c.cyan,
-      --   c.blue,
-      --   c.green,
-      -- },
+      colors = {
+        colors.white,
+        colors.yellow,
+        colors.magenta,
+        colors.cyan,
+        colors.blue,
+        colors.green,
+      },
       disable = { "html" },
     },
     context_commentstring = {
@@ -138,7 +115,8 @@ return function()
       enable = false,
       keymaps = {
         ["."] = "textsubjects-smart",
-        [";"] = "textsubjects-big" },
+        [";"] = "textsubjects-big"
+      },
     },
   })
   local ok_context, context = pcall(require, "treesitter-context")

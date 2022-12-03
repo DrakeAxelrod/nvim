@@ -41,11 +41,12 @@ return function()
     cache_path = vim.fn.expand(vim.fn.stdpath "cache" .. "/onedarkpro/"), -- The path to the cache directory
     colors = {}, -- Override default colors by specifying colors for 'onelight' or 'onedark' themes
     highlights = {
-      WhichKeyFloat = { bg = colors.bg_statusline },
+      WhichKeyFloat = { bg = colors.bg },
       NoiceLspProgressClient = { bg = colors.none }, -- itle 	Lsp progress client name
       NoiceLspProgressSpinner = { bg = colors.none }, -- Constant 	Lsp progress spinner
       NoiceLspProgressTitle = { bg = colors.none },
-      -- NormalFloat = { bg = colors.bg, fg = colors.fg },
+      NormalFloat = { bg = colors.bg, fg = colors.fg },
+      FloatBorder = { bg = colors.bg, fg = colors.fg },
       BarbecueSeparator = { fg = colors.white, bg = colors.none },
       TelescopeNormal = {
         bg = colors.bg,
@@ -99,5 +100,4 @@ return function()
       window_unfocused_color = false, -- When the window is out of focus, change the normal background?
     },
   }
-  vim.cmd [[colorscheme onedarkpro]]
 end

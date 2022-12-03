@@ -2,24 +2,52 @@ local t = require("tools")
 local configs = require("plugins.configs")
 local plugin = t.plugin
 
-plugin({ "lewis6991/impatient.nvim" })
--- plugin({ "kkharji/sqlite.lua" })
--- plugin({ "romgrk/fzy-lua-native" })
--- plugin({ "nvim-lua/popup.nvim" })
-plugin({ "nvim-lua/plenary.nvim" })
+-- ===========================[[ Utility ]]=========================== --
+
+plugin({ "lewis6991/impatient.nvim",
+  config = function()
+    require("impatient").enable_profile()
+  end,
+})
 
 plugin({
-  "kyazdani42/nvim-web-devicons",
-  -- "yamatsum/nvim-nonicons", requires = { "kyazdani42/nvim-web-devicons" }
+  "nvim-lua/plenary.nvim",
+  after = { "impatient.nvim" }
 })
--- plugin({ "romgrk/fzy-lua-native" })
+plugin({
+  "nvim-lua/popup.nvim",
+  after = { "impatient.nvim" }
+})
+plugin({
+  "kyazdani42/nvim-web-devicons",
+  after = { "impatient.nvim" },
+})
 
-plugin({ "m4xshen/autoclose.nvim" })
+plugin({
+  "antoinemadec/FixCursorHold.nvim",
+  after = { "impatient.nvim" },
+})
 
-plugin({ "antoinemadec/FixCursorHold.nvim" })
+plugin({
+  "rcarriga/nvim-notify",
+  after = {
+    "impatient.nvim",
+    "nvim-web-devicons",
+    "plenary.nvim",
+    "FixCursorHold.nvim",
+  },
+  config = configs.notify
+})
+
+plugin({
+  "olimorris/onedarkpro.nvim",
+  after = { "nvim-notify" },
+  config = configs.colorscheme,
+})
 
 plugin({
   "phaazon/hop.nvim",
+  after = { "nvim-notify" },
   config = configs.hop,
   cmd = {
     "HopWord",
@@ -31,29 +59,9 @@ plugin({
   },
 })
 
-plugin({ "rcarriga/nvim-notify", config = configs.notify })
-
-plugin({
-  "olimorris/onedarkpro.nvim",
-  config = configs.colorscheme,
-  rtp = "onedarkpro",
-})
-
-plugin({
-  "folke/which-key.nvim",
-  -- event = "BufWinEnter",
-  config = configs.whichkey,
-})
-
-plugin({
-  "kyazdani42/nvim-tree.lua",
-  requires = { "kyazdani42/nvim-web-devicons" },
-  cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeClose" },
-  config = configs.nvimtree,
-})
-
 plugin({
   "mrjones2014/smart-splits.nvim",
+  after = { "nvim-notify" },
   config = configs.smart_splits,
   cmd = {
     "SmartCursorMoveLeft",
@@ -68,15 +76,33 @@ plugin({
   },
 })
 
--- plugin({
---   "gelguy/wilder.nvim",
---   requires = { "romgrk/fzy-lua-native", "nvim-web-devicons" },
---   config = configs.wilder,
--- })
+-- ===========================[[ Interface ]]=========================== --
+
+plugin({
+  "folke/which-key.nvim",
+  after = { "nvim-notify" },
+  event = "BufWinEnter",
+  config = configs.whichkey,
+})
+
+plugin({
+  "kyazdani42/nvim-tree.lua",
+  after = { "nvim-notify" },
+  cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeClose" },
+  config = configs.nvimtree,
+})
+
+plugin({
+  "gelguy/wilder.nvim",
+  disable = true,
+  after = { "nvim-notify" },
+  requires = { "romgrk/fzy-lua-native", "nvim-web-devicons" },
+  config = configs.wilder,
+})
 
 plugin({
   "folke/noice.nvim",
-  -- disable = true,
+  disable = true,
   config = configs.noice,
   after = { "which-key.nvim" },
   requires = {
@@ -86,84 +112,75 @@ plugin({
   },
 })
 
---> lualine <--
+-- ===========================[[ Statusline ]]=========================== --
+
 plugin({
   "nvim-lualine/lualine.nvim",
-  requires = {
-    "kyazdani42/nvim-web-devicons",
-    "junnplus/lsp-setup.nvim",
-  },
+  after = { "lsp-setup.nvim", "onedarkpro.nvim" },
   config = configs.lualine,
 })
 
---> git <--
+-- ===========================[[ Git ]]=========================== --
 
 plugin({
   "lewis6991/gitsigns.nvim",
-  requires = { "nvim-lua/plenary.nvim" },
+  after = { "nvim-notify" },
   config = configs.gitsigns,
   event = "BufRead",
 })
 
 plugin({
   "TimUntersberger/neogit",
-  requires = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" },
+  after = { "nvim-notify" },
+  requires = { "sindrets/diffview.nvim" },
   config = configs.neogit,
   cmd = { "Neogit" },
 })
 
---> alpha <--
+-- ===========================[[ Dashboard ]]=========================== --
+
 plugin({
   "goolord/alpha-nvim",
-  requires = { "nvim-tree/nvim-web-devicons" },
-  -- event = "BufWinEnter",
+  after = { "nvim-notify" },
+  event = "BufWinEnter",
   config = configs.alpha,
 })
 
---> toggleterm <--
+-- ===========================[[ Terminal ]]=========================== --
+
 plugin({
   "akinsho/toggleterm.nvim",
+  tag = "*",
   config = configs.toggleterm,
   cmd = { "ToggleTerm" },
-  key = { "<c-t>" },
 })
 
---> telescope <--
+-- ===========================[[ Telescope ]]=========================== --
 
 plugin({
   "nvim-telescope/telescope.nvim",
+  after = { "nvim-notify" },
   requires = {
-    "nvim-telescope/telescope-fzy-native.nvim",
-    {
-      "nvim-telescope/telescope-smart-history.nvim",
-      requires = { "kkharji/sqlite.lua" },
-    },
-    {
-      "nvim-telescope/telescope-frecency.nvim",
-      requires = { "kkharji/sqlite.lua" },
-    },
-    { "nvim-telescope/telescope-ui-select.nvim" },
-    { "nvim-telescope/telescope-file-browser.nvim" },
-    { "rcarriga/nvim-notify" },
+    { "romgrk/fzy-lua-native", run = "make" },
+    "kkharji/sqlite.lua",
+    -- extensions
+    "nvim-telescope/telescope-ui-select.nvim",
+    "nvim-telescope/telescope-file-browser.nvim",
+    { "nvim-telescope/telescope-fzy-native.nvim", after = { "fzy-lua-native" } },
+    { "nvim-telescope/telescope-smart-history.nvim", after = { "sqlite.lua" } },
+    { "nvim-telescope/telescope-frecency.nvim", after = { "sqlite.lua" } },
+    { "sudormrfbin/cheatsheet.nvim" }
   },
   config = configs.telescope,
 })
 
-plugin({
-  "sudormrfbin/cheatsheet.nvim",
-  requires = {
-    { 'nvim-telescope/telescope.nvim' },
-    { 'nvim-lua/popup.nvim' },
-    { 'nvim-lua/plenary.nvim' },
-  }
-})
---> treesitter <--
+-- ===========================[[ Syntax ]]=========================== --
 
 plugin({
   "nvim-treesitter/nvim-treesitter",
   run = ":TSUpdate",
+  after = { "onedarkpro.nvim" },
   requires = {
-    { "p00f/nvim-ts-rainbow" },
     {
       "JoosepAlviste/nvim-ts-context-commentstring",
       event = "BufReadPost",
@@ -174,6 +191,23 @@ plugin({
   },
   config = configs.treesitter,
 })
+
+-- plugin({
+--   "windwp/nvim-ts-autotag",
+--   after = { "nvim-treesitter" },
+--   config = configs.autotag,
+-- })
+
+-- plugin({
+--   "p00f/nvim-ts-rainbow",
+--   after = { "nvim-treesitter" },
+-- })
+
+-- plugin({
+--   "RRethy/vim-illuminate",
+--   after = { "nvim-treesitter" },
+--   config = configs.illuminate,
+-- })
 
 plugin({
   "kylechui/nvim-surround",
@@ -188,29 +222,38 @@ plugin({
   event = "BufReadPost",
 })
 
+plugin({
+  "m4xshen/autoclose.nvim",
+  after = { "nvim-treesitter" },
+  event = "InsertEnter",
+})
+
 --> lsp <--
 
-plugin({
-  "folke/neodev.nvim",
-  ft = { "lua" },
-  config = configs.neodev,
-})
+plugin({"folke/neodev.nvim", ft = { "lua" }, config = configs.neodev })
 
 plugin({
   "junnplus/lsp-setup.nvim",
-  after = { "neodev.nvim" },
+  after = { "neodev.nvim", "nvim-notify" },
   requires = {
     "neovim/nvim-lspconfig",
-    { "williamboman/mason.nvim", config = configs.language.mason },
-    { "williamboman/mason-lspconfig.nvim", config = configs.language.mason_lspconfig },
+    {
+      "williamboman/mason.nvim",
+      config = configs.mason
+    },
+    {
+      "williamboman/mason-lspconfig.nvim",
+      config = configs.mason_lspconfig
+    },
     -- { "simrat39/rust-tools.nvim" },
     -- { "p00f/clangd_extensions.nvim" },
   },
-  config = configs.language.lsp_setup,
+  config = configs.lsp_setup,
 })
 
 plugin({
   "utilyre/barbecue.nvim",
+  after = { "lsp-setup.nvim" },
   requires = {
     "neovim/nvim-lspconfig",
     "smiteshp/nvim-navic",
@@ -224,18 +267,21 @@ plugin({
 plugin({
   "jose-elias-alvarez/null-ls.nvim",
   after = { "lsp-setup.nvim" },
-  config = configs.language.null_ls,
-  requires = { "nvim-lua/plenary.nvim" },
+  config = configs.null_ls,
+  requires = {
+    "nvim-lua/plenary.nvim",
+  },
 })
 
 plugin({
   "rcarriga/nvim-dap-ui",
+  disable = true,
   requires = {
     "mfussenegger/nvim-dap",
     "theHamsta/nvim-dap-virtual-text",
     "nvim-telescope/telescope-dap.nvim",
   },
-  config = configs.language.dap,
+  config = configs.dap,
   cmd = { "DapToggleRepl" },
 })
 
@@ -244,27 +290,23 @@ plugin({
 plugin({
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
+  after = { "nvim-notify" },
   requires = {
-    { "L3MON4D3/LuaSnip" },
-    { "rafamadriz/friendly-snippets" },
-    { "lukas-reineke/cmp-under-comparator" },
-    -- Snippet completion source
-    { "saadparwaiz1/cmp_luasnip" },
-    -- Lsp completion source
-    { "hrsh7th/cmp-nvim-lsp" },
-    -- Buffer completion source
-    { "hrsh7th/cmp-buffer" },
-    -- Path completion source
-    { "hrsh7th/cmp-path" },
-    -- Nvim api completion source
-    { "hrsh7th/cmp-nvim-lua" },
-    -- Signature completion source
+    { "L3MON4D3/LuaSnip" }, -- snippets
+    { "rafamadriz/friendly-snippets" }, -- snippets
+    { "lukas-reineke/cmp-under-comparator" }, -- better compare sorter
+    { "saadparwaiz1/cmp_luasnip" }, -- Snippet completion source
+    { "hrsh7th/cmp-nvim-lsp" }, -- Lsp completion source
+    { "hrsh7th/cmp-buffer" }, -- Buffer completion source
+    { "hrsh7th/cmp-path" }, -- Path completion source
+    { "hrsh7th/cmp-nvim-lua" }, -- Nvim api completion source
     { "hrsh7th/cmp-nvim-lsp-signature-help" },
+    { "kyazdani42/nvim-web-devicons" },
     {
-      "zbirenbaum/copilot-cmp",
+      "zbirenbaum/copilot-cmp", -- Copilot completion source
       event = "InsertEnter",
       requires = {
-        "zbirenbaum/copilot.lua",
+        "zbirenbaum/copilot.lua", -- Copilot
         event = "InsertEnter",
         config = configs.copilot,
       },

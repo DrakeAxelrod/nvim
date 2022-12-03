@@ -12,7 +12,7 @@ local config = {
       { name = "DiagnosticSignInfo", text = icons.diagnostics.Info },
     },
   },
-  virtual_text = { prefix = "●", source = "always" },
+  virtual_text = { prefix = icons.ui.SmallCircle, source = "always" },
   update_in_insert = false,
   underline = true,
   severity_sort = true,

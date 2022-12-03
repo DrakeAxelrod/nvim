@@ -1,15 +1,15 @@
 local M = {}
 if not import then
-  require "tools.globals"
+  require("tools.globals")
 end
 
 if not M.packer then
-  M.packer = require "tools.pack"
+  M.packer = require("tools.pack")
 end
 --- list of on_attach callbacks
 --- @type table<fun(client: number, bufnr: number)>
 M.on_attach_list = {}
-M.servers_path = joinpath(vim.fn.stdpath "config", "lua", "servers")
+M.servers_path = joinpath(vim.fn.stdpath("config"), "lua", "servers")
 local cfg = {
   servers = function() end,
   plugins = function() end,
@@ -17,11 +17,13 @@ local cfg = {
   keymaps = function() end,
   commands = function() end,
   autocommands = function() end,
+  colorscheme = function() end,
   leader = function() end,
 }
 
 M.plugin_count = function()
-  local start = vim.fn.len(vim.fn.globpath(joinpath(vim.fn.stdpath("data"), "site", "pack", "packer", "start"), "*", 0, 1))
+  local start =
+    vim.fn.len(vim.fn.globpath(joinpath(vim.fn.stdpath("data"), "site", "pack", "packer", "start"), "*", 0, 1))
   local opt = vim.fn.len(vim.fn.globpath(joinpath(vim.fn.stdpath("data"), "site", "pack", "packer", "opt"), "*", 0, 1))
   return {
     start = start,
@@ -31,11 +33,11 @@ M.plugin_count = function()
 end
 
 --- loads impatient if it is installed to speed up startup
-M.impatient = function()
-  import("impatient", function(imp)
-    imp.enable_profile()
-  end)
-end
+-- M.impatient = function()
+--   import("impatient", function(imp)
+--     imp.enable_profile()
+--   end)
+-- end
 
 --- Sets a keymap with vim.keymap.set (just a wrapper to make it easier to read)
 --- @param mode string | table The mode(s) to map the key in
@@ -45,6 +47,14 @@ end
 M.keymap = function(mode, lhs, rhs, opts)
   opts = vim.tbl_deep_extend("force", { noremap = true, silent = true }, opts or {})
   vim.keymap.set(mode, lhs, rhs, opts)
+end
+
+M.keycmd = function(str)
+  return "<cmd>" .. str .. "<CR>"
+end
+
+M.keyluacmd = function(str)
+  return "<cmd>lua " .. str .. "<CR>"
 end
 
 --- Sets a keymap with vim.keymap.set (just a wrapper to make it easier to read)
@@ -122,7 +132,6 @@ M.autocmd = function(event, command, opts)
   vim.api.nvim_create_autocmd(event, opts)
 end
 
-
 M.checkmod = function(mod)
   local ok, _ = pcall(require, mod)
   if ok then
@@ -136,7 +145,7 @@ M.servers = function()
   local path = M.servers_path
   local files = readdir(path)
   -- remove vim.fn.stdpath "config" / "lua" from path
-  path = path:gsub(joinpath(vim.fn.stdpath "config", "lua"), ""):gsub("/", ".")
+  path = path:gsub(joinpath(vim.fn.stdpath("config"), "lua"), ""):gsub("/", ".")
   for _, file in ipairs(files) do
     if file then
       local server = require(path .. "." .. file)
@@ -220,6 +229,12 @@ if not CONF then
     end
   end
 
+  CONF.colorscheme = function(colorscheme)
+    cfg.colorscheme = function()
+      pcall(vim.cmd, "colorscheme " .. colorscheme)
+    end
+  end
+
   CONF.leader = function(key)
     cfg.leader = function()
       M.leader(key)
@@ -227,7 +242,7 @@ if not CONF then
   end
 
   CONF.load = function()
-    M.impatient()
+    -- M.impatient()
     cfg.leader()
     cfg.servers()
     cfg.plugins()
@@ -237,6 +252,7 @@ if not CONF then
     cfg.keymaps()
     cfg.commands()
     cfg.autocommands()
+    cfg.colorscheme()
   end
 end
 

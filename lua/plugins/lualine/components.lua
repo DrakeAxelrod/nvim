@@ -53,7 +53,9 @@ local modes = {
 	["t"] = { text = "term", hl = "%#StatusLineTerminal#" }, -- terminal
 }
 
-local colors = require("theme.colors")
+-- local colors = require("theme.colors")
+local odp = require("onedarkpro")
+local colors = odp.get_colors()
 
 local function diff_source()
   local gitsigns = vim.b.gitsigns_status_dict
@@ -215,7 +217,7 @@ M.scrollbar = {
   function()
     local current_line = vim.fn.line "."
     local total_lines = vim.fn.line "$"
-    local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
+    local chars = icons.Statusline.Scrollbar
     local line_ratio = current_line / total_lines
     local index = math.ceil(line_ratio * #chars)
     return chars[index]

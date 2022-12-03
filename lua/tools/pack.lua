@@ -1,8 +1,9 @@
+local icons = require("theme.icons")
 
 local M = {}
 
-M.data_dir = joinpath(vim.fn.stdpath "data", "site")
-M.nvim_path = vim.fn.stdpath "config"
+M.data_dir = joinpath(vim.fn.stdpath("data"), "site")
+M.nvim_path = vim.fn.stdpath("config")
 M.plugins_dir = joinpath(M.nvim_path, "lua", "plugins")
 M.packer_compiled = joinpath(M.data_dir, "lua", "packer_compiled.lua")
 M.set_plugins_dir = function(dir)
@@ -38,26 +39,28 @@ end
 
 function Packer:load_packer()
   if not packer then
-    api.nvim_command "packadd packer.nvim"
-    packer = require "packer"
+    api.nvim_command("packadd packer.nvim")
+    packer = require("packer")
   end
-  packer.init {
+  packer.init({
     compile_path = M.packer_compiled,
     disable_commands = true,
     display = {
-      open_fn = require("packer.util").float,
-      working_sym = "ﰭ",
-      error_sym = "",
-      done_sym = "",
-      removed_sym = "",
-      moved_sym = "ﰳ",
+      open_fn = function()
+        return require("packer.util").float({ border = "rounded" })
+      end,
+      working_sym = icons.installer.Working,
+      error_sym = icons.installer.Error,
+      done_sym = icons.installer.Success,
+      removed_sym = icons.installer.Removed,
+      moved_sym = icons.installer.Moved,
     },
     git = { clone_timeout = 120 },
-  }
+  })
   packer.reset()
   local use = packer.use
   self:load_plugins()
-  use { "wbthomason/packer.nvim", opt = true }
+  use({ "wbthomason/packer.nvim", opt = true })
   for _, repo in ipairs(self.repos) do
     use(repo)
   end
@@ -70,7 +73,7 @@ function Packer:init_ensure_plugins()
     local cmd = "!git clone https://github.com/wbthomason/packer.nvim " .. packer_dir
     api.nvim_command(cmd)
     uv.fs_mkdir(M.data_dir .. "lua", 511, function()
-      assert "make compile path dir failed"
+      assert("make compile path dir failed")
     end)
     self:load_packer()
     packer.sync()
@@ -81,7 +84,7 @@ function Packer:cli_compile()
   self:load_packer()
   packer.compile()
   vim.defer_fn(function()
-    vim.cmd "q"
+    vim.cmd("q")
   end, 1000)
 end
 
@@ -114,16 +117,16 @@ function plugins.auto_compile()
     return
   end
 
-  if file:match "plugins.lua" then
+  if file:match("plugins.lua") then
     plugins.clean()
   end
   plugins.compile()
-  require "packer_compiled"
+  require("packer_compiled")
 end
 
 function plugins.load_compile()
   if vim.fn.filereadable(M.packer_compiled) == 1 then
-    require "packer_compiled"
+    require("packer_compiled")
   end
 
   local cmds = {
