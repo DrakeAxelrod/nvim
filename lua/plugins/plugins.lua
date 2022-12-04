@@ -6,7 +6,6 @@ local plugin = t.plugin
 
 plugin({
   "lewis6991/impatient.nvim",
-  event = "VimEnter",
   config = function()
     require("impatient").enable_profile()
   end,
@@ -14,29 +13,24 @@ plugin({
 
 plugin({
   "nvim-lua/plenary.nvim",
-  event = "VimEnter",
   after = { "impatient.nvim" },
 })
 plugin({
   "nvim-lua/popup.nvim",
-  event = "VimEnter",
   after = { "impatient.nvim" },
 })
 plugin({
   "kyazdani42/nvim-web-devicons",
-  event = "VimEnter",
   after = { "impatient.nvim" },
 })
 
 plugin({
   "antoinemadec/FixCursorHold.nvim",
-  event = "VimEnter",
   after = { "impatient.nvim" },
 })
 
 plugin({
   "rcarriga/nvim-notify",
-  event = "VimEnter",
   after = {
     "impatient.nvim",
     "nvim-web-devicons",
@@ -48,7 +42,6 @@ plugin({
 
 plugin({
   "olimorris/onedarkpro.nvim",
-  event = "VimEnter",
   after = { "nvim-notify" },
   config = configs.colorscheme,
 })
@@ -56,7 +49,6 @@ plugin({
 plugin({
   "phaazon/hop.nvim",
   after = { "nvim-notify" },
-  event = "VimEnter",
   config = configs.hop,
   cmd = {
     "HopWord",
@@ -71,7 +63,6 @@ plugin({
 plugin({
   "mrjones2014/smart-splits.nvim",
   after = { "nvim-notify" },
-  event = "VimEnter",
   config = configs.smart_splits,
   cmd = {
     "SmartCursorMoveLeft",
@@ -89,7 +80,6 @@ plugin({
 plugin({
   "Pocco81/auto-save.nvim",
   after = { "nvim-notify" },
-  event = "VimEnter",
   config = configs.auto_save,
 })
 
@@ -105,7 +95,6 @@ plugin({
 plugin({
   "kyazdani42/nvim-tree.lua",
   after = { "nvim-notify" },
-  event = "VimEnter",
   cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeClose" },
   config = configs.nvimtree,
 })
@@ -114,7 +103,6 @@ plugin({
   "gelguy/wilder.nvim",
   disable = true,
   after = { "nvim-notify" },
-  event = "VimEnter",
   requires = { "romgrk/fzy-lua-native", "nvim-web-devicons" },
   config = configs.wilder,
 })
@@ -124,7 +112,6 @@ plugin({
   -- disable = true,
   config = configs.noice,
   after = { "which-key.nvim", "lsp-setup.nvim" },
-  event = "VimEnter",
   requires = {
     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
     "MunifTanjim/nui.nvim",
@@ -137,7 +124,6 @@ plugin({
 plugin({
   "nvim-lualine/lualine.nvim",
   after = { "onedarkpro.nvim" },
-  event = "VimEnter",
   config = configs.lualine,
 })
 
@@ -154,7 +140,6 @@ plugin({
   "TimUntersberger/neogit",
   after = { "nvim-notify" },
   requires = { "sindrets/diffview.nvim" },
-  event = "VimEnter",
   config = configs.neogit,
   cmd = { "Neogit" },
 })
@@ -164,7 +149,6 @@ plugin({
 plugin({
   "goolord/alpha-nvim",
   after = { "nvim-notify" },
-  event = "BufWinEnter",
   config = configs.alpha,
 })
 
@@ -173,32 +157,25 @@ plugin({
 plugin({
   "akinsho/toggleterm.nvim",
   tag = "*",
-  event = "VimEnter",
   config = configs.toggleterm,
   cmd = { "ToggleTerm" },
 })
 
 -- ===========================[[ Bufferline ]]=========================== --
 
--- plugin({
---   "akinsho/bufferline.nvim",
---   tag = "v3.*",
---   after = { "nvim-notify" },
---   config = configs.bufferline,
--- })
+plugin({
+  "akinsho/bufferline.nvim",
+  tag = "v3.*",
+  after = { "nvim-notify" },
+  config = configs.bufferline,
+})
 
--- plugin({
---   "romgrk/barbar.nvim",
---   after = { "nvim-notify" },
---   config = configs.barbar,
--- })
 
 -- ===========================[[ Telescope ]]=========================== --
 
 plugin({
   "nvim-telescope/telescope.nvim",
   after = { "nvim-notify" },
-  event = "VimEnter",
   requires = {
     { "romgrk/fzy-lua-native", run = "make" },
     "kkharji/sqlite.lua",
@@ -218,8 +195,8 @@ plugin({
 plugin({
   "nvim-treesitter/nvim-treesitter",
   run = ":TSUpdate",
+  event = "BufRead",
   after = { "onedarkpro.nvim" },
-  event = "VimEnter",
   requires = {
     {
       "JoosepAlviste/nvim-ts-context-commentstring",
@@ -273,21 +250,18 @@ plugin({
 plugin({
   "folke/neodev.nvim",
   ft = { "lua" },
-  event = "VimEnter",
   config = configs.neodev
 })
 
 plugin({
   "glepnir/lspsaga.nvim",
   branch = "main",
-  event = "VimEnter",
   config = configs.lspsaga,
 })
 
 plugin({
   "junnplus/lsp-setup.nvim",
   after = { "neodev.nvim", "nvim-notify", "lspsaga.nvim" },
-  event = "VimEnter",
   requires = {
     "neovim/nvim-lspconfig",
     {
@@ -307,12 +281,12 @@ plugin({
 plugin({
   "utilyre/barbecue.nvim",
   after = { "lsp-setup.nvim" },
-  event = "VimEnter",
   requires = {
     "neovim/nvim-lspconfig",
     "smiteshp/nvim-navic",
     "kyazdani42/nvim-web-devicons", -- optional
   },
+  event = "BufReadPost",
   config = function()
     require("barbecue").setup()
   end,
@@ -321,7 +295,6 @@ plugin({
 plugin({
   "jose-elias-alvarez/null-ls.nvim",
   after = { "lsp-setup.nvim" },
-  event = "VimEnter",
   config = configs.null_ls,
   requires = {
     "nvim-lua/plenary.nvim",

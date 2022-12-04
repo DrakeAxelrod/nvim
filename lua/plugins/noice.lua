@@ -79,7 +79,7 @@ return function()
         reverse = true,
         focusable = false,
         position = {
-          row = 0,
+          row = 1,
           col = "100%",
           -- col = 0,
         },

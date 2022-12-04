@@ -27,6 +27,7 @@ t.augroup("UserMisc")(function(ac)
     pattern = "AlphaReady",
   }, function()
     vim.opt.laststatus = 0
+    vim.opt.showtabline = 0
   end)
   ac("User", {
     pattern = "AlphaClosed",

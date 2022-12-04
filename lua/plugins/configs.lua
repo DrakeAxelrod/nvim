@@ -28,7 +28,7 @@ M.telescope = require("plugins.telescope")
 -- M.illuminate = require("plugins.treesitter.illuminate")
 M.auto_save = require("plugins.auto-save")
 M.lspsaga = require("plugins.language.lspsaga")
-M.barbar = require("plugins.barbar")
+M.bufferline = require("plugins.bufferline")
 M.cmp = require("plugins.cmp")
 return M
 

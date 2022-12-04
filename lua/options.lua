@@ -64,7 +64,7 @@ t.options({
     swapfile = false, -- Disable use of swapfile for the buffer
     tabstop = 2, -- Number of space in a tab
     termguicolors = true, -- Enable 24-bit RGB color in the TUI
-    title = true, -- set the title of window to the value of the titlestring
+    title = false, -- set the title of window to the value of the titlestring
     -- titlestring = "%<%F%=%l/%L - nvim", -- what the title of the window will be set to
     background = "dark", -- background color of the window
     guifont = "JetBrainsMono Nerd Font:h12",
