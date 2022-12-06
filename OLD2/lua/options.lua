@@ -1,4 +1,6 @@
-local options = {
+local core = require("core")
+
+core.options({
   g = {
     -- cursorhold_updatetime = 100, -- cursorhold updatetime
     highlighturl_enabled = true, -- highlight URLs by default
@@ -105,13 +107,7 @@ local options = {
       eob = " ", -- "~" empty lines at the end of a buffer
     },
   },
-}
-
-for scope, settings in pairs(options) do
-  for key, value in pairs(settings) do
-    vim[scope][key] = value
-  end
-end
+})
 
 -- filnxtToOFcsAS
 vim.opt.spelllang:append "cjk" -- disable spellchecking for asian characters (VIM algorithm does not support it)

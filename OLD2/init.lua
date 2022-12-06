@@ -1,0 +1,10 @@
+require("core")
+
+Neovim.leader("<space>")
+Neovim.options("options")
+Neovim.servers("servers")
+Neovim.plugins("plugins")
+Neovim.keymaps("keymaps")
+Neovim.commands("commands")
+Neovim.autocommands("autocommands")
+Neovim.load()

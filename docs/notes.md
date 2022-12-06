@@ -58,6 +58,15 @@
 ```
 ## Might Use Material
 ```lua
+
+package.path = string.format(
+  "%s;%s/core/init.lua;%s/core/lua/?.lua",
+  package.path,
+  vim.fn.stdpath("config"),
+  vim.fn.stdpath("config")
+)
+require("core")
+
 local a = f("a => a + 1")
 
 Switch CWD to the directory of the open buffer

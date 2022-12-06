@@ -1,6 +1,8 @@
-local options = {
+local t = require("tools")
+
+t.options({
   g = {
-    -- cursorhold_updatetime = 100, -- cursorhold updatetime
+    cursorhold_updatetime = 100, -- cursorhold updatetime
     highlighturl_enabled = true, -- highlight URLs by default
     zipPlugin = false, -- disable zip
     load_black = false, -- disable black
@@ -105,21 +107,16 @@ local options = {
       eob = " ", -- "~" empty lines at the end of a buffer
     },
   },
-}
-
-for scope, settings in pairs(options) do
-  for key, value in pairs(settings) do
-    vim[scope][key] = value
-  end
-end
+})
 
 -- filnxtToOFcsAS
 vim.opt.spelllang:append "cjk" -- disable spellchecking for asian characters (VIM algorithm does not support it)
 -- -- vim.opt.shortmess:append "I" -- don't show the default intro message
 vim.opt.whichwrap:append "<,>,[,],h,l"
--- vim.opt.shortmess:append "c"
--- vim.opt.shortmess:append "s"
--- vim.opt.shortmess:append "A"
+vim.opt.shortmess:append "c"
+vim.opt.shortmess:append "s"
+vim.opt.shortmess:append "A"
+vim.opt.shortmess:append "A"
 
 vim.api.nvim_set_hl(0, "Search", {
   ctermfg = 0,
