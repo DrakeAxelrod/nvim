@@ -88,7 +88,7 @@ plugin({
 plugin({
   "folke/which-key.nvim",
   after = { "nvim-notify" },
-  event = "BufWinEnter",
+  -- event = "BufWinEnter",
   config = configs.whichkey,
 })
 
@@ -111,7 +111,7 @@ plugin({
   "folke/noice.nvim",
   -- disable = true,
   config = configs.noice,
-  after = { "which-key.nvim", "lsp-setup.nvim" },
+  -- after = { "which-key.nvim", "lsp-setup.nvim" },
   requires = {
     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
     "MunifTanjim/nui.nvim",
@@ -317,7 +317,7 @@ plugin({
 
 plugin({
   "hrsh7th/nvim-cmp",
-  event = "InsertEnter",
+  -- event = "InsertEnter",
   after = { "nvim-notify" },
   requires = {
     { "L3MON4D3/LuaSnip" }, -- snippets

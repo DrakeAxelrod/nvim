@@ -4,7 +4,19 @@
 local unpack = unpack or table.unpack
 local loadstring = loadstring or load
 
-core = {}
+core = {
+  plugins_dir = "plugins",
+  options_dir = "options",
+  commands_dir = "commands",
+  keymaps_dir = "keymaps",
+  autocommands_dir = "autocommands",
+  _inner = {
+    options = {},
+    keymaps = {},
+    commands = {},
+    autocommands = {},
+  },
+}
 
 --[[=============================[  Tables  ]=============================]]
 

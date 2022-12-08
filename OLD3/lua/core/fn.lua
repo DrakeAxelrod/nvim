@@ -19,7 +19,18 @@ core.augroup = function(group)
   end
 end
 
-core.options = function(options_dir)
-  options_dir = options_dir or "options"
-  require(options_dir)
+core.options = function(opts)
+  core._inner.options = opts
+end
+
+core.keymaps = function(keymaps)
+  core._inner.keymaps = keymaps
+end
+
+core.commands = function(commands)
+  core._inner.options = commands
+end
+
+core.autcommands = function(autocommands)
+  core._inner.autocommands = autocommands
 end

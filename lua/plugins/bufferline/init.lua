@@ -1,4 +1,7 @@
 return function()
+  local icons = require("theme.icons")
+  local colors = require("theme.colors")
+
   local is_ft = function (b, ft)
     return vim.bo[b].filetype == ft
   end
@@ -6,13 +9,11 @@ return function()
   local diagnostics_indicator = function(num, _, diagnostics, _)
     local result = {}
     local symbols = {
-      error = lvim.icons.diagnostics.Error,
-      warning = lvim.icons.diagnostics.Warning,
-      info = lvim.icons.diagnostics.Information,
+      error = icons.diagnostics.Error,
+      warning = icons.diagnostics.Warning,
+      info = icons.diagnostics.Information,
     }
-    if not lvim.use_icons then
-      return "(" .. num .. ")"
-    end
+
     for name, count in pairs(diagnostics) do
       if symbols[name] and count > 0 then
         table.insert(result, symbols[name] .. " " .. count)
@@ -39,8 +40,6 @@ return function()
     return (tab_num == last_tab and is_log) or (tab_num ~= last_tab and not is_log)
   end
 
-  local icons = require("theme.icons")
-  local colors = require("theme.colors")
   require('bufferline').setup({
     options = {
       mode = "buffers", -- set to "tabs" to only show tabpages instead

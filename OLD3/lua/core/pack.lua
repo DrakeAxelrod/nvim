@@ -1,12 +1,11 @@
 ---@diagnostic disable: redundant-parameter
 
-core.packer_spec = {}
-core.packer_autocmds_enabled = false
+core._inner.packer_spec = {}
+core._inner.packer_autocmds_enabled = false
 core.packer_install_path = joinpath(vim.fn.stdpath("data"), "site", "pack", "packer", "start", "packer.nvim")
-core.plugin_dir = "plugins"
 
 core.plugin = function(tbl)
-  table.insert(core.packer_spec, tbl)
+  table.insert(core._inner.packer_spec, tbl)
 end
 
 local ensure_packer = function()
@@ -26,7 +25,7 @@ local ensure_packer = function()
 end
 
 
-core.plugins = function()
+core._inner.apply_plugins = function()
   local bootstrap = ensure_packer()
   pcall(require, core.plugin_dir)
   core.packer = require("packer").startup({
@@ -36,9 +35,10 @@ core.plugins = function()
 
       -- use(vim.fn.stdpath("config") .. "/core")
 
-      for _, plugin in ipairs(core.packer_spec) do
+      for _, plugin in ipairs(core._inner.packer_spec) do
         use(plugin)
       end
+
       -- Automatically set up your configuration after cloning packer.nvim
       -- Put this at the end after all plugins
       if bootstrap then

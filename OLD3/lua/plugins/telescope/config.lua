@@ -1,78 +1,3 @@
-local fn = require("utils.fn")
-local icons = require("theme.icons")
-
-local extensions = {
-  fzy_native = {
-    override_generic_sorter = true,
-    override_file_sorter = true,
-  },
-  ["ui-select"] = {
-    require("telescope.themes").get_dropdown {
-      -- even more opts
-    },
-  },
-  frecency = {
-    show_scores = false,
-    show_unindexed = true,
-    ignore_patterns = { "*.git/*", "*/tmp/*" },
-    disable_devicons = false,
-    workspaces = {
-      ["config"] = fn.joinpath(os.getenv "HOME", ".config"),
-      ["data"] = fn.joinpath(os.getenv "HOME", ".local", "share"),
-      ["project"] = fn.joinpath(os.getenv "HOME", "Documents"),
-    },
-  },
-  file_browser = {
-    theme = "ivy",
-    -- disables netrw and use telescope-file-browser in its place
-    hijack_netrw = true,
-    mappings = {
-      ["i"] = {
-        -- your custom insert mode mappings
-      },
-      ["n"] = {
-        -- your custom normal mode mappings
-      },
-    },
-  },
-}
-
-local pickers = {
-  fzy_native = {
-    override_generic_sorter = true,
-    override_file_sorter = true,
-  },
-  ["ui-select"] = {
-    require("telescope.themes").get_dropdown {
-      -- even more opts
-    },
-  },
-  frecency = {
-    show_scores = false,
-    show_unindexed = true,
-    ignore_patterns = { "*.git/*", "*/tmp/*" },
-    disable_devicons = false,
-    workspaces = {
-      ["config"] = fn.joinpath(os.getenv "HOME", ".config"),
-      ["data"] = fn.joinpath(os.getenv "HOME", ".local", "share"),
-      ["project"] = fn.joinpath(os.getenv "HOME", "Documents"),
-    },
-  },
-  file_browser = {
-    theme = "ivy",
-    -- disables netrw and use telescope-file-browser in its place
-    hijack_netrw = true,
-    mappings = {
-      ["i"] = {
-        -- your custom insert mode mappings
-      },
-      ["n"] = {
-        -- your custom normal mode mappings
-      },
-    },
-  },
-}
-
 local M = {
   defaults = {
     prompt_prefix = "  ",
@@ -157,8 +82,64 @@ local M = {
     generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
     -- mappings = keys.telescope(),
   },
-  pickers = pickers,
-  extensions = extensions
+  pickers = {
+    file_browser = {
+      cwd_to_path = true,
+      hidden = true,
+    },
+    find_files = {
+      hidden = true,
+      find_command = { "fd", "--type=file", "--hidden", "--smart-case" },
+    },
+    live_grep = {
+      hidden = true,
+      only_sort_text = true,
+    },
+    fd = {
+      mappings = {
+        n = {
+          ["kj"] = "close",
+        },
+      },
+    },
+  },
+  extensions = {
+    fzy_native = {
+      override_generic_sorter = true,
+      override_file_sorter = true,
+    },
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown {
+        -- even more opts
+      },
+    },
+    frecency = {
+      show_scores = false,
+      show_unindexed = true,
+      ignore_patterns = { "*.git/*", "*/tmp/*" },
+      disable_devicons = false,
+      workspaces = {
+        ["config"] = joinpath(os.getenv "HOME", ".config"),
+        ["data"] = joinpath(os.getenv "HOME", ".local", "share"),
+        ["project"] = joinpath(os.getenv "HOME", "Documents"),
+      },
+    },
+    file_browser = {
+      theme = "ivy",
+      -- disables netrw and use telescope-file-browser in its place
+      hijack_netrw = true,
+      mappings = {
+        ["i"] = {
+          -- your custom insert mode mappings
+        },
+        ["n"] = {
+          -- your custom normal mode mappings
+        },
+      },
+    },
+    -- hidden_files = true, -- default: false
+    -- theme = "dropdown",
+  },
 }
 
 return M
