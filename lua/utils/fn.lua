@@ -12,6 +12,18 @@ M.get_relative_dir = function()
   local init_path = debug.getinfo(1, "S").source:sub(2):match("(.*[/\\])"):sub(1, -2)
 end
 
+--- reads all files and directories in a directory and returns them as a table
+--- @param dir string - the path to the directory
+--- @return table
+M.readdir = function(dir)
+  local packages_dir = M.joinpath(vim.fn.stdpath "config", "lua", dir)
+  if vim.fn.empty(vim.fn.glob(packages_dir)) > 0 then
+    return {}
+  end
+  return vim.tbl_map(function(file)
+    return file:match "(.*)%.lua" or file
+  end, vim.fn.readdir(packages_dir))
+end
 
 --- Sets a keymap with vim.keymap.set (just a wrapper to make it easier to read)
 --- @param mode string | table The mode(s) to map the key in

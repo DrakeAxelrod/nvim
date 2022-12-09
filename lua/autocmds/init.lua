@@ -16,12 +16,12 @@ fn.augroup("UserMisc")(function(ac)
     vim.wo.wrap = true
   end)
 
-  ac("FileType", {
-    desc = "Attach treesitter highlight for zsh files",
-    pattern = "zsh",
-  }, function()
-    require("nvim-treesitter.highlight").attach(0, "bash")
-  end)
+  -- ac("FileType", {
+  --   desc = "Attach treesitter highlight for zsh files",
+  --   pattern = "zsh",
+  -- }, function()
+  --   require("nvim-treesitter.highlight").attach(0, "bashls")
+  -- end)
 
   ac("User", {
     pattern = "AlphaReady",

@@ -19,38 +19,38 @@ local conditions = {
 }
 
 local modes = {
-	["n"] = { text = "norm", hl = "%#StatusLineNormal#" }, -- normal
-	["niI"] = { text = "norm", hl = "%#StatusLineNormal#" }, -- niI
-	["niR"] = { text = "norm", hl = "%#StatusLineNormal#" }, -- niR
-	["niV"] = { text = "norm", hl = "%#StatusLineNormal#" }, -- niV
-	["no"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- no-pending
-	["nov"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- nov-pending
-	["noV"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- noV-pending
-	["no\022"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- noVB-pending
-	["v"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- visual
-	["V"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- V-line
-	["\022"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- V-block
-	["s"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- selection
-	["S"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- S-line
-	["\019"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- S-block
-	["i"] = { text = "ins+", hl = "%#StatusLineInsert#" }, -- insert
-	["ic"] = { text = "ins+", hl = "%#StatusLineInsert#" }, -- insert-command
-	["ix"] = { text = "ins+", hl = "%#StatusLineInsert#" }, -- insert-x
-	["r"] = { text = "rplc", hl = "%#StatusLineReplace#" }, -- replace
-	["R"] = { text = "rplc", hl = "%#StatusLineReplace#" }, -- replace
-	["Rc"] = { text = "rplc", hl = "%#StatusLineReplace#" }, -- replace-command
-	["Rv"] = { text = "rplc", hl = "%#StatusLineReplace#" }, -- v-replace
-	["Rx"] = { text = "rplc", hl = "%#StatusLineReplace#" }, -- replace-x
-	["Rvc"] = { text = "rplc", hl = "%#StatusLineReplace#" }, -- v-replace-command
-	["Rvx"] = { text = "rplc", hl = "%#StatusLineReplace#" }, -- v-replace-x
-	["c"] = { text = "viex", hl = "%#StatusLineCommand#" }, -- command
-	["cv"] = { text = "viex", hl = "%#StatusLineCommand#" }, -- command-visual
-	["ce"] = { text = "viex", hl = "%#StatusLineCommand#" }, -- command-ex
-	["rm"] = { text = "more", hl = "%#StatusLineCommand#" }, -- more
-	["r?"] = { text = "????", hl = "%#StatusLineNormal#" }, -- confirm
-	["!"] = { text = "!!!!", hl = "%#StatusLineCommand#" }, -- shell
-	["nt"] = { text = "term", hl = "%#StatusLineTerminal#" }, -- t-normal
-	["t"] = { text = "term", hl = "%#StatusLineTerminal#" }, -- terminal
+  ["n"] = { text = "norm", hl = "%#StatusLineNormal#" }, -- normal
+  ["niI"] = { text = "norm", hl = "%#StatusLineNormal#" }, -- niI
+  ["niR"] = { text = "norm", hl = "%#StatusLineNormal#" }, -- niR
+  ["niV"] = { text = "norm", hl = "%#StatusLineNormal#" }, -- niV
+  ["no"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- no-pending
+  ["nov"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- nov-pending
+  ["noV"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- noV-pending
+  ["no\022"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- noVB-pending
+  ["v"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- visual
+  ["V"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- V-line
+  ["\022"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- V-block
+  ["s"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- selection
+  ["S"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- S-line
+  ["\019"] = { text = "visu", hl = "%#StatusLineVisual#" }, -- S-block
+  ["i"] = { text = "ins+", hl = "%#StatusLineInsert#" }, -- insert
+  ["ic"] = { text = "ins+", hl = "%#StatusLineInsert#" }, -- insert-command
+  ["ix"] = { text = "ins+", hl = "%#StatusLineInsert#" }, -- insert-x
+  ["r"] = { text = "rplc", hl = "%#StatusLineReplace#" }, -- replace
+  ["R"] = { text = "rplc", hl = "%#StatusLineReplace#" }, -- replace
+  ["Rc"] = { text = "rplc", hl = "%#StatusLineReplace#" }, -- replace-command
+  ["Rv"] = { text = "rplc", hl = "%#StatusLineReplace#" }, -- v-replace
+  ["Rx"] = { text = "rplc", hl = "%#StatusLineReplace#" }, -- replace-x
+  ["Rvc"] = { text = "rplc", hl = "%#StatusLineReplace#" }, -- v-replace-command
+  ["Rvx"] = { text = "rplc", hl = "%#StatusLineReplace#" }, -- v-replace-x
+  ["c"] = { text = "viex", hl = "%#StatusLineCommand#" }, -- command
+  ["cv"] = { text = "viex", hl = "%#StatusLineCommand#" }, -- command-visual
+  ["ce"] = { text = "viex", hl = "%#StatusLineCommand#" }, -- command-ex
+  ["rm"] = { text = "more", hl = "%#StatusLineCommand#" }, -- more
+  ["r?"] = { text = "????", hl = "%#StatusLineNormal#" }, -- confirm
+  ["!"] = { text = "!!!!", hl = "%#StatusLineCommand#" }, -- shell
+  ["nt"] = { text = "term", hl = "%#StatusLineTerminal#" }, -- t-normal
+  ["t"] = { text = "term", hl = "%#StatusLineTerminal#" }, -- terminal
 }
 
 -- local colors = require("theme.colors")
@@ -72,7 +72,7 @@ local branch = icons.git.Branch
 
 M.mode = {
   function()
-    return " ".. icons.misc.Package .. "  " .. modes[vim.fn.mode()].text .. "  "
+    return " " .. icons.misc.Package .. "  " .. modes[vim.fn.mode()].text .. "  "
   end,
   padding = { left = 0, right = 0 },
   color = {},
@@ -85,12 +85,12 @@ M.branch = {
 }
 M.filename = {
   "filename",
-  shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
+  shorting_target = 40, -- Shortens path to leave 40 spaces in the window
   -- for other components. (terrible name, any suggestions?)
   symbols = {
-  modified = '[+]',      -- Text to show when the file is modified.
-  readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
-  unnamed = '[No Name]', -- Text to show for unnamed buffers.
+    modified = '[+]', -- Text to show when the file is modified.
+    readonly = '[-]', -- Text to show when the file is non-modifiable or readonly.
+    unnamed = '[No Name]', -- Text to show for unnamed buffers.
   },
   color = {},
   cond = nil,
@@ -155,14 +155,14 @@ M.treesitter = {
 M.lsp = {
   function(msg)
     msg = msg or "LS Inactive"
-    local buf_clients = vim.lsp.buf_get_clients()
+    local buf_clients = vim.lsp.get_active_clients()
     if next(buf_clients) == nil then
       if type(msg) == "boolean" or #msg == 0 then
         return "LS Inactive"
       end
       return msg
     end
-    local buf_ft = vim.bo.filetype
+    -- local buf_ft = vim.bo.filetype
     local buf_client_names = {}
     local copilot_active = false
 

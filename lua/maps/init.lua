@@ -5,7 +5,7 @@ local telecmd = function()
 
 end
 
--- km({ "n" }, "<esc><esc>", cmd("noh"), { desc = "Remove Highlights" })
+km({ "n" }, "<esc>", cmd("noh"), { desc = "Remove Highlights" })
 km({ "n", "x" }, "<space>", "<nop>", { desc = "Dont move cursor on space" })
 --> splits <--
 km({ "n" }, "<leader>-", cmd("new"), { desc = "Horizonal Split" })
@@ -43,6 +43,7 @@ km({ "c" }, "<c-k>", 'pumvisible() ? "\\<C-p>" : "\\<C-k>"',
 
 -- ===========================[[ Leader ]]=========================== --
 
+-- km({ "n" }, "<leader>e", cmd("Telescope file_browser"), { desc = "File Explorer" })
 km({ "n" }, "<leader>e", cmd("NvimTreeToggle"), { desc = "Toggle NvimTree" })
 km({ "n" }, "<leader>j", cmd("HopWord"), { desc = "Hop!" })
 km({ "n" }, "<leader>w", cmd("w"), { desc = "Save" })
@@ -101,7 +102,7 @@ km({ "n" }, "<leader>PC", cmd("PackerCompile"), { desc = "Compile" })
 -- -- close floaterm
 -- keymap("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
 
-km({ "n" }, "g", "Goto", { desc = "Goto" })
+-- km({ "n" }, "g", "Goto", { desc = "Goto" })
 km({ "n" }, "gh", cmd("Lspsaga lsp_finder"), { desc = "LSP Finder" })
 km({ "n" }, "gD", lua("vim.lsp.buf.declaration()"), { desc = "LSP Declaration" })
 km({ "n" }, "gd", ":lua vim.lsp.buf.definition()<cr>", { desc = "LSP Definition" })

@@ -6,9 +6,9 @@ M.servers_path = fn.joinpath(vim.fn.stdpath("config"), "lua", "servers")
 M.servers = function()
   local servers = {}
   local path = M.servers_path
-  local files = readdir(path)
+  local files = fn.readdir(path)
   -- remove vim.fn.stdpath "config" / "lua" from path
-  path = path:gsub(joinpath(vim.fn.stdpath("config"), "lua"), ""):gsub("/", ".")
+  path = path:gsub(fn.joinpath(vim.fn.stdpath("config"), "lua"), ""):gsub("/", ".")
   for _, file in ipairs(files) do
     if file then
       local server = require(path .. "." .. file)

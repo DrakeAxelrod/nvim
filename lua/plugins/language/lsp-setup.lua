@@ -18,6 +18,6 @@ return function()
     end,
 
     capabilities = handlers.capabilities(), -- Global capabilities
-    -- servers = t.servers(), -- Configuration of LSP servers
+    servers = lsp_utils.servers(), -- Configuration of LSP servers
   })
 end

@@ -42,7 +42,7 @@ plugin({
 
 plugin({
   "kyazdani42/nvim-tree.lua",
-  disable = true,
+  -- disable = true,
   after = { "nvim-notify" },
   cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeClose" },
   config = configs.nvimtree,
@@ -50,7 +50,7 @@ plugin({
 
 plugin({
   "gelguy/wilder.nvim",
-  -- disable = true,
+  disable = true,
   after = { "nvim-notify" },
   requires = { "romgrk/fzy-lua-native", "nvim-web-devicons" },
   config = configs.wilder,
@@ -58,7 +58,7 @@ plugin({
 
 plugin({
   "folke/noice.nvim",
-  disable = true,
+  -- disable = true,
   config = configs.noice,
   -- after = { "which-key.nvim", "lsp-setup.nvim" },
   requires = {
@@ -67,6 +67,24 @@ plugin({
     "rcarriga/nvim-notify",
   },
 })
+
+plugin({
+  "mrjones2014/smart-splits.nvim",
+  after = { "nvim-notify" },
+  config = configs.smart_splits,
+  cmd = {
+    "SmartCursorMoveLeft",
+    "SmartCursorMoveRight",
+    "SmartCursorMoveUp",
+    "SmartCursorMoveDown",
+    "SmartResizeLeft",
+    "SmartResizeRight",
+    "SmartResizeUp",
+    "SmartResizeDown",
+    "SmartResizeMode",
+  },
+})
+
 
 -- ===========================[[ Statusline ]]=========================== --
 
@@ -154,7 +172,7 @@ plugin({
       },
     },
   },
-  config = configs.treesitter,
+  config = configs.treesitter.treesitter,
 })
 
 -- plugin({
@@ -178,7 +196,7 @@ plugin({
   "kylechui/nvim-surround",
   after = { "nvim-treesitter" },
   event = "BufReadPost",
-  config = configs.surround,
+  config = configs.treesitter.surround,
 })
 
 plugin({

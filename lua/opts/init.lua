@@ -78,7 +78,7 @@ options({
     guicursor = [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]],
     errorbells = false, -- Ring the bell (beep or screen flash) for error messages.
     visualbell = false, -- Use visual bell instead of beeping.
-    timeoutlen = 300, -- Length of time to wait for a mapped sequence
+    timeoutlen = 500, -- Length of time to wait for a mapped sequence
     undofile = true, -- Enable persistent undo
     updatetime = 300, -- Length of time to wait before triggering the plugin
     wrap = false, -- Disable wrapping of lines longer than the width of window

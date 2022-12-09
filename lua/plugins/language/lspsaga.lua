@@ -84,7 +84,7 @@ return function()
     symbol_in_winbar = {
       in_custom = false,
       enable = true,
-      separator = icons.ui.ChevronShortRight .. " ",
+      separator = " " .. icons.ui.ChevronShortRight .. " ",
       show_file = true,
       -- define how to customize filename, eg: %:., %
       -- if not set, use default value `%:t`
@@ -98,7 +98,7 @@ return function()
       win_position = "right",
       --set special filetype win that outline window split.like NvimTree neotree
       -- defx, db_ui
-      win_with = "",
+      -- win_with = "",
       win_width = 30,
       auto_enter = true,
       auto_preview = true,
