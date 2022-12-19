@@ -35,8 +35,8 @@ return function()
   local odp = require("onedarkpro")
   local colors = odp.get_colors()
   odp.setup {
-    dark_theme = "onedark_vivid", -- The default dark theme
-    light_theme = "onelight", -- The default light theme
+    -- dark_theme = "onedark_vivid", -- The default dark theme
+    -- light_theme = "onelight", -- The default light theme
     caching = false, -- Use caching for the theme?
     cache_path = vim.fn.expand(vim.fn.stdpath "cache" .. "/onedarkpro/"), -- The path to the cache directory
     colors = {}, -- Override default colors by specifying colors for 'onelight' or 'onedark' themes
@@ -96,10 +96,10 @@ return function()
       undercurl = true, -- Use undercurl styles?
 
       cursorline = false, -- Use cursorline highlighting?
-      transparency = false, -- Use a transparent background?
+      transparency = true, -- Use a transparent background?
       terminal_colors = true, -- Use the theme's colors for Neovim's :terminal?
       window_unfocused_color = false, -- When the window is out of focus, change the normal background?
     },
   }
-  vim.cmd [[colorscheme onedarkpro]]
+  vim.cmd [[colorscheme onedark_vivid]]
 end
