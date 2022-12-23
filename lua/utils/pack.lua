@@ -40,6 +40,7 @@ M.startup = function(plugins)
       end
     end,
     config = {
+      compile_path = fn.joinpath(vim.fn.stdpath('config'), "lua", 'packer_compiled.lua'),
       profile = {
         enable = true,
         threshold = 1 -- the amount in ms that a plugin's load time must be over for it to be included in the profile

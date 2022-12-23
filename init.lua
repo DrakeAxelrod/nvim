@@ -1,3 +1,7 @@
+
+-- vscode is true if we are running in vscode
+local vscode = vim.fn.exists("g:vscode") == 1
+
 local ok, impatient = pcall(require, "impatient")
 if ok then
   impatient.enable_profile()
@@ -10,4 +14,5 @@ require("plugins")
 require("maps")
 require("cmds")
 require("autocmds")
+require("packer_compiled")
 

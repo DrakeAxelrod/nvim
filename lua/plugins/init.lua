@@ -1,4 +1,5 @@
 local pack = require("utils.pack")
+local vscode = vim.g.vscode == 1
 
 local plugins = {}
 local plugin = function(tbl)
@@ -22,19 +23,45 @@ end
 
 -- ===========================[[ Utility ]]=========================== --
 
-plugin({ "lewis6991/impatient.nvim" })
-plugin({ "nvim-lua/plenary.nvim" })
-plugin({ "nvim-lua/popup.nvim" })
-plugin({ "kyazdani42/nvim-web-devicons" })
-plugin({ "antoinemadec/FixCursorHold.nvim", config = function() vim.g.cursorhold_updatetime = 100 end })
-plugin({ "rcarriga/nvim-notify", config = configs.notify })
-plugin({ "olimorris/onedarkpro.nvim", config = configs.colorscheme })
+plugin({
+  "lewis6991/impatient.nvim",
+  disable = vscode,
+})
+plugin({
+  "nvim-lua/plenary.nvim",
+  disable = vscode,
+})
+plugin({
+  "nvim-lua/popup.nvim",
+  disable = vscode,
+})
+plugin({
+  "kyazdani42/nvim-web-devicons",
+  disable = vscode,
+})
+plugin({
+  "antoinemadec/FixCursorHold.nvim",
+  disable = vscode,
+  config = function()
+    vim.g.cursorhold_updatetime = 100
+  end
+})
+plugin({
+  "rcarriga/nvim-notify",
+  disable = vscode,
+  config = configs.notify
+})
+plugin({
+  "olimorris/onedarkpro.nvim",
+  disable = vscode,
+  config = configs.colorscheme
+})
 
 -- ===========================[[ Interface ]]=========================== --
 
 plugin({
   "folke/which-key.nvim",
-  -- disable = true,
+  disable = vscode,
   after = { "nvim-notify" },
   -- event = "BufWinEnter",
   config = configs.whichkey,
@@ -42,7 +69,7 @@ plugin({
 
 plugin({
   "kyazdani42/nvim-tree.lua",
-  -- disable = true,
+  disable = vscode,
   after = { "nvim-notify" },
   cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeClose" },
   config = configs.nvimtree,
@@ -50,7 +77,7 @@ plugin({
 
 plugin({
   "gelguy/wilder.nvim",
-  disable = true,
+  disable = vscode or true,
   after = { "nvim-notify" },
   requires = { "romgrk/fzy-lua-native", "nvim-web-devicons" },
   config = configs.wilder,
@@ -58,7 +85,7 @@ plugin({
 
 plugin({
   "folke/noice.nvim",
-  -- disable = true,
+  disable = vscode,
   config = configs.noice,
   -- after = { "which-key.nvim", "lsp-setup.nvim" },
   requires = {
@@ -70,6 +97,7 @@ plugin({
 
 plugin({
   "mrjones2014/smart-splits.nvim",
+  disable = vscode,
   after = { "nvim-notify" },
   config = configs.smart_splits,
   cmd = {
@@ -90,6 +118,7 @@ plugin({
 
 plugin({
   "nvim-lualine/lualine.nvim",
+  disable = vscode,
   after = { "onedarkpro.nvim" },
   config = configs.lualine,
 })
@@ -98,6 +127,7 @@ plugin({
 
 plugin({
   "lewis6991/gitsigns.nvim",
+  disable = vscode,
   after = { "nvim-notify" },
   config = configs.gitsigns,
   event = "BufRead",
@@ -105,6 +135,7 @@ plugin({
 
 plugin({
   "TimUntersberger/neogit",
+  disable = vscode,
   after = { "nvim-notify" },
   requires = { "sindrets/diffview.nvim" },
   config = configs.neogit,
@@ -115,6 +146,7 @@ plugin({
 
 plugin({
   "goolord/alpha-nvim",
+  disable = vscode,
   after = { "nvim-notify" },
   config = configs.alpha,
 })
@@ -123,6 +155,7 @@ plugin({
 
 plugin({
   "akinsho/toggleterm.nvim",
+  disable = vscode,
   tag = "*",
   config = configs.toggleterm,
   cmd = { "ToggleTerm" },
@@ -132,6 +165,7 @@ plugin({
 
 plugin({
   "akinsho/bufferline.nvim",
+  disable = vscode,
   tag = "v3.*",
   after = { "nvim-notify" },
   config = configs.bufferline,
@@ -141,6 +175,7 @@ plugin({
 
 plugin({
   "nvim-telescope/telescope.nvim",
+  disable = vscode,
   after = { "nvim-notify" },
   requires = {
     { "romgrk/fzy-lua-native", run = "make" },
@@ -160,6 +195,7 @@ plugin({
 
 plugin({
   "nvim-treesitter/nvim-treesitter",
+  disable = vscode,
   run = ":TSUpdate",
   event = "BufRead",
   after = { "onedarkpro.nvim" },
@@ -194,6 +230,7 @@ plugin({
 
 plugin({
   "kylechui/nvim-surround",
+  disable = vscode,
   after = { "nvim-treesitter" },
   event = "BufReadPost",
   config = configs.treesitter.surround,
@@ -201,12 +238,14 @@ plugin({
 
 plugin({
   "tpope/vim-repeat",
+  disable = vscode,
   after = { "nvim-treesitter" },
   event = "BufReadPost",
 })
 
 plugin({
   "m4xshen/autoclose.nvim",
+  disable = vscode,
   after = { "nvim-treesitter" },
   event = "InsertEnter",
 })
@@ -215,19 +254,21 @@ plugin({
 
 plugin({
   "folke/neodev.nvim",
+  disable = vscode,
   ft = { "lua" },
   config = configs.neodev
 })
 
 plugin({
   "glepnir/lspsaga.nvim",
-  disable = false,
+  disable = vscode or false,
   branch = "main",
   config = configs.language.lspsaga,
 })
 
 plugin({
   "junnplus/lsp-setup.nvim",
+  disable = vscode,
   after = { "neodev.nvim", "nvim-notify", "lspsaga.nvim" },
   requires = {
     "neovim/nvim-lspconfig",
@@ -248,7 +289,7 @@ plugin({
 plugin({
   "utilyre/barbecue.nvim",
   after = { "lsp-setup.nvim" },
-  disable = true,
+  disable = vscode or true,
   requires = {
     "neovim/nvim-lspconfig",
     "smiteshp/nvim-navic",
@@ -263,7 +304,7 @@ plugin({
 plugin({
   "jose-elias-alvarez/null-ls.nvim",
   after = { "lsp-setup.nvim" },
-  disable = true,
+  disable = vscode or true,
   config = configs.null_ls,
   requires = {
     "nvim-lua/plenary.nvim",
@@ -272,7 +313,7 @@ plugin({
 
 plugin({
   "rcarriga/nvim-dap-ui",
-  disable = true,
+  disable = vscode or true,
   requires = {
     "mfussenegger/nvim-dap",
     "theHamsta/nvim-dap-virtual-text",
@@ -287,6 +328,7 @@ plugin({
 
 plugin({
   "hrsh7th/nvim-cmp",
+  disable = vscode,
   -- event = "InsertEnter",
   after = { "nvim-notify" },
   requires = {
