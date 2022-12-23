@@ -323,6 +323,19 @@ plugin({
   cmd = { "DapToggleRepl" },
 })
 
+plugin({
+  "phaazon/hop.nvim",
+  disable = vscode,
+  event = "BufRead",
+  config = function()
+    require("hop").setup()
+    -- lvim.keys.normal_mode["<leader>j"] = ":HopChar2<cr>"
+    -- lvim.keys.normal_mode["<leader>J"] = ":HopWord<cr>"
+    vim.keymap.set("n", "<leader>j", ":HopWord<cr>", { silent = true })
+    -- vim.api.nvim_set_keymap("n", "S", ":HopChar2<cr>", { silent = true })
+    -- vim.api.nvim_set_keymap("n", "s", ":HopWord<cr>", { silent = true })
+  end,
+})
 
 -- ===========================[[ Completion ]]=========================== --
 

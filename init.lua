@@ -11,8 +11,14 @@ local fn = require("utils.fn")
 fn.leader("<space>")
 require("opts")
 require("plugins")
-require("maps")
-require("cmds")
+if not vscode then
+  require("maps")
+  require("cmds")
+end
+
 require("autocmds")
 require("packer_compiled")
 
+if vscode then
+  vim.opt.showmode = true, -- Disable showing modes in command line
+end
