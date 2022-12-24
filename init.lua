@@ -20,5 +20,5 @@ require("autocmds")
 require("packer_compiled")
 
 if vscode then
-  vim.opt.showmode = true, -- Disable showing modes in command line
+  vim.opt.showmode = true,
 end
