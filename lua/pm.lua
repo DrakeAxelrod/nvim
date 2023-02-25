@@ -1,10 +1,10 @@
-local utils = require("utils")
+local fn = require("fn")
 
 local M = {}
 
-M.path = utils.joinpath(vim.fn.stdpath("data"), "lazy", "lazy.nvim")
+M.path = fn.joinpath(vim.fn.stdpath("data"), "lazy", "lazy.nvim")
 
-local ensure = function()
+M.setup = function(plugins)
   if not vim.loop.fs_stat(M.path) then
     vim.fn.system({
       "git",
@@ -16,10 +16,6 @@ local ensure = function()
     })
   end
   vim.opt.rtp:prepend(M.path)
-end
-
-M.setup = function(plugins)
-  ensure()
   require("lazy").setup(plugins, {
     -- your configuration comes here
     -- or leave it empty to use the default settings

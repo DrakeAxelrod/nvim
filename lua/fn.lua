@@ -21,9 +21,11 @@ M.map = function(mode, lhs, rhs, opts)
 end
 
 
-M.set = function(opts)
-  for key, value in pairs(opts) do
-    vim.opt[key] = value
+M.options = function(opts)
+  for scope, settings in pairs(opts) do
+    for key, value in pairs(settings) do
+      vim[scope][key] = value
+    end
   end
 end
 
