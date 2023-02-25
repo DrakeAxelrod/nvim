@@ -1,24 +1,12 @@
-
 -- vscode is true if we are running in vscode
 local vscode = vim.fn.exists("g:vscode") == 1
 
-local ok, impatient = pcall(require, "impatient")
-if ok then
-  impatient.enable_profile()
-end
+local pm = require("pm")
+local plugins = require("plugins")
 
-local fn = require("utils.fn")
-fn.leader("<space>")
-require("opts")
-require("plugins")
-if not vscode then
-  require("maps")
-  require("cmds")
-end
+-- Leader
+vim.keymap.set({ "n", "v", "x" }, "<Space>", "<NOP>", { noremap = true, silent = true })
+vim.g.mapleader = vim.api.nvim_replace_termcodes(" ", true, true, true)
 
-require("autocmds")
-require("packer_compiled")
-
-if vscode then
-  vim.opt.showmode = true,
-end
+-- Plugins
+pm.setup(plugins)
