@@ -14,4 +14,17 @@ M.prequire = function(mod)
   return nil
 end
 
+M.map = function(mode, lhs, rhs, opts)
+  local options = { noremap = true }
+  if opts then options = vim.tbl_extend("force", options, opts) end
+  vim.keymap.set(mode, lhs, rhs, options)
+end
+
+
+M.set = function(opts)
+  for key, value in pairs(opts) do
+    vim.opt[key] = value
+  end
+end
+
 return M
