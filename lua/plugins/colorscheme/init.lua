@@ -32,9 +32,9 @@
 -- yellow = "#e5c07b",
 
 return function()
-  local odp = require("onedarkpro")
+  local odp = require("onedarkpro.helpers")
   local colors = odp.get_colors()
-  odp.setup {
+  require("onedarkpro").setup {
     -- dark_theme = "onedark_vivid", -- The default dark theme
     -- light_theme = "onelight", -- The default light theme
     caching = false, -- Use caching for the theme?

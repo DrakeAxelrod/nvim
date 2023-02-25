@@ -56,7 +56,7 @@ local M = {
   yellow = "#e5c07b",
 }
 
-local ok, odp = pcall(require, "onedarkpro")
+local ok, odp = pcall(require, "onedarkpro.helpers")
 if ok then
   M = odp.get_colors()
 end

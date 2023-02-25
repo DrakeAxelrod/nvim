@@ -64,12 +64,12 @@ fn.augroup("UserMisc")(function(ac)
   --   vim.cmd([[call feedkeys("\<cr>")"]])
   -- end)
 
-  ac("VimResized", {
-    desc = "Auto resize windows",
-    pattern = "*",
-  }, function()
-    vim.cmd("wincmd =")
-  end)
+  -- ac("VimResized", {
+  --   desc = "Auto resize windows",
+  --   pattern = "*",
+  -- }, function()
+  --   vim.cmd("wincmd =")
+  -- end)
 
 end)
 

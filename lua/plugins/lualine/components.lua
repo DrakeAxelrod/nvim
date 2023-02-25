@@ -54,7 +54,7 @@ local modes = {
 }
 
 -- local colors = require("theme.colors")
-local odp = require("onedarkpro")
+local odp = require("onedarkpro.helpers")
 local colors = odp.get_colors()
 
 local function diff_source()

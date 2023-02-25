@@ -3,7 +3,7 @@ return function()
   if not ok then
     return
   end
-  local odp = require("onedarkpro")
+  local odp = require("onedarkpro.helpers")
   local colors = odp.get_colors()
   ts.setup({
     ensure_installed = { "lua" }, --"all", -- one of "all" or a list of languages
