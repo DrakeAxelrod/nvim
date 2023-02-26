@@ -17,13 +17,13 @@ end
 
 -- ===========================[[ Utility ]]=========================== --
 
-plugin({ "lewis6991/impatient.nvim" })
+plugin({ "lewis6991/impatient.nvim", lazy = false })
 plugin({ "nvim-lua/plenary.nvim" })
 plugin({ "nvim-lua/popup.nvim" })
 plugin({ "kyazdani42/nvim-web-devicons" })
-plugin({ "antoinemadec/FixCursorHold.nvim" })
-plugin({ "rcarriga/nvim-notify", cfile = "notify" })
-plugin({ "olimorris/onedarkpro.nvim", cfile = "onedarkpro" })
+plugin({ "antoinemadec/FixCursorHold.nvim", lazy = false })
+plugin({ "rcarriga/nvim-notify", cfile = "notify", lazy = false })
+plugin({ "olimorris/onedarkpro.nvim", cfile = "onedarkpro", lazy = false })
 
 -- ===========================[[ Interface ]]=========================== --
 
