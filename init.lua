@@ -1,20 +1,18 @@
--- vscode is true if we are running in vscode
-local vscode = vim.fn.exists("g:vscode") == 1
+require("core") -- load core
 
--- libs
-local pm = require("pm")
-local fn = require("fn")
+if is_vscode then return end -- exit if we are in vscode
 
--- dicts
-local plugins = require("plugins")
-local settings = require("settings")
+-- Impatient
+nvim.impatient() -- enable impatient
 
 -- Leader
-vim.keymap.set({ "n", "v", "x" }, "<Space>", "<NOP>", { noremap = true, silent = true })
-vim.g.mapleader = vim.api.nvim_replace_termcodes(" ", true, true, true)
+nvim.leader(" ") -- set leader to space
 
 -- Options
-fn.options(settings)
+local options = require("options") -- options spec
+nvim.options(options) -- set options
 
 -- Plugins
-pm.setup(plugins)
+local pm = require("pm") -- load plugin manager
+local plugins = require("plugins") -- plugin spec
+pm.setup(plugins) -- setup plugins

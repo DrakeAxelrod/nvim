@@ -1,7 +1,7 @@
 
 local M = {
   g = {
-    -- cursorhold_updatetime = 100, -- cursorhold updatetime
+    cursorhold_updatetime = 100, -- cursorhold updatetime
     highlighturl_enabled = true, -- highlight URLs by default
     zipPlugin = false, -- disable zip
     load_black = false, -- disable black
