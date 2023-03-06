@@ -20,7 +20,7 @@ end
 M.setup = function(plugins)
   ensure()
   local icons = require("theme.icons")
-  require("lazy").setup(plugins, config)
+  require("lazy").setup(config)
 end
 
 return M

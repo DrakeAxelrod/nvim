@@ -1,11 +1,15 @@
-return function()
-  local odp = prequire("onedarkpro")
-  if not odp then
+local M = {
+  "olimorris/onedarkpro.nvim"
+}
+
+M.config = function()
+  local status, odp = pcall(require, "onedarkpro")
+  if not status then
     return
   end
 
-  local config = prequire("plugins.onedarkpro.config") or {}
-
-  odp.setup(config)
+  odp.setup({})
   vim.cmd [[colorscheme onedark_vivid]]
 end
+
+return M

@@ -1,6 +1,4 @@
 require("core.globals")
-local fn = require("core.fn")
 
-nvim.impatient = fn.impatient
-nvim.leader = fn.leader
-nvim.options = fn.options
+vim.theme = require("core.theme")
+vim.pm = require("core.pm")

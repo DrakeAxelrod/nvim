@@ -1,18 +1,13 @@
-require("core") -- load core
+local status, core = pcall(require, "core")
+if (status) then
+  return
+end
 
-if is_vscode then return end -- exit if we are in vscode
+local options = require("options")
+for scope, settings in pairs(options) do
+  for key, value in pairs(settings) do
+    vim[scope][key] = value
+  end
+end
 
--- Impatient
-nvim.impatient() -- enable impatient
-
--- Leader
-nvim.leader(" ") -- set leader to space
-
--- Options
-local options = require("options") -- options spec
-nvim.options(options) -- set options
-
--- Plugins
-local pm = require("pm") -- load plugin manager
-local plugins = require("plugins") -- plugin spec
-pm.setup(plugins) -- setup plugins
+vim.pm.setup()
