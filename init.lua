@@ -1,7 +1,4 @@
-local status, core = pcall(require, "core")
-if (status) then
-  return
-end
+require("core")
 
 local options = require("options")
 for scope, settings in pairs(options) do

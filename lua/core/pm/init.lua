@@ -15,7 +15,7 @@ M.setup = function()
   end
   vim.opt.rtp:prepend(M.path)
 
-  local config = require("core.plugin_manager.config")
+  local config = require("core.pm.config")
 
   require("lazy").setup(config)
 end
