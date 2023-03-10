@@ -20,5 +20,4 @@ M.setup = function()
   require("lazy").setup(config)
 end
 
-
 return M

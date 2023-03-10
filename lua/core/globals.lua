@@ -14,7 +14,23 @@ vscode = (function()
   return false
 end)()
 
+set = {}
 
+set.leader = function(c)
+  c = vim.api.nvim_replace_termcodes(c, true, true, true)
+  if c == " " then
+    vim.keymap.set({"n", "v", "x" }, "<Space>", "<NOP>", { noremap = true, silent = true })
+  end
+  vim.g.mapleader = c
+end
+
+set.options = function(opts)
+  for scope, settings in pairs(opts) do
+    for key, value in pairs(settings) do
+      vim[scope][key] = value
+    end
+  end
+end
 
 path = {}
 
