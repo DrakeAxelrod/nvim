@@ -2,6 +2,7 @@
 local M = {
   g = {
     cursorhold_updatetime = 100, -- cursorhold updatetime
+    markdown_recommended_style = 0, -- Fix markdown indentation settings
     highlighturl_enabled = true, -- highlight URLs by default
     zipPlugin = false, -- disable zip
     load_black = false, -- disable black
@@ -31,6 +32,7 @@ local M = {
     -- shortmess = "filnxtToOFcsACS", -- shortmess
     showtabline = 0, -- always show tabline
     cmdheight = 1, -- hide command line unless entering command
+    wildmode = "longest:full,full", -- Command-line completion mode
     laststatus = 3, -- always show status line
     clipboard = "unnamedplus", -- use system clipboard
     autochdir = false, -- auto chdir
@@ -108,13 +110,28 @@ local M = {
   },
 }
 
--- filnxtToOFcsAS
--- vim.opt.spelllang:append "cjk" -- disable spellchecking for asian characters (VIM algorithm does not support it)
--- -- vim.opt.shortmess:append "I" -- don't show the default intro message
 -- vim.opt.whichwrap:append "<,>,[,],h,l"
--- vim.opt.shortmess:append "c"
--- vim.opt.shortmess:append "s"
--- vim.opt.shortmess:append "A"
+
+vim.opt.whichwrap:append {
+  --[[ move to previous or next line
+  | char | bool |   key     |   mode  ]]
+  -- ["b"] = false, -- <BS>    | normal/visual
+  -- ["s"] = false, -- <Space> | normal/visual
+  ["h"] = true, -- "h"      | normal/visual
+  ["l"] = true, -- "l"      | normal/visual
+  ["<"] = true, -- <Left>	  | normal/visual
+  [">"] = true, -- <Right>  | normal/visual
+  -- ["~"] = true, -- "~"      | normal
+  ["["] = true, -- "["      | insert/replace
+  ["]"] = true, -- "]"      | insert/replace
+}
+vim.opt.shortmess:append {
+  W = true, -- don't give "written" or "[w]" when writing a file
+  I = true, -- don't give the intro message when starting Vim
+  c = true, -- don't give ins-completion-menu messages
+  -- s = true, -- do not show search count message when searching, e.g.	"[1/5]"
+  -- A = true, -- don't give the "ATTENTION" message when an existing swap file is found
+}
 
 -- vim.api.nvim_set_hl(0, "Search", {
 --   ctermfg = 0,
@@ -125,5 +142,10 @@ local M = {
 --   standout = true,
 --   underdotted = true,
 -- })
+
+if vim.fn.has("nvim-0.9.0") == 1 then
+  M.opt.splitkeep = "screen"
+  M.opt.shortmess:append { C = true }
+end
 
 return M
