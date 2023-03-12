@@ -6,3 +6,5 @@ set.leader(" ")
 set.options(opts)
 
 vim.pm.setup()
+
+oak = deepcopy(vim)
