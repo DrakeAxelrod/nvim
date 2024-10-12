@@ -35,15 +35,10 @@ require("core.path")
 -- Global Variables
 ----------------------------------------
 local utils = require("core.utils")
--- utils.impatient()
+utils.impatient()
 vim.leader = utils.leader
-vim.localleader = utils.localleader
-vim.colorscheme = utils.colorscheme
-vim.transparent_mode = utils.transparent_mode
-
 -- vim.options = utils.options
 -- vim.map = utils.map
-map = utils.map
 
 -- Helper Functions
 ----------------------------------------
@@ -101,37 +96,29 @@ get_os = function()
   end
 end
 
--- impatient = function()
---   pcall(function()
---     require("impatient").enable_profile()
---   end)
--- end
-impatient = utils.impatient
+impatient = function()
+  pcall(function()
+    require("impatient").enable_profile()
+  end)
+end
 
 --- Plugin Manager
 ----------------------------------------
-lazy = function(args)
+lazy = function(dir)
   dir = dir or "plugins"
   local lazypath = path.join(vim.fn.stdpath("data"), "lazy", "lazy.nvim")
-  if not (vim.uv or vim.loop).fs_stat(lazypath) then
-    local out = vim.fn.system({
-      "git",
-      "clone",
-      "--filter=blob:none",
-      "--branch=stable",
-      "https://github.com/folke/lazy.nvim.git",
-      lazypath
-    })
-    if vim.v.shell_error ~= 0 then
-      vim.api.nvim_echo({
-        { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-        { out, "WarningMsg" },
-        { "\nPress any key to exit..." },
-      }, true, {})
-      vim.fn.getchar()
-      os.exit(1)
+  if vim.fn.empty(vim.fn.glob(lazypath)) > 0 then
+    if not vim.loop.fs_stat(lazypath) then
+      vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+      })
     end
   end
   vim.opt.rtp:prepend(lazypath)
-  require("lazy").setup(args)
+  require("lazy").setup(dir)
 end

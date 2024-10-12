@@ -1,5 +1,16 @@
 {
-    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-    "Lua.runtime.version": "Lua 5.4",
-    "Lua.workspace.checkThirdParty": false
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "Lua.workspace.checkThirdParty": "Disable",
+  "format.enable": true,
+  "runtime.version": "LuaJIT",
+  "runtime.path": [
+    "lua/?.lua",
+    "lua/?/init.lua"
+  ],
+  "diagnostics.globals": ["vim"],
+  "workspace.checkThirdParty": false,
+  "workspace.library": [
+    "$VIMRUNTIME",
+    "${3rd}/luv/library"
+  ]
 }
