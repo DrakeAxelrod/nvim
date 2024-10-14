@@ -1,10 +1,11 @@
 require("core")
 -- setup variables
-local options = require("options")
-local autocmds = require("autocmds")
+local options = require("config.options")
+local lsp = require("config.lsp")
+local autocmds = require("config.autocmds")
 
 -- make sure impatient is loaded
-impatient()
+vim.loader.enable()
 
 -- temporary setup with default options (until I can improve the implementation)
 options.defaults()
@@ -23,19 +24,16 @@ lazy({
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "onedark_vivid" } },
+  install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
 
--- options.defaults()
-
 vim.colorscheme("onedark_vivid")
 
---[[ Autocmds ]]
+lsp.defaults()
 
-autocmds.highlight_on_yank()
-autocmds.treesitter_zsh()
-autocmds.termopen()
-autocmds.vimresized()
-autocmds.fix_indent()
+require("config.keymaps")
+
+autocmds.defaults()
+

@@ -39,11 +39,13 @@ local utils = require("core.utils")
 vim.leader = utils.leader
 vim.localleader = utils.localleader
 vim.colorscheme = utils.colorscheme
-vim.transparent_mode = utils.transparent_mode
+vim.augroup = utils.augroup
+vim.autocmd = utils.autocmd
+-- vim.transparent_mode = utils.transparent_mode
 
 -- vim.options = utils.options
 -- vim.map = utils.map
-map = utils.map
+-- map = utils.map
 
 -- Helper Functions
 ----------------------------------------
@@ -101,12 +103,6 @@ get_os = function()
   end
 end
 
--- impatient = function()
---   pcall(function()
---     require("impatient").enable_profile()
---   end)
--- end
-impatient = utils.impatient
 
 --- Plugin Manager
 ----------------------------------------

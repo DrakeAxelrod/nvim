@@ -1,10 +1,9 @@
 
 return {
-  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' },
-  -- {
-  --   "nvim-telescope/telescope-smart-history.nvim",
-  --   requires = { "kkharji/sqlite.lua" },
-  -- },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release"
+  },
   {
     "nvim-telescope/telescope-frecency.nvim"
   },
@@ -15,14 +14,13 @@ return {
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
   },
   {
-    'nvim-telescope/telescope.nvim', tag = '0.1.8',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    "nvim-telescope/telescope.nvim", tag = "0.1.8",
+    dependencies = { "nvim-lua/plenary.nvim" },
     opts = function()
       local telescope = require("telescope")
       local extensions = {
         "fzf",
         "frecency",
-        -- "smart_history",
         "fzf_native",
         "ui_select",
         "notify",

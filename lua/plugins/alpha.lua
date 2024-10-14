@@ -125,23 +125,26 @@ return {
           { type = "text", val = "Quick links", opts = { hl = "SpecialComment", position = "center" } },
           { type = "padding", val = 1 },
           dashboard.button("e",       "  New File",        ":ene<cr>"),
-          dashboard.button("SPC f f", "  Find File",       ":Telescope find_files<cr>"),
-          dashboard.button("SPC f f", "󰈞  Find",             ":Telescope fd<cr>"),
-          dashboard.button("SPC f g", "  Live Grep",       ":Telescope live_grep<cr>"),
-          dashboard.button("c",       "  Configuration",   ":lua vim.fn.stdpath('config')<cr>"),
+          dashboard.button("f",       "  Find File",       ":Telescope fd<cr>"),
+          dashboard.button("g",       "  Live Grep",       ":Telescope live_grep<cr>"),
+          dashboard.button("z",       "󰡱  fzf", ":FzfLua<cr>"),
+          -- dashboard.button("c",       "  Configuration",   ":edit " .. path.join(vim.fn.stdpath("config"), "init.lua") .. "<cr>"), --":lua vim.fn.stdpath('config')<cr>"),
+          dashboard.button("c",       "  Neovim Configs", ":lua require('telescope').extensions.file_browser.file_browser({path = vim.fn.stdpath('config')})<cr>"),
           dashboard.button("l",       "󰒲  Lazy",            ":Lazy<cr>"),
           dashboard.button("q",       "✗  Quit",            ":qa<cr>"),
         },
         position = "center",
     }
+
+
     return {
       layout = {
-        { type = "padding", val = 4 },
+        { type = "padding", val = 1 },
         header,
         { type = "padding", val = 1 },
-        mru,
-        { type = "padding", val = 1 },
         buttons,
+        { type = "padding", val = 1 },
+        mru,
       },
       opts = {
         margin = 5,
